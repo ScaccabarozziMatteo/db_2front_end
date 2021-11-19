@@ -2,8 +2,10 @@
   "name": "db_2front_end",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080/DB_2JEE_war_exploded",
+  "proxy": "http://localhost:8080/",
   "dependencies": {
+    "@emotion/react": "^11.6.0",
+    "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.1.1",
     "@mui/material": "^5.1.1",
     "@testing-library/jest-dom": "^5.15.0",
