@@ -2,16 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import LoginUser from "./container/LoginUser";
 import {BrowserRouter as Router} from 'react-router-dom';
-import indexNavBanner from "./container/indexNavBanner";
-import UserHome from "./container/UserHome";
+import MainPage from "./container/MainPage";
 
 ReactDOM.render(
   <Router>
-      <indexNavBanner />
-      <UserHome />
-      <LoginUser />
+      <MainPage />
   </Router>,
   document.getElementById('root')
 );

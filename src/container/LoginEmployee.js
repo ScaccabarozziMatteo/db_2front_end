@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import UserHome from "./UserHome";
 import {Alert, Box, Button, Collapse, TextField} from "@mui/material";
 
-const LoginUser = () => {
+const LoginEmployee = () => {
 
 const [allValues, setAllValues] = useState({
     email: '',
     password: '',
 });
 
-const [alert, setAlert] = useState(false);
+const [alert, setAlert] = React.useState(false);
 
 const changeHandler = e => {
    setAllValues({...allValues, [e.target.name]: e.target.value})
@@ -17,7 +17,7 @@ const changeHandler = e => {
 
   const handleSubmit = (event) => {
       event.preventDefault();
-      fetch("/user/login", {
+      fetch("/employee/login", {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           name: 'parameters',
@@ -35,11 +35,11 @@ const changeHandler = e => {
 
   return (
       <React.Fragment>
-          <h1>User</h1>
+          <h2>Login - Employee</h2>
           <Box
               component="form"
               sx={{
-                  '& > :not(style)': {m: 1, width: '25ch'},
+                  '& > :not(style)': {m: 2, width: '80%'},
               }}
               noValidate
               autoComplete="off"
@@ -52,7 +52,7 @@ const changeHandler = e => {
                          name="password" color="secondary"
                          onChange={changeHandler}/>
 
-              <Button variant="outlined" color="secondary" onClick={handleSubmit}>Accedi</Button>
+              <Button variant="outlined" color="secondary" onClick={handleSubmit}>Log in</Button>
 
           </Box>
           <Collapse in={alert}>
@@ -63,4 +63,4 @@ const changeHandler = e => {
   )
 };
 
-export default LoginUser;
+export default LoginEmployee;
