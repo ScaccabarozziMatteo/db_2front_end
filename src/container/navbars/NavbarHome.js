@@ -4,22 +4,28 @@ import {Grid} from "@mui/material";
 import LoginUser from "../LoginUser";
 import LoginEmployee from "../LoginEmployee";
 
-const NavbarHome = () => {
+class NavbarHome extends React.Component {
 
-    return (
-        <React.Fragment>
-            <Box sx={{flexGrow: 1}}>
-                <Grid item xs={15}>
-                    <Grid item xs={6}>
-                        <LoginEmployee />
+    render() {
+        return (
+
+            <React.Fragment>
+                <Box sx={{
+                    flexGrow: 1
+                }
+                }>
+                    <Grid item xs={15}>
+                        <Grid item xs={6}>
+                            <LoginEmployee/>
+                        </Grid>
+                        <Grid item xs={9}>
+                            <LoginUser/>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={9}>
-                        <LoginUser/>
-                    </Grid>
-                </Grid>
-            </Box>
-        </React.Fragment>
-    )
+                </Box>
+            </React.Fragment>
+        )
+    }
 };
 
 export default NavbarHome;
