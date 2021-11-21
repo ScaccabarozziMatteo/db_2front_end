@@ -39,17 +39,17 @@ class LoginUser extends React.Component {
     handleOpen(state) {
         this.setState({'open': state,});
         if (!state)
-            this.setAlert(false);
+            this.setAlert(false)
     };
 
-    handlerInputChange(e) {
-        this.setState({
+    handlerInputChange(e, _this) {
+        _this.setState({
             [e.target.name]: e.target.value,
         });
     }
 
 
-    handleSubmit(e) {
+    handleSubmit() {
         axios.post("/user/login",
             {email: this.state.email, password: this.state.password})
             .then(result => {
@@ -58,7 +58,7 @@ class LoginUser extends React.Component {
                 this.setAlert(false);
             } else if (result.status === 401)
                 this.setAlert(true);
-        }).catch(error => {
+        }).catch(() => {
             this.setAlert(true);
         })
     }
@@ -90,10 +90,10 @@ class LoginUser extends React.Component {
                             <TextField id="standard-basic" label="E-mail" variant="standard"
                                        name="email" color="secondary"
                                        type="email"
-                                       onChange={() => this.handlerInputChange}/>
+                                       onChange={(event) => this.handlerInputChange(event, this)}/>
                             <TextField id="standard-basic" label="Password" variant="standard" type="password"
                                        name="password" color="secondary"
-                                       onChange={() => this.handlerInputChange}/>
+                                       onChange={(event) => this.handlerInputChange(event, this)}/>
 
                             <Button variant="outlined" color="secondary" type="submit" onClick={() => this.handleSubmit(this)}>Login</Button>
 
