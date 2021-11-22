@@ -2,14 +2,16 @@ import React from 'react';
 import NavbarHome from "./navbars/NavbarHome";
 
 
-const MainPage = () => {
+class MainPage extends React.Component{
 
-  return (
-      <div>
-          <NavbarHome/>
-      </div>
+    render() {
+        return (
+            <div>
+                <NavbarHome/>
+            </div>
 
-  );
+        );
+    }
 }
 
 export default MainPage;
