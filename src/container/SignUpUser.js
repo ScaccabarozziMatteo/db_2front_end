@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {Alert, Box, Button, Collapse, TextField} from "@mui/material";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
@@ -29,79 +29,67 @@ function SignUpUser() {
         error1: false,
         error2: false,
         error3: false,
-        error4: false,
         errorAlert: false
     });
 
-    const [open, setOpen] = useState({});
-
+    const [open, setOpen] = useState(false);
 
     function handleSubmit() {
 
-        if (!(_error.error1 || _error.error2 || _error.error3)) {
+        if (checkValidity()) {
 
             axios.post('/user/registration',
-                {email: this.state.email, username: this.state.username, password: this.state.password})
+                {email: userAttr.email, username: userAttr.username, password: userAttr.password})
                 .then(result => {
                     if (result.status === 200) {
-                        sessionStorage.setItem("email", this.state.email);      // Set email in session storage
-                        this.setAlert(false);
-                        this.setErrorZero();
+                        sessionStorage.setItem("email", userAttr.email);      // Set email in session storage
+                        setError({..._error, errorAlert: false, error1: false, error2: false, error3: false});
                     } else if (result.status === 401)
-                        this.setAlert(true);
+                        setError({..._error, errorAlert: true})
                 }).catch(() => {
-                this.setAlert(true);
+                    setError({..._error, errorAlert: true, error1: false, error2: false, error3: false});
             })
         }
     }
 
     function handleOpen(state) {
-        this.setState({'open': state,});
-        if (!state) {
-            this.setAlert(false)
-            this.setErrorZero()
-        }
-    };
-
-    function setAlert(state) {
-        this.setState({'errorAlert': state,});
-    }
-
-    function setErrorZero() {
-        this.setState({
-            error1: false,
-            error2: false,
-            error3: false,
-            error4: false
-        })
+        setOpen(state);
+        if (!state)
+            setError({..._error, errorAlert: false, error1: false, error2: false, error3: false});
     }
 
     function checkValidity() {
-        this.setState({
-            error1: (this.state.email.length < 1 || this.state.email.length > 30),
-            error2: (this.state.username.length < 1 || this.state.username.length > 60),
-            error3: (this.state.password.length < 1 || this.state.password.length > 60 || this.state.password !== this.state.password1 || this.state.password1.length < 1 || this.state.password1.length > 60),
-        });
+        let _error1 = (userAttr.email.length < 1 || userAttr.email.length > 30);
+        let _error2 = (userAttr.username.length < 1 || userAttr.username.length > 60);
+        let _error3 = (userAttr.password.length < 6 || userAttr.password.length > 60 || userAttr.password !== userAttr.password1 || userAttr.password1.length < 1 || userAttr.password1.length > 60);
+
+
+        setError({..._error,
+            error1: _error1,
+            error2: _error2,
+            error3: _error3
+        })
+
+        return(!(_error1 || _error2 || _error3))
+
     }
 
-    function handlerInputChange(e, _this) {
-        _this.setState({
-            [e.target.name]: e.target.value,
-        });
-        console.log(this.state.email)
-        this.checkValidity();
+    function handlerInputChange(e) {
+        setUserAttr({...userAttr,
+            [e.target.name]: e.target.value
+        })
     }
 
     return (
         <React.Fragment>
             <Button onClick={() =>
-                this.handleOpen(true)
+                handleOpen(true)
             }
 
             >SignUp User</Button>
             <Modal
-                open={this.state.open}
-                onClose={() => this.handleOpen(false)}
+                open={open}
+                onClose={() => handleOpen(false)}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -118,35 +106,35 @@ function SignUpUser() {
                                    name="email" color="secondary"
                                    type="email"
                                    required
-                                   error={this.state.error1}
-                                   helperText={this.state.error1 ? 'E-mail not valid' : ''}
-                                   onChange={(event) => this.handlerInputChange(event, this)}/>
+                                   error={_error.error1}
+                                   helperText={_error.error1 ? 'E-mail not valid' : ''}
+                                   onChange={handlerInputChange}/>
                         <TextField id="outlined-basic" label="Username" variant="outlined"
                                    name="username" color="secondary"
                                    type="text"
                                    required
-                                   error={this.state.error2}
-                                   helperText={this.state.error2 ? 'Username not valid' : ''}
-                                   onChange={(event) => this.handlerInputChange(event, this)}/>
+                                   error={_error.error2}
+                                   helperText={_error.error2 ? 'Username not valid' : ''}
+                                   onChange={handlerInputChange}/>
                         <TextField id="outlined-basic" label="Password" variant="outlined" type="password"
                                    name="password" color="secondary"
                                    required
-                                   error={this.state.error3}
-                                   helperText={this.state.error3 ? 'Password not valid, please enter characters between 6 and 30' : 'Insert characters between 6 and 30'}
-                                   onChange={(event) => this.handlerInputChange(event, this)}/>
+                                   error={_error.error3}
+                                   helperText={_error.error3 ? 'Password not valid, please enter characters between 6 and 30' : 'Insert characters between 6 and 30'}
+                                   onChange={handlerInputChange}/>
                         <TextField id="outlined-basic" label="Confirm password" variant="outlined" type="password"
                                    name="password1" color="secondary"
                                    required
-                                   error={this.state.error3}
-                                   helperText={this.state.error3 ? 'Password not valid, please insert the same password' : ''}
-                                   onChange={(event) => this.handlerInputChange(event, this)}/>
+                                   error={_error.error3}
+                                   helperText={_error.error3 ? 'Password not valid, please insert the same password' : ''}
+                                   onChange={handlerInputChange}/>
 
                         <Button variant="outlined" color="secondary" type="submit"
-                                onClick={() => this.handleSubmit(this)}>Confirm</Button>
+                                onClick={handleSubmit}>Confirm</Button>
 
 
                     </Box>
-                    <Collapse in={this.state.errorAlert}>
+                    <Collapse in={_error.errorAlert}>
                         <Alert severity="error">Not valid credentials!</Alert>
                     </Collapse>
                 </Box>
