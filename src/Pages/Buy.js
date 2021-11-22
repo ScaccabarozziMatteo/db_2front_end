@@ -1,6 +1,6 @@
 import react from "react";
 
-const Buy = () =>{
+function Buy() {
     return (<div>Buy</div>)
 }
 

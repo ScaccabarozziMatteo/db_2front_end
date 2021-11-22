@@ -3,7 +3,7 @@ import {Alert, Box, Button, Collapse, Divider, IconButton, TextField, Typography
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 import CustomizedSwitches from "./navbars/switchEmployee";
-import CloseIcon from '@material-ui/icons/Close';
+import {CloseIcon} from '@material-ui/icons/Close';
 
 const style = {
     position: 'absolute',

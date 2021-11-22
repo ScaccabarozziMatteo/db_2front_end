@@ -2,6 +2,7 @@ import React from 'react';
 import NavbarHome from "./navbars/NavbarHome";
 import {Route, Router, Routes} from "react-router-dom";
 import Home from "../Pages/Home";
+import "./MainPage.css";
 import Buy from "../Pages/Buy";
 import Pay from "../Pages/Pay";
 import Error from "../Pages/Error";
@@ -14,10 +15,10 @@ function MainPage() {
         <Router>
             <NavbarHome/>
             <Routes>
-                <Route path="/" exact element={<Home/>}/>
-                <Route path="/buy" exact element={<Buy/>}/>
-                <Route path="/pay" exact element={<Pay/>}/>
-                <Route path="/login" exact element={<Login/>}/>
+                <Route path="/" index element={<Home/>}/>
+                <Route path="/buy" element={<Buy/>}/>
+                <Route path="/pay" element={<Pay/>}/>
+                <Route path="/login" element={<Login/>}/>
                 <Route path="/*" element={<Error/>}/>
             </Routes>
         </Router>
