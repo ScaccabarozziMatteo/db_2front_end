@@ -1,11 +1,10 @@
 import React, {useState} from "react";
-import {Alert, Box, Button, Collapse, TextField} from "@mui/material";
+import {Alert, Box, Button, Collapse, Divider, TextField, Typography} from "@mui/material";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 
 const style = {
     position: 'absolute',
-    overflow: 'scroll',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -42,12 +41,11 @@ function SignUpUser() {
                 {email: userAttr.email, username: userAttr.username, password: userAttr.password})
                 .then(result => {
                     if (result.status === 200) {
-                        sessionStorage.setItem("email", userAttr.email);      // Set email in session storage
                         setError({..._error, errorAlert: false, error1: false, error2: false, error3: false});
                     } else if (result.status === 401)
                         setError({..._error, errorAlert: true})
                 }).catch(() => {
-                    setError({..._error, errorAlert: true, error1: false, error2: false, error3: false});
+                setError({..._error, errorAlert: true, error1: false, error2: false, error3: false});
             })
         }
     }
@@ -64,18 +62,20 @@ function SignUpUser() {
         let _error3 = (userAttr.password.length < 6 || userAttr.password.length > 60 || userAttr.password !== userAttr.password1 || userAttr.password1.length < 1 || userAttr.password1.length > 60);
 
 
-        setError({..._error,
+        setError({
+            ..._error,
             error1: _error1,
             error2: _error2,
             error3: _error3
         })
 
-        return(!(_error1 || _error2 || _error3))
+        return (!(_error1 || _error2 || _error3))
 
     }
 
     function handlerInputChange(e) {
-        setUserAttr({...userAttr,
+        setUserAttr({
+            ...userAttr,
             [e.target.name]: e.target.value
         })
     }
@@ -94,7 +94,8 @@ function SignUpUser() {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <h1>SignUp - User</h1>
+                    <Typography marginBottom={'15px'} align={"center"} variant="h4">User - SignUp</Typography>
+                    <Divider variant="middle"/>
                     <Box
                         sx={{
                             '& > :not(style)': {m: 1, width: '100%', margin: '10px auto 10px auto'},

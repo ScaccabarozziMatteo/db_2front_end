@@ -1,8 +1,9 @@
-import React from 'react';
-import {Alert, Box, Button, Collapse, TextField} from "@mui/material";
+import React, {useState} from 'react';
+import {Alert, Box, Button, Collapse, Divider, IconButton, TextField, Typography} from "@mui/material";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 import CustomizedSwitches from "./navbars/switchEmployee";
+import CloseIcon from '@material-ui/icons/Close';
 
 const style = {
     position: 'absolute',
@@ -16,130 +17,147 @@ const style = {
     p: 4,
 };
 
-class Login extends React.Component {
+function Login() {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            password: '',
-            errorAlert: false,
-            open: false,
-            typeLogin: 'user',
-            title: 'User - Login',
-            pathPost: '/user/login'
-        };
+    const [_state, _setState] = useState({
+        email: '',
+        password: '',
+        open: false,
+        typeLogin: 'user',
+        title: 'User - Login',
+        pathPost: '/user/login'
+    })
+
+    const [_error, setError] = useState({
+        error1: false,
+        error2: false,
+        errorAlert: false
+    });
 
 
-
-
-        this.handleOpen.bind(this);
-        this.handlerInputChange.bind(this);
-        this.handleSubmit.bind(this);
-        this.setAlert.bind(this);
-        this.handleCallback.bind(this);
-        this.changeTypeLogin.bind(this);
-
-    }
-
-    setAlert(state) {
-        this.setState({'errorAlert': state,});
-    }
-
-    changeTypeLogin() {
-        if (this.state.typeLogin === "employee") {
-            this.setState({
-            title: 'User - Login',
-            pathPost: '/user/login',
-            typeLogin: 'user'
+    function changeTypeLogin() {
+        if (_state.typeLogin === "employee") {
+            _setState({
+                    ..._state,
+                    title: 'User - Login',
+                    pathPost: '/user/login',
+                    typeLogin: 'user'
                 }
             )
         } else {
-            this.setState({
-            title: 'Employee - Login',
-            pathPost: '/employee/login',
-            typeLogin: 'employee'
+            _setState({
+                    ..._state,
+                    title: 'Employee - Login',
+                    pathPost: '/employee/login',
+                    typeLogin: 'employee'
                 }
             )
         }
     }
 
-    handleOpen(state) {
-        this.setState({'open': state,});
+    function handleOpen(state) {
+        _setState({..._state, open: state});
         if (!state)
-            this.setAlert(false)
-    };
+            setError({..._error, errorAlert: false});
+    }
 
-    handleCallback = (childData) => {
-        this.setState({typeLogin: childData})
-        this.changeTypeLogin();
-    };
+    function handleCallback(childData) {
+        _setState({..._state, typeLogin: childData})
+        changeTypeLogin();
+    }
 
-    handlerInputChange(e, _this) {
-        _this.setState({
+    function handlerInputChange(e) {
+        _setState({
+            ..._state,
             [e.target.name]: e.target.value,
         });
     }
 
+    function checkValidity() {
+        let _error1 = (_state.email.length < 1 || _state.email.length > 30);
+        let _error2 = (_state.password.length < 6 || _state.password.length > 60);
 
-    handleSubmit() {
-        axios.post(this.state.pathPost,
-            {email: this.state.email, password: this.state.password})
-            .then(result => {
-            if (result.status === 200) {
-                window.sessionStorage.setItem("email", this.state.email);      // Set email in session storage
-                this.setAlert(false);
-            } else if (result.status === 401)
-                this.setAlert(true);
-        }).catch(() => {
-            this.setAlert(true);
+
+        setError({
+            ..._error,
+            error1: _error1,
+            error2: _error2,
         })
+
+        return (!(_error1 || _error2))
+
     }
 
- render() {
-        return (
-            <React.Fragment>
-                <Button onClick={() =>
-                    this.handleOpen(true)
-                }
+    function handleSubmit() {
 
-                >Login</Button>
-                <Modal
-                    open={this.state.open}
-                    onClose={() => this.handleOpen(false)}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <Box sx={style}>
-                        <h1>{this.state.title}</h1>
-                        <Box
-                            sx={{
-                                '& > :not(style)': {m: 1, width: '100%', margin: '10px auto 10px auto'},
-                            }}
-                            noValidate
-                            autoComplete="off"
-                        >
-                            <TextField id="standard-basic" label="E-mail" variant="standard"
-                                       name="email" color="secondary"
-                                       type="email"
-                                       onChange={(event) => this.handlerInputChange(event, this)}/>
-                            <TextField id="standard-basic" label="Password" variant="standard" type="password"
-                                       name="password" color="secondary"
-                                       onChange={(event) => this.handlerInputChange(event, this)}/>
+        if (checkValidity()) {
 
-                            <Button variant="outlined" color="secondary" type="submit" onClick={() => this.handleSubmit(this)}>Login</Button>
+            axios.post(_state.pathPost,
+                {email: _state.email, password: _state.password})
+                .then(result => {
+                    if (result.status === 200) {
+                        localStorage.setItem("email", _state.email);      // Set email in session storage
+                        setError({..._error, errorAlert: false})
+                    } else if (result.status === 401)
+                        setError({..._error, errorAlert: true})
+                }).catch(() => {
+                setError({..._error, errorAlert: true})
+            })
+        }
+    }
 
-                            <CustomizedSwitches {...this.state} handleCallback={(typeLogin) => this.handleCallback(typeLogin)} />
-                        </Box>
-                        <Collapse in={this.state.errorAlert}>
-                            <Alert severity="error">Not valid credentials!</Alert>
-                        </Collapse>
+    return (
+        <React.Fragment>
+            <Button onClick={() =>
+                handleOpen(true)
+            }
+
+            >Login</Button>
+            <Modal
+                open={_state.open}
+                onClose={() => handleOpen(false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <Typography marginBottom={'15px'} align={"center"} variant="h4">{_state.title}</Typography>
+                    <IconButton onClick={_setState({..._state, open: false})}>
+            <CloseIcon />
+        </IconButton>
+                    <Divider variant="middle"/>
+                    <Box
+                        sx={{
+                            '& > :not(style)': {m: 1, width: '100%', margin: '10px auto 10px auto'},
+                        }}
+                        noValidate
+                        autoComplete="off"
+                    >
+                        <TextField id="outlined-basic" label="E-mail" variant="outlined"
+                                   name="email" color="secondary"
+                                   type="email"
+                                   required
+                                   error={_error.error1}
+                                   helperText={_error.error1 ? 'E-mail not valid' : ''}
+                                   onChange={handlerInputChange}/>
+                        <TextField id="outlined-basic" label="Password" variant="outlined" type="password"
+                                   name="password" color="secondary"
+                                   required
+                                   error={_error.error2}
+                                   helperText={_error.error2 ? 'Password not valid, please enter characters between 6 and 30' : ''}
+                                   onChange={handlerInputChange}/>
+
+                        <Button variant="outlined" color="secondary" type="submit" onClick={handleSubmit}>Login</Button>
+
+                        <CustomizedSwitches {..._state} handleCallback={(typeLogin) => handleCallback(typeLogin)}/>
                     </Box>
-                </Modal>
+                    <Collapse in={_error.errorAlert}>
+                        <Alert severity="error">Not valid credentials!</Alert>
+                    </Collapse>
+                </Box>
+            </Modal>
 
-            </React.Fragment>
-        );
-    }
+        </React.Fragment>
+    );
 }
 
 

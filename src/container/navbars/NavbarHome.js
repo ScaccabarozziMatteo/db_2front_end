@@ -4,11 +4,9 @@ import Login from "../Login";
 import SignUpUser from "../SignUpUser";
 
 
-class NavbarHome extends React.Component {
+function NavbarHome() {
 
-    render() {
         return (
-
             <React.Fragment>
                 <Stack divider={<Divider orientation="vertical" flexItem />}
                        direction="row" spacing={3} alignItems="center" alignContent="center">
@@ -18,7 +16,6 @@ class NavbarHome extends React.Component {
 
             </React.Fragment>
         )
-    }
 }
 
 export default NavbarHome;

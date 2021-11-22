@@ -4,10 +4,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginUser from './LoginUser';
 import Navbar from './navbars/Navbar';
 import "./MainPage.css";
-import Home from './Pages/Home';
-import Buy from './Pages/Buy';
-import Pay from './Pages/Pay';
-import Error from './Pages/Error';
+import Home from '../src/Pages/Home';
+import Buy from '../src/Pages/Buy';
+import Pay from '../src/Pages/Pay';
+import Error from '../src/Pages/Error';
 
 const MainPage = () => {
  

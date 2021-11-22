@@ -6,9 +6,9 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import MainPage from "./container/MainPage";
 
 ReactDOM.render(
-  <Router>
+  <React.StrictMode>
       <MainPage />
-  </Router>,
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
