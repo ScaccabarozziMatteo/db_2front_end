@@ -1,7 +1,8 @@
 import React from 'react';
-import {Alert, Box, Button, Collapse, TextField} from "@mui/material";
+import {Alert, Box, Button, Collapse,TextField} from "@mui/material";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
+import CustomizedSwitches from "./navbars/switchEmployee";
 
 const style = {
     position: 'absolute',
@@ -15,7 +16,7 @@ const style = {
     p: 4,
 };
 
-class LoginUser extends React.Component {
+class Login extends React.Component {
 
     constructor(props) {
         super(props);
@@ -24,22 +25,54 @@ class LoginUser extends React.Component {
             password: '',
             errorAlert: false,
             open: false,
+            typeLogin: 'user',
+            title: 'User - Login',
+            pathPost: '/user/login'
         };
+
+
+
 
         this.handleOpen.bind(this);
         this.handlerInputChange.bind(this);
         this.handleSubmit.bind(this);
         this.setAlert.bind(this);
+        this.handleCallback.bind(this);
+        this.changeTypeLogin.bind(this);
+
     }
 
     setAlert(state) {
         this.setState({'errorAlert': state,});
     }
 
+    changeTypeLogin() {
+        if (this.state.typeLogin === "employee") {
+            this.setState({
+            title: 'User - Login',
+            pathPost: '/user/login',
+            typeLogin: 'user'
+                }
+            )
+        } else {
+            this.setState({
+            title: 'Employee - Login',
+            pathPost: '/employee/login',
+            typeLogin: 'employee'
+                }
+            )
+        }
+    }
+
     handleOpen(state) {
         this.setState({'open': state,});
         if (!state)
             this.setAlert(false)
+    };
+
+    handleCallback = (childData) => {
+        this.setState({typeLogin: childData})
+        this.changeTypeLogin();
     };
 
     handlerInputChange(e, _this) {
@@ -50,7 +83,7 @@ class LoginUser extends React.Component {
 
 
     handleSubmit() {
-        axios.post("/user/login",
+        axios.post(this.state.pathPost,
             {email: this.state.email, password: this.state.password})
             .then(result => {
             if (result.status === 200) {
@@ -65,13 +98,12 @@ class LoginUser extends React.Component {
 
  render() {
         return (
-
             <React.Fragment>
                 <Button onClick={() =>
                     this.handleOpen(true)
                 }
 
-                >Login User</Button>
+                >Login</Button>
                 <Modal
                     open={this.state.open}
                     onClose={() => this.handleOpen(false)}
@@ -79,7 +111,7 @@ class LoginUser extends React.Component {
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                        <h1>User - Login</h1>
+                        <h1>{this.state.title}</h1>
                         <Box
                             sx={{
                                 '& > :not(style)': {m: 1, width: '100%', margin: '10px auto 10px auto'},
@@ -97,6 +129,7 @@ class LoginUser extends React.Component {
 
                             <Button variant="outlined" color="secondary" type="submit" onClick={() => this.handleSubmit(this)}>Login</Button>
 
+                            <CustomizedSwitches {...this.state} handleCallback={(typeLogin) => this.handleCallback(typeLogin)} />
                         </Box>
                         <Collapse in={this.state.errorAlert}>
                             <Alert severity="error">Not valid credentials!</Alert>
@@ -110,4 +143,4 @@ class LoginUser extends React.Component {
 }
 
 
-export default LoginUser;
+export default Login;

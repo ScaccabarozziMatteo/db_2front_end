@@ -1,8 +1,16 @@
 import React from 'react'
-import Box from "@mui/material/Box";
-import {Grid} from "@mui/material";
-import LoginUser from "../LoginUser";
-import LoginEmployee from "../LoginEmployee";
+import {Divider, Grid, Stack} from "@mui/material";
+import Login from "../Login";
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+
+    const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
 
 class NavbarHome extends React.Component {
 
@@ -10,19 +18,12 @@ class NavbarHome extends React.Component {
         return (
 
             <React.Fragment>
-                <Box sx={{
-                    flexGrow: 1
-                }
-                }>
-                    <Grid item xs={15}>
-                        <Grid item xs={6}>
-                            <LoginEmployee/>
-                        </Grid>
-                        <Grid item xs={9}>
-                            <LoginUser/>
-                        </Grid>
-                    </Grid>
-                </Box>
+                <Stack divider={<Divider orientation="vertical" flexItem />}
+                       direction="row" spacing={3} alignItems="center" alignContent="center">
+                    <Login/>
+                    <Item>Ciao</Item>
+                </Stack>
+
             </React.Fragment>
         )
     }
