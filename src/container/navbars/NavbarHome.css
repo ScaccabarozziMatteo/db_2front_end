@@ -23,6 +23,13 @@ nav{
 .menu-list{
     list-style-type: none;
     display: flex;
+    justify-content:flex-end;
+    align-items: center;
+}
+
+.lastButt{
+    list-style-type: none;
+    display: flex;
     justify-content: space-between;
     align-items: center;
 }
@@ -35,6 +42,7 @@ nav{
     margin-left: 20px;
 }
 
+/*
 .menu-list li:last-child a{
     font-weight: 300;
     padding: 5px 10px;
@@ -42,7 +50,7 @@ nav{
     transition: all 0.5s ease-in-out;
     margin-left: 2px;
     border-radius: 2px;
-}
+}*/
 
 .menu-list li a:hover ,
 .menu-list li a.active{

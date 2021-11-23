@@ -24,7 +24,7 @@ const LoginProfile = (props) =>{
 
     return (
     isLoggedIn? 
-    <NavLink exact to = "/logout" onClick={logout} className="bibi">
+    <NavLink exact to = "/" onClick={logout} className="bibi">
 Ciao 
  {
  localStorage.getItem("username")!==null ? localStorage.getItem("username") : localStorage.getItem("email")

@@ -19,6 +19,8 @@ const style = {
 
 function Login(props) {
 
+    const navigate=useNavigate();
+
 
     const [_state, _setState] = useState({
         email: '',
