@@ -9,8 +9,10 @@ const Login = () =>{
         <Alert severity='warning'>In order to login, please click on the LOGIN BUTTON in the top-right and enter you credentials.</Alert>
     </div>:
         <div>
-        YOU ARE ALREADY LOGGED IN! {(localStorage.getItem("username")!==" " && localStorage.getItem("username")!==null)? localStorage.getItem("username"): localStorage.getItem("email")} :)
-    </div>
+            <Alert>
+        You are already logged in, {(localStorage.getItem("username")!==" " && localStorage.getItem("username")!==null)? localStorage.getItem("username"): localStorage.getItem("email")}! :)
+            </Alert>
+        </div>
     )
 }
 

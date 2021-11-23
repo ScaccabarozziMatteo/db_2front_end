@@ -1,7 +1,8 @@
 import react from "react";
 import HorizontalLinearStepper from "../container/components/HorizontalStepper";
-import {Navigate} from "react-router-dom";
 import Login from "../container/Login";
+import {Alert} from "@mui/material";
+import React from "react";
 
 function Buy() {
 
@@ -16,9 +17,10 @@ function Buy() {
     }
 
     function pleaseLog() {
-        return(
+        return (
             <div>
-                <Login/>
+                <Alert severity='warning'>In order to buy something, please click on the LOGIN BUTTON in the top-right and enter
+                    you credentials.</Alert>
             </div>
         )
     }
