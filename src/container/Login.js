@@ -3,8 +3,8 @@ import {Alert, Box, Button, Collapse, Divider, IconButton, TextField, Typography
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 import CustomizedSwitches from "./navbars/switchEmployee";
-import LoginProfile from "./components/LoginProfile";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
 
 const style = {
     position: 'absolute',
@@ -20,7 +20,7 @@ const style = {
 
 function Login(props) {
 
-    const navigate = useNavigate();
+    const navigate=useNavigate();
 
 
     const [_state, _setState] = useState({
@@ -101,15 +101,15 @@ function Login(props) {
                 {email: _state.email, password: _state.password})
                 .then(result => {
                     if (result.status === 200) {
-                        console.log(result.status)
+                        
                         localStorage.setItem("email", _state.email); 
                         localStorage.setItem("username", result.data.username); 
                         localStorage.setItem("user_id", result.data.id);
                              // Set email in session storage
                         setError({..._error, errorAlert: false});
                         props.onLogChange(true);
-                        _setState({..._state, open: false});
-                        <LoginProfile />;
+                        navigate("/");
+
                     } else if (result.status === 401)
                         setError({..._error, errorAlert: true})
                 }).catch(() => {
@@ -120,7 +120,7 @@ function Login(props) {
 
     return (
         <React.Fragment>
-            <Button color={"inherit"} size={"large"} onClick={() =>
+            <Button onClick={() =>
                 handleOpen(true)
             }
 

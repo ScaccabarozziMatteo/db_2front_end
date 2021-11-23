@@ -8,16 +8,18 @@ nav{
     z-index: 99;
 }
 
-
-
-#logo{
+.logo{
     font-weight: 600;
     font-size: 25px;
     color: #01aacd;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
-#logo font{
+.logo font{
     color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
 .menu-list{
@@ -25,6 +27,8 @@ nav{
     display: flex;
     justify-content:flex-end;
     align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
 .lastButt{
@@ -36,10 +40,12 @@ nav{
 
 .menu-list li a{
     text-decoration: none;
-    color: #ffffff;
+    color: #fff;
     font-weight: 300;
     padding: 5px 10px;
     margin-left: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
 /*

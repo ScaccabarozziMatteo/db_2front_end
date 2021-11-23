@@ -10,6 +10,6 @@ export const MenuList =[
         {
         title: "Pay",
         url: "/pay",
-    }
+    },
 ];
 export default MenuList;

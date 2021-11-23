@@ -82,11 +82,11 @@ function SignUpUser() {
 
     return (
         <React.Fragment>
-            <Button color={"inherit"} size={"large"} onClick={() =>
+            <Button onClick={() =>
                 handleOpen(true)
             }
 
-            >SignUp</Button>
+            >SignUp User</Button>
             <Modal
                 open={open}
                 onClose={() => handleOpen(false)}
