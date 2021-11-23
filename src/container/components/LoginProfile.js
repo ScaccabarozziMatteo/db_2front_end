@@ -1,14 +1,13 @@
 import React from "react";
 
 import react, {useEffect, useState} from 'react';
+import { NavLink } from "react-router-dom";
 import Login from "../Login";
 
+import "./LoginProfile.css";
 
 
 const LoginProfile = (props) =>{
-
-    const [isLoggedIn,setIsLoggedIn] = useState();
-
 
     function logout(){
 
@@ -17,15 +16,20 @@ const LoginProfile = (props) =>{
         localStorage.setItem("username","");
         setIsLoggedIn(false);
     }
+    
+
+    const [isLoggedIn,setIsLoggedIn] = useState(localStorage.getItem("email")!=="" && localStorage.getItem("email")!==null);
+
+
 
     return (
     isLoggedIn? 
-    <button onClick={logout}>
+    <NavLink exact to = "/logout" onClick={logout} className="bibi">
 Ciao 
  {
  localStorage.getItem("username")!==null ? localStorage.getItem("username") : localStorage.getItem("email")
  } !
- </button>
+ </NavLink>
  :
  <Login vat={isLoggedIn} onLogChange={setIsLoggedIn}/>
 )

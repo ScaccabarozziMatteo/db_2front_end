@@ -7,7 +7,7 @@ import Pay from "../Pages/Pay";
 import Error from "../Pages/Error";
 import Login from "./Login";
 import Home from "../Pages/Home";
-
+import Logout from '../Pages/Logout';
 
 function MainPage() {
 
@@ -19,6 +19,7 @@ function MainPage() {
                 <Route path="/buy" element={<Buy/>}/>
                 <Route path="/pay" element={<Pay/>}/>
                 <Route path="/login" element={<Login/>}/>
+                <Route path="/logout" element={<Logout/>}/>
                 <Route path="/*" element={<Error/>}/>
             </Routes>
         </Router>
