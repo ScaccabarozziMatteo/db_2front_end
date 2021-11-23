@@ -12,10 +12,14 @@ nav{
     font-weight: 600;
     font-size: 25px;
     color: #01aacd;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
 .logo font{
     color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
 .menu-list{
@@ -23,6 +27,8 @@ nav{
     display: flex;
     justify-content:flex-end;
     align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
 .lastButt{
@@ -38,6 +44,8 @@ nav{
     font-weight: 300;
     padding: 5px 10px;
     margin-left: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
 /*
