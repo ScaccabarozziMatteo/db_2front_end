@@ -29,7 +29,9 @@ const LoginProfile = (props) =>{
 Ciao 
  {
  localStorage.getItem("username")!==null ? " "+localStorage.getItem("username") : " "+localStorage.getItem("email")
- }!
+ }
+
+ !
  </NavLink>
  :
  <div>

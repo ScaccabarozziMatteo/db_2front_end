@@ -120,11 +120,11 @@ function Login(props) {
 
     return (
         <React.Fragment>
-            <Button onClick={() =>
+            <Button color={"inherit"} size={"large"} onClick={() =>
                 handleOpen(true)
             }
 
-            >LOGIN</Button>
+            >Login</Button>
             <Modal
                 open={_state.open}
                 onClose={() => handleOpen(false)}
@@ -161,7 +161,7 @@ function Login(props) {
                         <CustomizedSwitches {..._state} handleCallback={(typeLogin) => handleCallback(typeLogin)}/>
                     </Box>
                     <Collapse in={_error.errorAlert}>
-                        <Alert severity="error">Not valid credentials!</Alert>
+                        <Alert severity="error">Invalid credentials!</Alert>
                     </Collapse>
                 </Box>
             </Modal>

@@ -92,7 +92,7 @@ function SignUpUser() {
                 handleOpen(true)
             }
 
-            >SignUp User</Button>
+            >SignUp</Button>
             <Modal
                 open={open}
                 onClose={() => handleOpen(false)}
@@ -142,7 +142,7 @@ function SignUpUser() {
 
                     </Box>
                     <Collapse in={_error.errorAlert}>
-                        <Alert severity="error">Not valid credentials!</Alert>
+                        <Alert severity="error">Invalid credentials!</Alert>
                     </Collapse>
                 </Box>
             </Modal>

@@ -1,13 +1,8 @@
 import React from 'react'
-import {Divider, Stack} from "@mui/material";
-// import Login from "../Login";
-import SignUpUser from "../SignUpUser";
 import MenuList from "./MenuList";
 import {NavLink} from "react-router-dom";
 import './NavbarHome.css';
-import { Button } from 'bootstrap';
 import Profile from '../components/LoginProfile';
-import Login from '../Login';
 
 function NavbarHome() {
 
