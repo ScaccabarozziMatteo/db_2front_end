@@ -1,0 +1,22 @@
+.divs{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.list-group{
+        align-items: center;
+        justify-content: space-around;
+        padding: 0;
+}
+
+
+.lis{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    justify-content: center;
+    list-style: none;
+    font-size: 80%;
+}
