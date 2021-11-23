@@ -2,19 +2,30 @@ import { NavLink } from "react-router-dom";
 import "./Packages.css";
 import Services from "./Services";
 import OptionalProducts from "./OptionalProducts";
+import { useNavigate } from "react-router";
 
 function Packages({packages}) {
+
+  const navigate = useNavigate();
+
+function clickHandle(apackage){
+  navigate("/buy");
+  localStorage.setItem("package",apackage);
+  console.log(localStorage.getItem("package"));
+}
+
     return (
     <ul className="list-group">
     {packages.map((apackage) => (
      <div className="divq">
      <li
         key={apackage.id}
-        className="list-row" activeClassName="active" onClick={this.click}
+        id={apackage.id}
+        className="list-row" activeClassName="active" onClick={()=>clickHandle(apackage.id)}
       >
-        <NavLink to="/pay" className="name">
+        <div  className="name">
             {apackage.name.toUpperCase()}
-        </NavLink>
+        </div>
         <div className="list-title" > Serivces:</div>
         <Services services={apackage.services}/>
         <div className="list-title" > Included-product:</div>
