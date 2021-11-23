@@ -1,10 +1,11 @@
 import React from 'react'
-import {Divider, Stack} from "@mui/material";
 import Login from "../Login";
 import SignUpUser from "../SignUpUser";
 import MenuList from "./MenuList";
 import {NavLink} from "react-router-dom";
-import './Navbar.css';
+import './NavbarHome.css';
+import Typography from "@mui/material/Typography";
+import {AppBar, Box, Button, Toolbar} from "@material-ui/core";
 
 
 function NavbarHome() {

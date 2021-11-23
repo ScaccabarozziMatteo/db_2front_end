@@ -3,6 +3,7 @@ import {Alert, Box, Button, Collapse, Divider, IconButton, TextField, Typography
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 import CustomizedSwitches from "./navbars/switchEmployee";
+import LoginProfile from "./components/LoginProfile";
 
 const style = {
     position: 'absolute',
@@ -97,14 +98,15 @@ function Login(props) {
                 {email: _state.email, password: _state.password})
                 .then(result => {
                     if (result.status === 200) {
-                        
+                        console.log(result.status)
                         localStorage.setItem("email", _state.email); 
                         localStorage.setItem("username", result.data.username); 
                         localStorage.setItem("user_id", result.data.id);
                              // Set email in session storage
                         setError({..._error, errorAlert: false});
                         props.onLogChange(true);
-
+                        _setState({..._state, open: false});
+                        <LoginProfile />;
                     } else if (result.status === 401)
                         setError({..._error, errorAlert: true})
                 }).catch(() => {
