@@ -1,6 +1,7 @@
 {
   "name": "db_2front_end",
   "version": "1.0.0",
+  "proxy": "http://localhost:8080/",
   "dependencies": {
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",

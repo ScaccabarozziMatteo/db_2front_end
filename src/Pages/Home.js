@@ -1,11 +1,27 @@
-import react from 'react';
+import react, {useEffect, useState} from 'react';
+import axios from "axios";
+import Packages from '../container/Packages';
+import Loading from "../container/Loading";
 
 
 function Home() {
-    console.log(localStorage.getItem("username"));  // Returns "Bob") ;
+
+        const [packages,setPackages] = useState([]);
+
+useEffect(() =>{
+    axios.get("package/getall").then((result)=>{
+        setPackages(result.data);
+    })
+
+},[])
+
     return (
-        <div>{localStorage.getItem("username")}
-        </div>);
+    <div>
+        {
+            packages? <Packages packages={packages} /> : <Loading/>
+        }
+    </div>
+    );
 }
 
 export default Home;
