@@ -5,9 +5,6 @@ import SignUpUser from "../SignUpUser";
 import MenuList from "./MenuList";
 import {NavLink} from "react-router-dom";
 import './Navbar.css';
-import Typography from "@mui/material/Typography";
-import {AppBar, Box, Button, IconButton, Toolbar} from "@material-ui/core";
-import MenuIcon from '@mui/icons-material/Menu';
 
 
 function NavbarHome() {
