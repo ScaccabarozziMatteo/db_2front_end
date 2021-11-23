@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import "./Packages.css";
 import Services from "./Services";
+import OptionalProducts from "./OptionalProducts";
 
 function Packages({packages}) {
     return (
@@ -17,14 +18,46 @@ function Packages({packages}) {
         <div className="list-title" > Serivces:</div>
         <Services services={apackage.services}/>
         <div className="list-title" > Included-product:</div>
-        <ul >
-            <li className="innerlist">
-            products there
-            ok\
-            </li>
-            
-        </ul>
-      </li>
+        <div className="list-group">
+        <OptionalProducts optionalproducts={apackage.optionalProducts}/>
+      </div>
+      <div className="OH">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                12 MONTHS PRICE:
+              </th>
+              <th>
+                24 MONTHS PROMO:
+              </th>
+              <th>
+                36 MONTHS PROMO:
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr>
+              <th>
+              {
+                apackage.fee12
+              }
+              </th>
+              <th>
+              {
+                apackage.fee24
+              }           
+              </th>
+              <th>
+              {
+                apackage.fee36
+              }              
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </li>
       </div>
     ))}
   </ul>)

@@ -4,24 +4,10 @@ function OptionalProducts({optionalproducts}) {
     return (
     <ul className="list-group">
     {optionalproducts.map((products) => (
-     <div className="divq">
+     <div className="divs">
      <li
-        key={products.id}
-        className="list-row"
-      >
-        <NavLink to="/pay" className="name">
-            {apackage.name.toUpperCase()}
-        </NavLink>
-        <div className="list-title" > Serivces:</div>
-        <Services services={apackage.services}/>
-        <div className="list-title" > Included-product:</div>
-        <ul >
-            <li className="innerlist">
-            products here
-            ok\
-            </li>
-            
-        </ul>
+        key={products.id} className="lis" >
+        {products.name}
       </li>
       </div>
     ))}
@@ -29,4 +15,4 @@ function OptionalProducts({optionalproducts}) {
   ;
 };
 
-export default Packages;
+export default OptionalProducts;
