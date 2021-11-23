@@ -8,7 +8,7 @@ function Buy() {
     print();
 
     function print() {
-        if (localStorage.getItem("email") !== null)
+        if (localStorage.getItem("username") !== null && localStorage.getItem("username") !== '')
             return Logged()
         else
             return pleaseLog()
