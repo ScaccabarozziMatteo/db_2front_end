@@ -103,6 +103,8 @@ function Login(props) {
                         localStorage.setItem("user_id", result.data.id);
                              // Set email in session storage
                         setError({..._error, errorAlert: false});
+                        props.onLogChange(true);
+
                     } else if (result.status === 401)
                         setError({..._error, errorAlert: true})
                 }).catch(() => {
