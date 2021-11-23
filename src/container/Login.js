@@ -3,6 +3,8 @@ import {Alert, Box, Button, Collapse, Divider, IconButton, TextField, Typography
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 import CustomizedSwitches from "./navbars/switchEmployee";
+import { useNavigate } from 'react-router-dom';
+
 
 const style = {
     position: 'absolute',
@@ -17,6 +19,8 @@ const style = {
 };
 
 function Login(props) {
+
+    const navigate=useNavigate();
 
 
     const [_state, _setState] = useState({
@@ -104,6 +108,7 @@ function Login(props) {
                              // Set email in session storage
                         setError({..._error, errorAlert: false});
                         props.onLogChange(true);
+                        navigate("/");
 
                     } else if (result.status === 401)
                         setError({..._error, errorAlert: true})

@@ -28,7 +28,7 @@ function NavbarHome() {
                         TEL<font>CO</font>
                     </div>
                     <ul className="menu-list">{menuList}</ul>
-                    <div >
+                    <div className="lastButt">
                        {localStorage.getItem("email")===" " ? <Login/> : <Profile/>}
                     </div>
                 </nav>
