@@ -8,13 +8,15 @@ nav{
     z-index: 99;
 }
 
-.logo{
+
+
+#logo{
     font-weight: 600;
     font-size: 25px;
-    color: #01aacd;
+    color: black;
 }
 
-.logo font{
+#logo font{
     color: #fff;
 }
 
@@ -27,7 +29,7 @@ nav{
 
 .menu-list li a{
     text-decoration: none;
-    color: #fff;
+    color: #ffffff;
     font-weight: 300;
     padding: 5px 10px;
     margin-left: 20px;

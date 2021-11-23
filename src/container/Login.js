@@ -107,7 +107,7 @@ function Login() {
 
     return (
         <React.Fragment>
-            <Button onClick={() =>
+            <Button color={"inherit"} size={"large"} onClick={() =>
                 handleOpen(true)
             }
 
