@@ -20,8 +20,6 @@ function NavbarHome() {
     });
 
         return (
-            <React.Fragment>
-
                 <nav>
                     <div className="logo">
                         TEL<font>CO</font>
@@ -31,14 +29,6 @@ function NavbarHome() {
                         {localStorage.getItem("username")}
                     </div>
                 </nav>
-
-                <Stack divider={<Divider orientation="vertical" flexItem />}
-                       direction="row" spacing={3} alignItems="center" alignContent="center">
-                    <Login/>
-                    <SignUpUser />
-                </Stack>
-
-            </React.Fragment>
         )
 }
 
