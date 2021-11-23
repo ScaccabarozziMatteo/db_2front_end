@@ -4,6 +4,7 @@ import Modal from "@mui/material/Modal";
 import axios from "axios";
 import CustomizedSwitches from "./navbars/switchEmployee";
 import LoginProfile from "./components/LoginProfile";
+import {useNavigate} from "react-router-dom";
 
 const style = {
     position: 'absolute',
@@ -19,7 +20,7 @@ const style = {
 
 function Login(props) {
 
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
 
     const [_state, _setState] = useState({
