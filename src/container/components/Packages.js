@@ -10,7 +10,7 @@ function Packages({packages}) {
      <div className="divq">
      <li
         key={apackage.id}
-        className="list-row"
+        className="list-row" activeClassName="active" onClick={this.click}
       >
         <NavLink to="/pay" className="name">
             {apackage.name.toUpperCase()}

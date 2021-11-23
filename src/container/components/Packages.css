@@ -25,7 +25,8 @@
 }
 
 
-.list-row:hover{
+.list-row:hover,
+.list-row.active{
     box-shadow: 0 16px 32px 0 rgba(0,0,0,0.5);
 }
 
