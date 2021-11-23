@@ -4,6 +4,7 @@ import './index.css';
 import reportWebVitals from "./reportWebVitals";
 import MainPage from "./container/MainPage";
 
+
 ReactDOM.render(
   <React.StrictMode>
       <MainPage />

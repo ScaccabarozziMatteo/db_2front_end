@@ -3,7 +3,7 @@ import {Divider, Stack} from "@mui/material";
 import Login from "../Login";
 import SignUpUser from "../SignUpUser";
 import {NavLink} from "react-router-dom";
-import {MenuList} from "@material-ui/core";
+import MenuList from "./MenuList";
 
 
 function NavbarHome() {
