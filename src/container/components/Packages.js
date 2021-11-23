@@ -6,7 +6,8 @@ function Packages({packages}) {
     return (
     <ul className="list-group">
     {packages.map((apackage) => (
-      <li
+     <div className="divq">
+     <li
         key={apackage.id}
         className="list-row"
       >
@@ -21,8 +22,10 @@ function Packages({packages}) {
             products here
             ok\
             </li>
+            
         </ul>
       </li>
+      </div>
     ))}
   </ul>)
   ;
