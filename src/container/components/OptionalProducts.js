@@ -1,14 +1,12 @@
-import { NavLink } from "react-router-dom";
-import "./Packages.css";
-import Services from "./Services";
+import "./OptionalProducts.css";
 
-function Packages({packages}) {
+function OptionalProducts({optionalproducts}) {
     return (
     <ul className="list-group">
-    {packages.map((apackage) => (
+    {optionalproducts.map((products) => (
      <div className="divq">
      <li
-        key={apackage.id}
+        key={products.id}
         className="list-row"
       >
         <NavLink to="/pay" className="name">
@@ -19,7 +17,7 @@ function Packages({packages}) {
         <div className="list-title" > Included-product:</div>
         <ul >
             <li className="innerlist">
-            products there
+            products here
             ok\
             </li>
             

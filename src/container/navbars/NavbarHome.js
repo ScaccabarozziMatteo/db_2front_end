@@ -1,14 +1,13 @@
 import React from 'react'
 import {Divider, Stack} from "@mui/material";
-import Login from "../Login";
+// import Login from "../Login";
 import SignUpUser from "../SignUpUser";
 import MenuList from "./MenuList";
 import {NavLink} from "react-router-dom";
 import './NavbarHome.css';
 import { Button } from 'bootstrap';
 import Profile from '../components/LoginProfile';
-/*
-*/
+import Login from '../Login';
 
 function NavbarHome() {
 
@@ -22,15 +21,15 @@ function NavbarHome() {
         )
     });
 
+
+
         return (
                 <nav>
                     <div className="logo">
                         TEL<font>CO</font>
                     </div>
                     <ul className="menu-list">{menuList}</ul>
-                    <div className="lastButt">
-                       {localStorage.getItem("email")===" " ? <Login/> : <Profile/>}
-                    </div>
+                <Profile/>
                 </nav>
         )
 }

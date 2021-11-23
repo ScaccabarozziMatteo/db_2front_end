@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import {Alert, Box, Button, Collapse, Divider, TextField, Typography} from "@mui/material";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
+import { useNavigate } from "react-router";
+
 
 const style = {
     position: 'absolute',
@@ -16,6 +18,8 @@ const style = {
 };
 
 function SignUpUser() {
+
+    const navigate=useNavigate();
 
     const [userAttr, setUserAttr] = useState({
         email: '',
@@ -42,6 +46,8 @@ function SignUpUser() {
                 .then(result => {
                     if (result.status === 200) {
                         setError({..._error, errorAlert: false, error1: false, error2: false, error3: false});
+                        navigate("/login");
+                        
                     } else if (result.status === 401)
                         setError({..._error, errorAlert: true})
                 }).catch(() => {
@@ -82,7 +88,7 @@ function SignUpUser() {
 
     return (
         <React.Fragment>
-            <Button onClick={() =>
+            <Button color={"inherit"} size={"large"} onClick={() =>
                 handleOpen(true)
             }
 

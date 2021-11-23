@@ -3,6 +3,7 @@ import React from "react";
 import react, {useEffect, useState} from 'react';
 import { NavLink } from "react-router-dom";
 import Login from "../Login";
+import SignUpUser from "../SignUpUser";
 
 import "./LoginProfile.css";
 
@@ -31,7 +32,10 @@ Ciao
  }!
  </NavLink>
  :
+ <div>
  <Login vat={isLoggedIn} onLogChange={setIsLoggedIn}/>
+ <SignUpUser onLogChange={setIsLoggedIn}/>
+ </div>
 )
 }
 

@@ -124,7 +124,7 @@ function Login(props) {
                 handleOpen(true)
             }
 
-            >Login</Button>
+            >LOGIN</Button>
             <Modal
                 open={_state.open}
                 onClose={() => handleOpen(false)}

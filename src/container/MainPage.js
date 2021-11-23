@@ -5,9 +5,9 @@ import "./MainPage.css";
 import Buy from "../Pages/Buy";
 import Pay from "../Pages/Pay";
 import Error from "../Pages/Error";
-import Login from "./Login";
 import Home from "../Pages/Home";
 import Logout from '../Pages/Logout';
+import Login from '../Pages/LoginPage';
 
 function MainPage() {
 
@@ -18,8 +18,8 @@ function MainPage() {
                 <Route path="/" index element={<Home/>}/>
                 <Route path="/buy" element={<Buy/>}/>
                 <Route path="/pay" element={<Pay/>}/>
-                <Route path="/login" element={<Login/>}/>
                 <Route path="/logout" element={<Logout/>}/>
+                <Route path="/login" element={<Login/>}/>
                 <Route path="/*" element={<Error/>}/>
             </Routes>
         </Router>
