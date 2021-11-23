@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {Alert, Box, Button, Collapse, Divider, IconButton, TextField, Typography} from "@mui/material";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
@@ -16,10 +16,12 @@ const style = {
     p: 4,
 };
 
-function Login() {
+function Login(props) {
+
 
     const [_state, _setState] = useState({
         email: '',
+        username: '',
         password: '',
         open: false,
         typeLogin: 'user',
@@ -95,8 +97,12 @@ function Login() {
                 {email: _state.email, password: _state.password})
                 .then(result => {
                     if (result.status === 200) {
-                        localStorage.setItem("email", _state.email);      // Set email in session storage
-                        setError({..._error, errorAlert: false})
+                        
+                        localStorage.setItem("email", _state.email); 
+                        localStorage.setItem("username", result.data.username); 
+                        localStorage.setItem("user_id", result.data.id);
+                             // Set email in session storage
+                        setError({..._error, errorAlert: false});
                     } else if (result.status === 401)
                         setError({..._error, errorAlert: true})
                 }).catch(() => {

@@ -4,8 +4,11 @@ import Login from "../Login";
 import SignUpUser from "../SignUpUser";
 import MenuList from "./MenuList";
 import {NavLink} from "react-router-dom";
-import './Navbar.css';
-
+import './NavbarHome.css';
+import { Button } from 'bootstrap';
+import Profile from '../components/LoginProfile';
+/*
+*/
 
 function NavbarHome() {
 
@@ -25,8 +28,8 @@ function NavbarHome() {
                         TEL<font>CO</font>
                     </div>
                     <ul className="menu-list">{menuList}</ul>
-                    <div>
-                        {localStorage.getItem("username")}
+                    <div >
+                       {localStorage.getItem("email")===" " ? <Login/> : <Profile/>}
                     </div>
                 </nav>
         )
