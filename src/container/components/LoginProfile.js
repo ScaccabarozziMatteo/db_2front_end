@@ -6,6 +6,7 @@ import Login from "../Login";
 import SignUpUser from "../SignUpUser";
 
 import "./LoginProfile.css";
+import MenuAppBar from "./AvatarUser";
 
 
 const LoginProfile = (props) =>{
@@ -24,15 +25,15 @@ const LoginProfile = (props) =>{
 
 
     return (
-    isLoggedIn? 
+    isLoggedIn? <div>
+        <MenuAppBar/>
     <NavLink exact to = "/" onClick={logout} className="bibi">
 Ciao 
  {
  localStorage.getItem("username")!==null ? " "+localStorage.getItem("username") : " "+localStorage.getItem("email")
- }
-
- !
+ }!
  </NavLink>
+        </div>
  :
  <div>
  <Login vat={isLoggedIn} onLogChange={setIsLoggedIn}/>

@@ -8,6 +8,7 @@ import Error from "../Pages/Error";
 import Home from "../Pages/Home";
 import Logout from '../Pages/Logout';
 import Login from '../Pages/LoginPage';
+import MenuAppBar from "./components/AvatarUser";
 
 function MainPage() {
 
