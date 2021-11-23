@@ -3,6 +3,7 @@ import {Alert, Box, Button, Collapse, Divider, TextField, Typography} from "@mui
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import {Snackbar} from "@material-ui/core";
 
 
 const style = {
@@ -32,7 +33,8 @@ function SignUpUser() {
         error1: false,
         error2: false,
         error3: false,
-        errorAlert: false
+        errorAlert: false,
+        successAlert: false
     });
 
     const [open, setOpen] = useState(false);
@@ -43,11 +45,20 @@ function SignUpUser() {
 
             axios.post('/user/registration',
                 {email: userAttr.email, username: userAttr.username, password: userAttr.password})
-                .then(result => {
+                .then(async result => {
                     if (result.status === 200) {
-                        setError({..._error, errorAlert: false, error1: false, error2: false, error3: false});
-                        navigate("/login");
-                        
+                        setError({
+                            ..._error,
+                            errorAlert: false,
+                            error1: false,
+                            error2: false,
+                            error3: false,
+                            successAlert: true
+                        });
+                        setOpen(false)
+                            navigate('/login');
+
+
                     } else if (result.status === 401)
                         setError({..._error, errorAlert: true})
                 }).catch(() => {
@@ -56,10 +67,18 @@ function SignUpUser() {
         }
     }
 
+    const handleClose = (event, reason) => {
+    if (reason === 'clickable') {
+      return;
+    }
+
+    setError({..._error, successAlert: false});
+  };
+
     function handleOpen(state) {
         setOpen(state);
         if (!state)
-            setError({..._error, errorAlert: false, error1: false, error2: false, error3: false});
+            setError({..._error, errorAlert: false, error1: false, error2: false, error3: false, successAlert: false});
     }
 
     function checkValidity() {
@@ -92,7 +111,7 @@ function SignUpUser() {
                 handleOpen(true)
             }
 
-            >SignUp User</Button>
+            >SignUp</Button>
             <Modal
                 open={open}
                 onClose={() => handleOpen(false)}
@@ -142,10 +161,15 @@ function SignUpUser() {
 
                     </Box>
                     <Collapse in={_error.errorAlert}>
-                        <Alert severity="error">Not valid credentials!</Alert>
+                        <Alert severity="error">Invalid credentials!</Alert>
                     </Collapse>
                 </Box>
             </Modal>
+            <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'left'}} open={_error.successAlert}
+                      autoHideDuration={6000} onClose={handleClose}>
+                <Alert variant='filled' severity='success'>Great! You are registered</Alert>
+
+            </Snackbar>
 
         </React.Fragment>
     )
