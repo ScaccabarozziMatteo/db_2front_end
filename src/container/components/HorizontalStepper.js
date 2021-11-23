@@ -5,12 +5,23 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import axios from 'axios';
+import Packages from './Packages';
+import { useState,useEffect } from 'react';
 
 const steps = ['Select a package', 'Add optional products', 'Check your order'];
 
 export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
+  const [packages,setPackages] = useState([]);
+
+  useEffect(() =>{
+    axios.get("package/getall").then((result)=>{
+        setPackages(result.data);
+    })
+
+},[])
 
   const isStepOptional = (step) => {
     return step === 1;
@@ -88,6 +99,9 @@ export default function HorizontalLinearStepper() {
       ) : (
         <React.Fragment>
           <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+
+          <Packages packages={packages} /> 
+
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
               color="inherit"
