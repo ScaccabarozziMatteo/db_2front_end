@@ -1,7 +1,7 @@
 import react, {useEffect, useState} from 'react';
 import axios from "axios";
 import Packages from "../container/components/Packages";
-//import Loading from "../components/Loading";
+import Loading from "../container/components/Loading";
 
 function Home() {
 
@@ -17,8 +17,7 @@ useEffect(() =>{
     return (
     <div>
         {
-            <Packages packages={packages} />
-            //packages? <Packages packages={packages} /> : <Loading/>
+            packages? <Packages packages={packages} /> : <Loading/>
         }
     </div>
     );
