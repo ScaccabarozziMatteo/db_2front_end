@@ -6,15 +6,16 @@ import Buy from "../Pages/Buy";
 import Pay from "../Pages/Pay";
 import Error from "../Pages/Error";
 import Login from "./Login";
+import Home from "../Pages/Home";
 
 
 function MainPage() {
 
     return (
+        <Router>
+            <Routes>
                 <NavbarHome/>
 
-       /* <Router>
-            <Routes>
                 <Route path="/" index element={<Home/>}/>
                 <Route path="/buy" element={<Buy/>}/>
                 <Route path="/pay" element={<Pay/>}/>
@@ -23,7 +24,6 @@ function MainPage() {
             </Routes>
         </Router>
 
-        */
 
     )
 }
