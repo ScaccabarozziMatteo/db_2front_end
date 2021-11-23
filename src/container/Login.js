@@ -3,7 +3,6 @@ import {Alert, Box, Button, Collapse, Divider, IconButton, TextField, Typography
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 import CustomizedSwitches from "./navbars/switchEmployee";
-import {CloseIcon} from '@material-ui/icons/Close';
 
 const style = {
     position: 'absolute',
@@ -121,9 +120,7 @@ function Login() {
             >
                 <Box sx={style}>
                     <Typography marginBottom={'15px'} align={"center"} variant="h4">{_state.title}</Typography>
-                    <IconButton onClick={_setState({..._state, open: false})}>
-            <CloseIcon />
-        </IconButton>
+
                     <Divider variant="middle"/>
                     <Box
                         sx={{

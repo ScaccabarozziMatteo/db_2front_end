@@ -13,9 +13,8 @@ function MainPage() {
 
     return (
         <Router>
+            <NavbarHome/>
             <Routes>
-                <NavbarHome/>
-
                 <Route path="/" index element={<Home/>}/>
                 <Route path="/buy" element={<Buy/>}/>
                 <Route path="/pay" element={<Pay/>}/>
