@@ -11,11 +11,12 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import { Navigate, useNavigate } from 'react-router';
 
-export default function MenuAppBar() {
+export default function MenuAppBar(props) {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const navigate= useNavigate();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -24,6 +25,12 @@ export default function MenuAppBar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const logOut=()=> {
+    handleClose();
+    props.onLogChange();
+    navigate("/");
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -54,7 +61,7 @@ export default function MenuAppBar() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={logOut}>Logout</MenuItem>
               </Menu>
             </div>
     </Box>
