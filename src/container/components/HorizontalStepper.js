@@ -12,6 +12,8 @@ import OptionalProducts from './OptionalProducts';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 import "./HorizontalStepper.css";
+import OptionalProductsCards from './OptionalProductsCards';
+
 const steps = ['Select a package', 'Add optional products', 'Check your order'];
 
 export default function HorizontalLinearStepper() {
@@ -118,7 +120,7 @@ useEffect(() =>{
         <React.Fragment>
           <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
 
-          {activeStep===0? 
+          {activeStep===0 ? 
           <div className="selected">
             <div className="packageDetails">
             <div className="packNamediv">
@@ -132,7 +134,13 @@ useEffect(() =>{
           <Packages packages={packages} reloadStepper={setSelectedPackage} />
           </div>
           : 
-          <OptionalProducts optionalproducts={products}/> }
+          activeStep===1 ?
+          <OptionalProductsCards optionalproducts={products}/>
+          :
+
+          "Checkout Place Holder"
+        
+        }
 
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
