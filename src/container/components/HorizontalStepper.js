@@ -122,7 +122,7 @@ useEffect(() =>{
           <div className="selected">
             <div className="packageDetails">
             <div className="packNamediv">
-            You selcted: <div className="packName">{selectedPackage!==null && selectedPackage!=="undefined" && selectedPackage!==""? selectedPackage.name.toUpperCase() + ". " : ""}</div>            
+            You selected: <div className="packName">{selectedPackage!==null && selectedPackage!=="undefined" && selectedPackage!==""? selectedPackage.name.toUpperCase() + ". " : ""}</div>
            </div>
             <div className="dateSelector">
               Starting from: 

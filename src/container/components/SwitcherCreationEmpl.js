@@ -10,6 +10,8 @@ import { green } from '@mui/material/colors';
 import Box from '@mui/material/Box';
 import CreatePackage from "../components/CreatePackage";
 import CreateOptProduct from "../components/CreateOptProduct";
+import CreateService from "../components/CreateService";
+
 
 
 function TabPanel(props) {
@@ -73,8 +75,9 @@ function SwitcherCreationEmpl() {
           variant="fullWidth"
           aria-label="action tabs example"
         >
-          <Tab label="Create package" {...a11yProps(0)} />
-          <Tab label="Create optional product" {...a11yProps(1)} />
+          <Tab label="Create service" {...a11yProps(0)} />
+          <Tab label="Create package" {...a11yProps(1)} />
+          <Tab label="Create optional product" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -83,9 +86,12 @@ function SwitcherCreationEmpl() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <CreatePackage />
+          <CreateService />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
+          <CreatePackage />
+        </TabPanel>
+        <TabPanel value={value} index={2} dir={theme.direction}>
           <CreateOptProduct/>
         </TabPanel>
       </SwipeableViews>
