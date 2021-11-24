@@ -17,7 +17,8 @@ export default function HorizontalLinearStepper() {
   const [skipped, setSkipped] = React.useState(new Set());
   const [packages,setPackages] = useState([]);
   const [products,setProducts] = useState([]);
-
+  const [selectedPackage,setSelectedPackage] = useState(JSON.parse(localStorage.getItem("selectedPackage")));
+  const [selectedProducts,setSelectedProducts] =useState([]);
 
 
   useEffect(() =>{
@@ -113,7 +114,13 @@ useEffect(() =>{
         <React.Fragment>
           <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
 
-          {activeStep===0? <Packages packages={packages} />: <OptionalProducts optionalproducts={products}/> }
+          {activeStep===0? 
+          <div className="selected">
+            Selected package: {selectedPackage.name.toUpperCase()}
+          <Packages packages={packages} reloadStepper={setSelectedPackage} />
+          </div>
+          : 
+          <OptionalProducts optionalproducts={products}/> }
 
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button

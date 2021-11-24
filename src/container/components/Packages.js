@@ -4,24 +4,30 @@ import Services from "./Services";
 import OptionalProducts from "./OptionalProducts";
 import { useNavigate } from "react-router";
 
-function Packages({packages}) {
+function Packages(props) {
 
   const navigate = useNavigate();
 
 function clickHandle(apackage){
+  
+  console.log(window.location.href);
+  
+  localStorage.setItem("selectedPackage",JSON.stringify(apackage));
+  console.log(JSON.parse(localStorage.getItem("selectedPackage")));
+  if(window.location.href==="http://localhost:3000/")
   navigate("/buy");
-  localStorage.setItem("package",apackage);
-  console.log(localStorage.getItem("package"));
+  else{
+  props.reloadStepper(JSON.parse(localStorage.getItem("selectedPackage")));}
 }
 
     return (
     <ul className="list-group">
-    {packages.map((apackage) => (
+    {props.packages.map((apackage) => (
      <div className="divq">
      <li
         key={apackage.id}
         id={apackage.id}
-        className="list-row" activeClassName="active" onClick={()=>clickHandle(apackage.id)}
+        className="list-row" activeClassName="active" onClick={()=>clickHandle(apackage)}
       >
         <div  className="name">
             {apackage.name.toUpperCase()}
@@ -33,7 +39,7 @@ function clickHandle(apackage){
         <OptionalProducts optionalproducts={apackage.optionalProducts}/>
       </div>
       <div className="OH">
-        <table>
+        <table className="tablet">
           <thead>
             <tr>
               <th>
@@ -52,17 +58,17 @@ function clickHandle(apackage){
               <th>
               {
                 apackage.fee12
-              }
+              }€/month
               </th>
               <th>
               {
                 apackage.fee24
-              }           
+              }€/month           
               </th>
               <th>
               {
                 apackage.fee36
-              }              
+              }€/month              
               </th>
             </tr>
           </tbody>
