@@ -4,12 +4,12 @@ export const MenuList =[
         url: "/employee",
     },
     {
-        title: "Empllyeefun",
-        url: "/buy",
+        title: "Create",
+        url: "/employee/createPackages",
     },
         {
-        title: "Employeefun",
-        url: "/pay",
+        title: "Report",
+        url: "/employee/report",
     },
 ];
 export default MenuList;
