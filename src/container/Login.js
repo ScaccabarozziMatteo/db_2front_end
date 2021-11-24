@@ -108,6 +108,7 @@ function Login(props) {
                              // Set email in session storage
                         setError({..._error, errorAlert: false});
                         props.onLogChange(true);
+                        props.reload(true);
                         navigate("/");
 
                     } else if (result.status === 401)

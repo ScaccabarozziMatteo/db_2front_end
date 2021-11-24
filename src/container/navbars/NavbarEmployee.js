@@ -1,10 +1,11 @@
 import React from 'react'
-import MenuList from "./MenuList";
+import MenuList from "./MenuListEmployee";
 import {NavLink} from "react-router-dom";
 import './NavbarHome.css';
 import Profile from '../components/LoginProfile';
+import { PinDropSharp } from '@material-ui/icons';
 
-function NavbarHome(props) {
+function NavbarEmployee(props) {
 
         const menuList = MenuList.map(({ url, title }, index) =>{
         return(
@@ -29,4 +30,4 @@ function NavbarHome(props) {
         )
 }
 
-export default NavbarHome;
+export default NavbarEmployee;

@@ -17,6 +17,7 @@ const LoginProfile = (props) =>{
         localStorage.setItem("email","");
         localStorage.setItem("username","");
         setIsLoggedIn(false);
+        props.reload(false);
     }
     
 
@@ -37,7 +38,7 @@ Ciao
         </div>
  :
  <div className = "menuobj">
- <Login className="menuobj" vat={isLoggedIn} onLogChange={setIsLoggedIn}/>
+ <Login className="menuobj" vat={isLoggedIn} reload = {props.reload} onLogChange={setIsLoggedIn}/>
  <SignUpUser className="menuobj" onLogChange={setIsLoggedIn}/>
  </div>
 )
