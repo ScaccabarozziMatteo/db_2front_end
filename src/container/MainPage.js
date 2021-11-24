@@ -23,7 +23,7 @@ console.log(localStorage.getItem("username"));
 
     return (
         <Router>
-           {(role ===true && localStorage.getItem("email")!== " " && localStorage.getItem("username")=== "undefined") ? <NavbarEmployee reload={setRole}/> : <NavbarHome reload={setRole}/>} 
+           {(localStorage.getItem("email")!== " " && localStorage.getItem("username")=== "undefined") ? <NavbarEmployee reload={setRole}/> : <NavbarHome reload={setRole}/>} 
             <Routes>
                 <Route path="/" index element={<Home/>}/>
                 <Route path="/employee" element={<HomeEmployee/>}/>
