@@ -30,7 +30,7 @@ const LoginProfile = (props) =>{
     <NavLink exact to = "/" onClick={logout} className="bibi">
 Ciao 
  {
- localStorage.getItem("username")!==null ? " "+localStorage.getItem("username") : " "+localStorage.getItem("email")
+ localStorage.getItem("username")!==null && localStorage.getItem("username")!=="undefined" && localStorage.getItem("username")!==" "? " "+localStorage.getItem("username") : " "+localStorage.getItem("email")
  }!
  </NavLink>
  <MenuAppBar onLogChange={logout} />
