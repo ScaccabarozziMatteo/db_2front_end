@@ -77,8 +77,8 @@ export default function createPackage() {
             <Box width='90%' alignContent={"center"} sx={{boxShadow: 3}}>
                 <Typography marginBottom={'15px'} align={"center"} variant="h4">Create package</Typography>
                 <Box sx={{flexGrow: 1}}>
-                    <Grid container spacing={1} co>
-                        <Grid container spacing={2} column direction={'row'}>
+                    <Grid container item spacing={2}>
+                        <Grid container item spacing={2} column direction={'row'}>
                             <Grid item xs>
                                 <TextField id="outlined-basic" label="Name" variant="outlined"
                                            name="name" color="secondary"
@@ -98,10 +98,28 @@ export default function createPackage() {
                                            helperText={_error.error2 ? 'Username not valid' : ''}
                                            onChange={handlerInputChange}/>
                             </Grid>
+                            <Grid item xs>
+                                <TextField id="outlined-basic" label="Username" variant="outlined"
+                                           name="username" color="secondary"
+                                           type="text"
+                                           required
+                                           error={_error.error2}
+                                           helperText={_error.error2 ? 'Username not valid' : ''}
+                                           onChange={handlerInputChange}/>
+                            </Grid>
+                            <Grid item xs>
+                                <TextField id="outlined-basic" label="Username" variant="outlined"
+                                           name="username" color="secondary"
+                                           type="text"
+                                           required
+                                           error={_error.error2}
+                                           helperText={_error.error2 ? 'Username not valid' : ''}
+                                           onChange={handlerInputChange}/>
+                            </Grid>
 
                         </Grid>
-                        <Grid container spacing={2} direction={'column'}>
-                            <Grid item xs={4}>
+                        <Grid container item spacing={2} column direction={'row'}>
+                            <Grid item xs>
                                 <TextField id="outlined-basic" label="Name" variant="outlined"
                                            name="name" color="secondary"
                                            type="name"
@@ -111,7 +129,25 @@ export default function createPackage() {
                                            onChange={handlerInputChange}/>
                             </Grid>
 
-                            <Grid item xs={4}>
+                            <Grid item xs>
+                                <TextField id="outlined-basic" label="Username" variant="outlined"
+                                           name="username" color="secondary"
+                                           type="text"
+                                           required
+                                           error={_error.error2}
+                                           helperText={_error.error2 ? 'Username not valid' : ''}
+                                           onChange={handlerInputChange}/>
+                            </Grid>
+                            <Grid item xs>
+                                <TextField id="outlined-basic" label="Username" variant="outlined"
+                                           name="username" color="secondary"
+                                           type="text"
+                                           required
+                                           error={_error.error2}
+                                           helperText={_error.error2 ? 'Username not valid' : ''}
+                                           onChange={handlerInputChange}/>
+                            </Grid>
+                            <Grid item xs>
                                 <TextField id="outlined-basic" label="Username" variant="outlined"
                                            name="username" color="secondary"
                                            type="text"

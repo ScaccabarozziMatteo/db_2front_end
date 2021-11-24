@@ -42,20 +42,6 @@ function a11yProps(index) {
   };
 }
 
-const fabStyle = {
-  position: 'absolute',
-  bottom: 16,
-  right: 16,
-};
-
-const fabGreenStyle = {
-  color: 'common.white',
-  bgcolor: green[500],
-  '&:hover': {
-    bgcolor: green[600],
-  },
-};
-
 function SwitcherCreationEmpl() {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
