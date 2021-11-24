@@ -109,7 +109,10 @@ function Login(props) {
                         setError({..._error, errorAlert: false});
                         props.onLogChange(true);
                         props.reload(true);
-                        navigate("/");
+                        if (_state.typeLogin === 'user')
+                            navigate("/");
+                        else
+                            navigate("/employee");
 
                     } else if (result.status === 401)
                         setError({..._error, errorAlert: true})

@@ -10,6 +10,7 @@ import Logout from '../Pages/Logout';
 import Login from '../Pages/LoginPage';
 import MenuAppBar from "./components/AvatarUser";
 import NavbarEmployee from './navbars/NavbarEmployee';
+import HomeEmployee from "../Pages/HomeEmployee";
 
 function MainPage() {
 const [role,setRole]=useState();
@@ -25,6 +26,7 @@ console.log(localStorage.getItem("username"));
            {(role ===true && localStorage.getItem("email")!== " " && localStorage.getItem("username")=== "undefined") ? <NavbarEmployee reload={setRole}/> : <NavbarHome reload={setRole}/>} 
             <Routes>
                 <Route path="/" index element={<Home/>}/>
+                <Route path="/employee" element={<HomeEmployee/>}/>
                 <Route path="/buy" element={<Buy/>}/>
                 <Route path="/pay" element={<Pay/>}/>
                 <Route path="/logout" element={<Logout/>}/>
