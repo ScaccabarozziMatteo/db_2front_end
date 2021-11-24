@@ -1,7 +1,7 @@
 import react, {useEffect, useState} from 'react';
 import axios from "axios";
-import Packages from "../container/components/Packages";
-import Loading from "../container/components/Loading";
+import Packages from "../../container/components/Packages";
+import Loading from "../../container/components/Loading";
 
 function Home() {
 

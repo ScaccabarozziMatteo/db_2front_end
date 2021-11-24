@@ -1,6 +1,6 @@
 import react from "react";
-import HorizontalLinearStepper from "../container/components/HorizontalStepper";
-import Login from "../container/Login";
+import HorizontalLinearStepper from "../../container/components/HorizontalStepper";
+import Login from "../../container/Login";
 import {Alert} from "@mui/material";
 import React from "react";
 
