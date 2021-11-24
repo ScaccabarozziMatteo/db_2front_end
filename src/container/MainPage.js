@@ -14,7 +14,7 @@ import HomeEmployee from "../Pages/Employee_Pages/HomeEmployee";
 import ReportPage from "../Pages/Employee_Pages/ReportPage";
 
 function MainPage() {
-const [role,setRole]=useState(localStorage.getItem("username") === "undefined");
+const [role,setRole]=useState();
 
 useEffect (()=>{
 console.log(localStorage.getItem("email"));
@@ -27,7 +27,7 @@ console.log(localStorage.getItem("username"));
            {(localStorage.getItem("email")!== " " && localStorage.getItem("username")=== "undefined") ? <NavbarEmployee reload={setRole}/> : <NavbarHome reload={setRole}/>} 
             <Routes>
                 <Route path="/" index element={<Home/>}/>
-                <Route path="/employee" index element={<HomeEmployee/>}/>
+                <Route path="/employee" element={<HomeEmployee/>}/>
                 <Route path="/buy" element={<Buy/>}/>
                 <Route path="/pay" element={<Pay/>}/>
                 <Route path="/logout" element={<Logout/>}/>
