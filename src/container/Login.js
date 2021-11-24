@@ -108,7 +108,10 @@ function Login(props) {
                              // Set email in session storage
                         setError({..._error, errorAlert: false});
                         props.onLogChange(true);
-                        navigate("/");
+                        if (_state.typeLogin === 'user')
+                            navigate("/");
+                        else
+                            navigate("/employee");
 
                     } else if (result.status === 401)
                         setError({..._error, errorAlert: true})

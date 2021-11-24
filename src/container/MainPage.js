@@ -9,6 +9,7 @@ import Home from "../Pages/Home";
 import Logout from '../Pages/Logout';
 import Login from '../Pages/LoginPage';
 import MenuAppBar from "./components/AvatarUser";
+import HomeEmployee from "../Pages/HomeEmployee";
 
 function MainPage() {
 
@@ -17,6 +18,7 @@ function MainPage() {
             <NavbarHome/>
             <Routes>
                 <Route path="/" index element={<Home/>}/>
+                <Route path="/employee" element={<HomeEmployee/>}/>
                 <Route path="/buy" element={<Buy/>}/>
                 <Route path="/pay" element={<Pay/>}/>
                 <Route path="/logout" element={<Logout/>}/>
