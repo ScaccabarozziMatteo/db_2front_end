@@ -24,6 +24,7 @@ function clickHandle(apackage){
     <ul className="list-group">
     {props.packages.map((apackage) => (
      <div className="divq">
+       <br></br>
      <li
         key={apackage.id}
         id={apackage.id}
