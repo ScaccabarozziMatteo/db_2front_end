@@ -24,7 +24,6 @@ function clickHandle(apackage){
     <ul className="list-group">
     {props.packages.map((apackage) => (
      <div className="divq">
-       <br></br>
      <li
         key={apackage.id}
         id={apackage.id}
@@ -41,32 +40,32 @@ function clickHandle(apackage){
       </div>
       <div className="OH">
         <table className="tablet">
-          <thead>
-            <tr>
-              <th>
+          <thead className="list-titlet">
+            <tr className="price-row">
+              <th className="list-titlet">
                 12 MONTHS PRICE:
               </th>
-              <th>
+              <th className="list-titlet">
                 24 MONTHS PROMO:
               </th>
-              <th>
+              <th className="list-titlet">
                 36 MONTHS PROMO:
               </th>
             </tr>
           </thead>
           <tbody>
-          <tr>
-              <th>
+          <tr className="price-row">
+              <th className="price-tag">
               {
                 apackage.fee12
               }€/month
               </th>
-              <th>
+              <th className="price-tag">
               {
                 apackage.fee24
               }€/month           
               </th>
-              <th>
+              <th className="price-tag">
               {
                 apackage.fee36
               }€/month              

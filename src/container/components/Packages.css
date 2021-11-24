@@ -10,6 +10,7 @@
 }
 
 .list-row{
+    margin-top: 1%;
     width: 75%;
     list-style: none;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -20,7 +21,8 @@
 	border-width: 1px;
     background-color: #F5F5F5;
     align-items: center;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .innerlist{
@@ -52,10 +54,37 @@
 .list-title{
    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-
+    margin-top: 1%;
 }
+
+.price-row{
+    text-align: center;
+}
+
+.list-titlet{
+    font-family: Arial, Helvetica, sans-serif;
+     font-weight: bold;
+     margin-top: 2%;
+     font-size: 120%;
+     color: rgb(216, 0, 0);
+ }
+ 
 
 .OH {
 width: 100%;
 font-weight: bold;
+}
+
+.tablet{
+    border-radius: 5px; /* 5px rounded corners */
+    box-sizing: border-box;
+	border-style:hidden;
+	border-width: 0.1px;
+    justify-content: center;
+    font-weight: normal;
+    font-size:  130%;
+}
+
+.price-tag{
+    font-size: 200%;
 }
