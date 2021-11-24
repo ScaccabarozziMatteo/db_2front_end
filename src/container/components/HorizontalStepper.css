@@ -1,0 +1,22 @@
+.packageDetails{
+    width: 100%;
+    font-weight: bolder;
+    justify-content: space-between;
+    display: flex;
+}
+
+.dateSelector{
+    width: min-content*1.01;
+    margin-right: 13%;
+    display: flex;
+}
+
+.packNamediv{
+    display: flex;
+    align-items: center;
+}
+
+.packName{
+    font-size: 120%;
+    color: rgb(21, 110, 226);
+}

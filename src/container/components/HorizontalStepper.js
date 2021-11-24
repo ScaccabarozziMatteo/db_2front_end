@@ -9,7 +9,9 @@ import axios from 'axios';
 import Packages from './Packages';
 import { useState,useEffect } from 'react';
 import OptionalProducts from './OptionalProducts';
-
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import 'react-day-picker/lib/style.css';
+import "./HorizontalStepper.css";
 const steps = ['Select a package', 'Add optional products', 'Check your order'];
 
 export default function HorizontalLinearStepper() {
@@ -20,6 +22,8 @@ export default function HorizontalLinearStepper() {
   const [selectedPackage,setSelectedPackage] = useState(JSON.parse(localStorage.getItem("selectedPackage")));
   const [selectedProducts,setSelectedProducts] =useState([]);
 
+  const today= new Date();
+  
 
   useEffect(() =>{
     axios.get("package/getall").then((result)=>{
@@ -116,7 +120,15 @@ useEffect(() =>{
 
           {activeStep===0? 
           <div className="selected">
-            Selected package: {selectedPackage.name.toUpperCase()}
+            <div className="packageDetails">
+            <div className="packNamediv">
+            You selcted: <div className="packName">{selectedPackage.name.toUpperCase() + ". "}</div>            
+           </div>
+            <div className="dateSelector">
+              Starting from: 
+           <DayPickerInput dayPickerProps={{ disabledDays: {before: new Date()} }} onDayChange={day =>  localStorage.setItem("date",day)} />
+           </div>
+          </div>
           <Packages packages={packages} reloadStepper={setSelectedPackage} />
           </div>
           : 
