@@ -32,13 +32,13 @@ Ciao
  localStorage.getItem("username")!==null ? " "+localStorage.getItem("username") : " "+localStorage.getItem("email")
  }!
  </NavLink>
- <MenuAppBar onLogChange={setIsLoggedIn} />
+ <MenuAppBar onLogChange={logout} />
 
         </div>
  :
- <div>
- <Login vat={isLoggedIn} onLogChange={setIsLoggedIn}/>
- <SignUpUser onLogChange={setIsLoggedIn}/>
+ <div className = "menuobj">
+ <Login className="menuobj" vat={isLoggedIn} onLogChange={setIsLoggedIn}/>
+ <SignUpUser className="menuobj" onLogChange={setIsLoggedIn}/>
  </div>
 )
 }
