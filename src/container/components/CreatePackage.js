@@ -1,28 +1,8 @@
 import React, {useState} from "react";
 import axios from "axios";
-import {Box, Grid, InputAdornment} from "@material-ui/core";
+import {Box, Checkbox, Grid, InputAdornment, ListItemText, OutlinedInput, Select} from "@material-ui/core";
 import {Alert, Button, Collapse, TextField, Typography} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
-import async from "async";
-
-const typeServices = [
-    {
-        value: 'fixed_phone',
-        label: 'Fixed phone',
-    },
-    {
-        value: 'fixed_internet',
-        label: 'Fixed internet',
-    },
-    {
-        value: 'mobile_phone',
-        label: 'Mobile phone',
-    },
-    {
-        value: 'mobile_internet',
-        label: 'Mobile internet',
-    },
-];
 
 export default function createPackage() {
 
@@ -37,6 +17,8 @@ export default function createPackage() {
     )
 
     const [optionalProducts, setOptionalProducts] = React.useState([]);
+
+    const [choosenProducts, setChoosenProducts] = React.useState([]);
 
     const [name, setName] = React.useState('')
 
@@ -61,10 +43,26 @@ export default function createPackage() {
     });
 
     React.useEffect(async () => {
+
         axios.get("../service/getall").then((result) => {
             setServices(result.data);
         })
+
+        axios.get("../product/getall").then((_products) => {
+            setOptionalProducts(_products.data);
+        })
     }, [])
+
+      function handleChangeProducts(event) {
+
+    const {
+      target: { value },
+    } = event;
+    setChoosenProducts(
+      // On autofill we get a the stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  }
 
     function handleSubmit() {
 
@@ -158,8 +156,9 @@ export default function createPackage() {
             <Box width='90%' alignContent={"center"} sx={{boxShadow: 3}}>
                 <Typography marginBottom={'15px'} align={"center"} variant="h4">Create service</Typography>
                 <Box sx={{flexGrow: 1}}>
-                    <Grid container item spacing={2}>
-                        <Grid container item spacing={2} column direction={'row'}>
+                    <Grid container item spacing={1}>
+
+                        <Grid container item spacing={1} column direction={'row'}>
                             <Grid item xs>
 
                                 <TextField
@@ -176,7 +175,6 @@ export default function createPackage() {
                                 </TextField>
                             </Grid>
                         </Grid>
-
                         <Grid container item spacing={1} column direction={'row'}>
                             <Grid item xs>
                                 <TextField
@@ -189,7 +187,7 @@ export default function createPackage() {
                                     sx={{m: 1, width: '25ch'}}
                                     value={typeServices.mobile_phone}
                                     onChange={handleAddServices}
-                                    helperText={!_error.error0 ? "You can choose one of it" : "Choose at least one service"}
+                                    helperText={!_error.error1 ? "You can choose one of it" : "Choose at least one service"}
 
                                 ><MenuItem value=''><em>None</em></MenuItem>
                                     {services.map(service => {
@@ -211,7 +209,7 @@ export default function createPackage() {
 
                             <Grid item xs>
                                 <TextField
-                                    id="outlined-select-typeservice3"
+                                    id="outlined-select-typeservice2"
                                     select
                                     required
                                     name="fixed_phone"
@@ -220,7 +218,7 @@ export default function createPackage() {
                                     sx={{m: 1, width: '25ch'}}
                                     value={typeServices.fixed_phone}
                                     onChange={handleAddServices}
-                                    helperText={!_error.error0 ? "You can choose one of it" : "Choose at least one service"}
+                                    helperText={!_error.error1 ? "You can choose one of it" : "Choose at least one service"}
 
                                 ><MenuItem value=''><em>None</em></MenuItem>
                                     {services.map(service => {
@@ -251,7 +249,7 @@ export default function createPackage() {
                                     sx={{m: 1, width: '25ch'}}
                                     value={typeServices.fixed_internet}
                                     onChange={handleAddServices}
-                                    helperText={!_error.error0 ? "You can choose one of it" : "Choose at least one service"}
+                                    helperText={!_error.error1 ? "You can choose one of it" : "Choose at least one service"}
 
                                 ><MenuItem value=''><em>None</em></MenuItem>
                                     {services.map(service => {
@@ -281,7 +279,7 @@ export default function createPackage() {
                                     error={_error.error1}
                                     value={typeServices.mobile_internet}
                                     onChange={handleAddServices}
-                                    helperText={!_error.error0 ? "You can choose one of it" : "Choose at least one service"}
+                                    helperText={!_error.error1 ? "You can choose one of it" : "Choose at least one service"}
 
                                 ><MenuItem value=''><em>None</em></MenuItem>
                                     {services.map(service => {
@@ -301,7 +299,33 @@ export default function createPackage() {
                             </Grid>
 
                         </Grid>
-                        <Grid container item spacing={2} column direction={'row'}>
+                        <Grid container item spacing={1} column direction={'row'}>
+                            <Grid item xs>
+
+                                <Select
+                                    labelId="outlined-select-products-label"
+                                    id="outlined-select-products"
+                                    required
+                                    variant='outlined'
+                                    style={{width: '100%'}}
+                                    multiple
+                                    sx={{m: 1, width: '25ch'}}
+                                    value={choosenProducts}
+                                    input={<OutlinedInput label="Optional products" />}
+                                    onChange={handleChangeProducts}
+                                    helperText={"You can choose 0, 1 or many products"}
+                                >
+                                    {optionalProducts.map(product => (
+                                        <MenuItem key={product.id} value={product.id}>
+                                            {'ID: ' + product.id + ' ' + product.name + ', fee: ' + product.monthly_fee + '€'}
+                                        <Checkbox checked={choosenProducts.indexOf(product.id) > -1} />
+                                        </MenuItem>
+                                        )
+                                    )}
+                                </Select>
+                            </Grid>
+                        </Grid>
+                        <Grid container item spacing={1} column direction={'row'}>
                             <Grid item xs>
                                 <TextField
                                     id="outlined-fee12"
@@ -351,9 +375,7 @@ export default function createPackage() {
                             </Grid>
                         </Grid>
 
-
                     </Grid>
-
 
                     <Button variant="outlined" color="secondary" type="submit"
                             onClick={handleSubmit}>Create</Button>
