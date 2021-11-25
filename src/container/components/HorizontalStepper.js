@@ -14,22 +14,26 @@ import 'react-day-picker/lib/style.css';
 import "./HorizontalStepper.css";
 import OptionalProductsCards from './OptionalProductsCards';
 import Riepilogo from './Riepilogo';
+import Login from '../Login';
+import FinalStepButton from './finalStepButton';
 
 const steps = ['Select a package', 'Add optional products', 'Check your order'];
 
 
 
-
-export default function HorizontalLinearStepper() {
+export default function HorizontalLinearStepper(props) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const [packages,setPackages] = useState([]);
   const [products,setProducts] = useState([]);
   const [selectedPackage,setSelectedPackage] = useState(JSON.parse(localStorage.getItem("selectedPackage")));
   const [selectedProducts,setSelectedProducts] =useState(JSON.parse(localStorage.getItem("optionalProducts")));
-
+  const [isLoggedIn,setIsLoggedIn] = useState(localStorage.getItem("email")!=="" && localStorage.getItem("email")!==null);
   const today= new Date();
   
+
+
+    
 
   useEffect(() =>{
     axios.get("package/getall").then((result)=>{
@@ -172,10 +176,13 @@ localStorage.getItem("date")===null || localStorage.getItem("date")==="" || loca
                 Skip
               </Button>
             )}
-
+            {activeStep !== steps.length - 1 ? 
             <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? 'Confirm order' : 'Next'}
+              Next
             </Button>
+            :
+<FinalStepButton role={props.role} reload={props.reload}/> 
+              }
           </Box>
         </React.Fragment>
       )}

@@ -22,7 +22,9 @@ const LoginProfile = (props) =>{
     
 
     const [isLoggedIn,setIsLoggedIn] = useState(localStorage.getItem("email")!=="" && localStorage.getItem("email")!==null);
-
+    useEffect(()=>{
+        setIsLoggedIn(props.role);
+    })
 
 
     return (
@@ -38,7 +40,7 @@ Ciao
         </div>
  :
  <div className = "menuobj">
- <Login className="menuobj" vat={isLoggedIn} reload = {props.reload} onLogChange={setIsLoggedIn}/>
+ <Login url="/"className="menuobj" vat={isLoggedIn} reload = {props.reload} onLogChange={setIsLoggedIn}/>
  <SignUpUser className="menuobj" onLogChange={setIsLoggedIn}/>
  </div>
 )

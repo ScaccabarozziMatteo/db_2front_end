@@ -24,11 +24,11 @@ console.log(localStorage.getItem("username"));
 
     return (
         <Router>
-           {(localStorage.getItem("email")!== " " && localStorage.getItem("username")=== "undefined") ? <NavbarEmployee reload={setRole}/> : <NavbarHome reload={setRole}/>} 
+           {(localStorage.getItem("email")!== " " && localStorage.getItem("username")=== "undefined") ? <NavbarEmployee reload={setRole}/> : <NavbarHome role={role} reload={setRole}/>} 
             <Routes>
                 <Route path="/" index element={<Home/>}/>
                 <Route path="/employee/home" element={<HomeEmployee/>}/>
-                <Route path="/buy" element={<Buy/>}/>
+                <Route path="/buy" element={<Buy role ={role} reload={setRole}/>}/>
                 <Route path="/pay" element={<Pay/>}/>
                 <Route path="/logout" element={<Logout/>}/>
                 <Route path="/login" element={<Login/>}/>
