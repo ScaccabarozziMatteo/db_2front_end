@@ -1,9 +1,12 @@
+import { useEffect } from "react";
 import "./OptionalProducts.css";
 
-function OptionalProducts({optionalproducts}) {
+function OptionalProducts(props) {
+    
+    //console.log(props.optionalproducts)
     return (
     <ul className="list-group">
-    {optionalproducts.map((products) => (
+    {props.optionalproducts.map((products) => (
      <div className="divs">
      <li
         key={products.id} className="lis" >

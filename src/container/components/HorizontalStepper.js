@@ -12,7 +12,12 @@ import OptionalProducts from './OptionalProducts';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 import "./HorizontalStepper.css";
+import OptionalProductsCards from './OptionalProductsCards';
+
 const steps = ['Select a package', 'Add optional products', 'Check your order'];
+
+
+
 
 export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -20,7 +25,7 @@ export default function HorizontalLinearStepper() {
   const [packages,setPackages] = useState([]);
   const [products,setProducts] = useState([]);
   const [selectedPackage,setSelectedPackage] = useState(JSON.parse(localStorage.getItem("selectedPackage")));
-  const [selectedProducts,setSelectedProducts] =useState([]);
+  const [selectedProducts,setSelectedProducts] =useState(JSON.parse(localStorage.getItem("optionalProducts")));
 
   const today= new Date();
   
@@ -118,11 +123,11 @@ useEffect(() =>{
         <React.Fragment>
           <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
 
-          {activeStep===0? 
+          {activeStep===0 ? 
           <div className="selected">
             <div className="packageDetails">
             <div className="packNamediv">
-            You selected: <div className="packName">{selectedPackage!==null && selectedPackage!=="undefined" && selectedPackage!==""? selectedPackage.name.toUpperCase() + ". " : ""}</div>
+            You selected: <div className="packName">{selectedPackage!==null && selectedPackage!=='null' && selectedPackage!=="undefined" && selectedPackage!==""? selectedPackage.name.toUpperCase() + ". " : ""}</div>            
            </div>
             <div className="dateSelector">
               Starting from: 
@@ -132,7 +137,20 @@ useEffect(() =>{
           <Packages packages={packages} reloadStepper={setSelectedPackage} />
           </div>
           : 
-          <OptionalProducts optionalproducts={products}/> }
+          activeStep===1 ?
+          <div>
+            You selected: <div className="packName">{selectedProducts!==null && selectedProducts!=='null' && selectedProducts!=='undefined' && selectedProducts!==""? 
+            <div>
+            <OptionalProducts optionalproducts={selectedProducts}/>
+            </div>
+            : ""}</div>            
+          <OptionalProductsCards it={selectedProducts} optionalproducts={products} reload={setSelectedProducts}/>
+          </div>
+          :
+
+          "Checkout Place Holder"
+        
+        }
 
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
