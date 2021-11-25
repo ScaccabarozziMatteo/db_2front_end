@@ -1,9 +1,8 @@
 import React, {useState} from "react";
 import axios from "axios";
-import {Box, Grid, InputAdornment} from "@material-ui/core";
+import {Box, Checkbox, Grid, InputAdornment, ListItemText, OutlinedInput, Select} from "@material-ui/core";
 import {Alert, Button, Collapse, TextField, Typography} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
-
 
 export default function createPackage() {
 
@@ -54,15 +53,16 @@ export default function createPackage() {
         })
     }, [])
 
-      const handleChangeProducts = (event) => {
+      function handleChangeProducts(event) {
+
     const {
       target: { value },
     } = event;
-    setPersonName(
+    setChoosenProducts(
       // On autofill we get a the stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
-  };
+  }
 
     function handleSubmit() {
 
@@ -302,24 +302,28 @@ export default function createPackage() {
                         <Grid container item spacing={1} column direction={'row'}>
                             <Grid item xs>
 
-                                <TextField
+                                <Select
+                                    labelId="outlined-select-products-label"
                                     id="outlined-select-products"
                                     required
+                                    variant='outlined'
                                     style={{width: '100%'}}
-                                    select
-                                    label="Choose optional products"
+                                    multiple
                                     sx={{m: 1, width: '25ch'}}
-                                    value={optionalProducts}
-                                    onChange={handleChangeName}
+                                    value={choosenProducts}
+                                    input={<OutlinedInput label="Optional products" />}
+                                    onChange={handleChangeProducts}
                                     helperText={"You can choose 0, 1 or many products"}
                                 >
                                     {optionalProducts.map(product => (
                                         <MenuItem key={product.id} value={product.id}>
                                             {'ID: ' + product.id + ' ' + product.name + ', fee: ' + product.monthly_fee + '€'}
+                                        <Checkbox checked={choosenProducts.indexOf(product.id) > -1} />
+                                        <ListItemText primary={product.id} />
                                         </MenuItem>
                                         )
                                     )}
-                                </TextField>
+                                </Select>
                             </Grid>
                         </Grid>
                         <Grid container item spacing={1} column direction={'row'}>
