@@ -20,9 +20,9 @@ function NavbarHome(props) {
 
         return (
                 <nav>
-                    <div className="logo">
+                    <NavLink exact to="/" className="logo">
                         TEL<font>CO</font>
-                    </div>
+                    </NavLink>
                     <ul className="menu-list">{menuList}</ul>
                 <Profile reload={props.reload}/>
                 </nav>
