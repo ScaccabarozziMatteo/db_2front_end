@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
-import {Box, Grid, InputAdornment, InputLabel, Select} from "@material-ui/core";
+import {Box, Grid, InputAdornment} from "@material-ui/core";
 import {Alert, Button, Collapse, TextField, Typography} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 
@@ -44,6 +44,7 @@ export default function createService() {
         error6: false,
 
         errorAlert: false,
+        errorZeroInput: false,
         successAlert: false
     });
 
@@ -73,25 +74,32 @@ export default function createService() {
                             error4: false,
                             error5: false,
                             error6: false,
+                            errorZeroInput: false,
                             successAlert: true
                         });
 
                     } else if (result.status === 401)
-                        setError({..._error, errorAlert: true})
+                        setError({..._error, errorAlert: true, errorZeroInput: false})
                 }).catch(() => {
-                setError({..._error, errorAlert: true, error0: false, error1: false, error2: false, error3: false, error4: false, error5: false, error6: false});
+                setError({..._error, errorZeroInput: false, errorAlert: true, error0: false, error1: false, error2: false, error3: false, error4: false, error5: false, error6: false});
             })
         }
     }
 
     function checkValidity() {
-        let _error0 = (serviceAttr.type !== 'fixed_phone' || serviceAttr.type !== 'mobile_internet' || serviceAttr.type !== 'fixed_internet' || serviceAttr.type !== 'mobile_phone');
+        let _error0 = (serviceAttr.type !== 'fixed_phone' && serviceAttr.type !== 'mobile_internet' && serviceAttr.type !== 'fixed_internet' && serviceAttr.type !== 'mobile_phone');
         let _error1 = Number(serviceAttr.sms) < -1
         let _error2 = Number(serviceAttr.sms_fee) < 0
         let _error3 = Number(serviceAttr.minutes) < -1
         let _error4 = Number(serviceAttr.minutes_fee) < 0
         let _error5 = Number(serviceAttr.internet) < -1
         let _error6 = Number(serviceAttr.internet_fee) < 0
+        let _errorZeroInput = false;
+
+        if (Number(serviceAttr.sms) === 0 && Number(serviceAttr.minutes) === 0 && Number(serviceAttr.internet) === 0) {
+            _error0 = _error1 = _error2 =  _error3 =  _error4 =  _error5 = _error6 = true;
+            _errorZeroInput = true;
+        }
 
         setError({
             ..._error,
@@ -102,6 +110,7 @@ export default function createService() {
             error4: _error4,
             error5: _error5,
             error6: _error6,
+            errorZeroInput: _errorZeroInput,
         })
 
         return (!(_error0 || _error1 || _error2 || _error3 || _error4 || _error5 || _error6))
@@ -113,7 +122,6 @@ export default function createService() {
             ...serviceAttr,
             [e.target.name]: e.target.value
         })
-        console.log(e.target.value)
     }
 
 
@@ -121,7 +129,7 @@ export default function createService() {
         <div align={'center'}>
             <Box width='90%' alignContent={"center"} sx={{boxShadow: 3}}>
                 <Typography marginBottom={'15px'} align={"center"} variant="h4">Create service</Typography>
-                <Box component={"form"} sx={{flexGrow: 1}}>
+                <Box sx={{flexGrow: 1}}>
                     <Grid container item spacing={2}>
                         <Grid container item spacing={2} column direction={'row'}>
                             <Grid item xs>
@@ -129,6 +137,7 @@ export default function createService() {
                                 <TextField
                                     id="outlined-select-currency"
                                     select
+                                    required
                                     name="type"
                                     label="Type of service"
                                     sx={{m: 1, width: '25ch'}}
@@ -150,6 +159,7 @@ export default function createService() {
                                 <TextField id="outlined-basic" label="SMS quantity" variant="outlined"
                                            name="sms" color="secondary"
                                            type="number"
+                                           disabled={(serviceAttr.type) === ('fixed_phone') || (serviceAttr.type) === ('')}
                                            sx={{m: 1, width: '25ch'}}
                                            error={_error.error1}
                                            helperText={_error.error1 ? 'SMS quantity not valid' : 'Please insert SMS quantity, -1 for infinity'}
@@ -175,6 +185,7 @@ export default function createService() {
                                            name="minutes" color="secondary"
                                            type="number"
                                            sx={{m: 1, width: '25ch'}}
+                                           disabled={(serviceAttr.type) === ('')}
                                            error={_error.error3}
                                            helperText={_error.error3 ? 'Minute quantity not valid' : 'Please insert minute quantity, -1 for infinity'}
                                            onChange={handlerInputChange}/>
@@ -200,6 +211,7 @@ export default function createService() {
                                 <TextField id="outlined-basic" label="Internet MB" variant="outlined"
                                            name="internet" color="secondary"
                                            type="number"
+                                           disabled={(serviceAttr.type) === 'fixed_phone' || (serviceAttr.type) === ('')}
                                            sx={{m: 1, width: '25ch'}}
                                            error={_error.error5}
                                            helperText={_error.error5 ? 'Internet MB not valid' : 'Please insert Internet MB, -1 for infinity'}
@@ -212,7 +224,6 @@ export default function createService() {
                                            disabled={Number(serviceAttr.internet) === 0}
                                            sx={{m: 1, width: '25ch'}}
                                            error={_error.error6}
-
                                            helperText={_error.error6 ? 'Internet fee price not valid' : 'Please insert price of internet fee'}
                                            InputProps={{
                                                startAdornment: <InputAdornment position="start">€</InputAdornment>,
@@ -229,7 +240,10 @@ export default function createService() {
 
                 </Box>
                 <Collapse in={_error.errorAlert}>
-                    <Alert severity="error">Invalid inputs!</Alert>
+                    <Alert style={{marginTop: '20px'}} severity="error">Invalid inputs!</Alert>
+                </Collapse>
+                <Collapse in={_error.errorZeroInput}>
+                    <Alert style={{marginTop: '20px'}} severity="error">Choose at least one service!</Alert>
                 </Collapse>
                 <Collapse in={_error.successAlert}>
                     <Alert style={{marginTop: '20px'}} severity="success">Service created!</Alert>
