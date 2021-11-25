@@ -16,13 +16,16 @@ import OptionalProductsCards from './OptionalProductsCards';
 
 const steps = ['Select a package', 'Add optional products', 'Check your order'];
 
+
+
+
 export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const [packages,setPackages] = useState([]);
   const [products,setProducts] = useState([]);
   const [selectedPackage,setSelectedPackage] = useState(JSON.parse(localStorage.getItem("selectedPackage")));
-  const [selectedProducts,setSelectedProducts] =useState([]);
+  const [selectedProducts,setSelectedProducts] =useState(JSON.parse(localStorage.getItem("optionalProducts")));
 
   const today= new Date();
   
@@ -124,7 +127,7 @@ useEffect(() =>{
           <div className="selected">
             <div className="packageDetails">
             <div className="packNamediv">
-            You selcted: <div className="packName">{selectedPackage!==null && selectedPackage!=="undefined" && selectedPackage!==""? selectedPackage.name.toUpperCase() + ". " : ""}</div>            
+            You selcted: <div className="packName">{selectedPackage!==null && selectedPackage!=='null' && selectedPackage!=="undefined" && selectedPackage!==""? selectedPackage.name.toUpperCase() + ". " : ""}</div>            
            </div>
             <div className="dateSelector">
               Starting from: 
@@ -135,7 +138,14 @@ useEffect(() =>{
           </div>
           : 
           activeStep===1 ?
-          <OptionalProductsCards optionalproducts={products}/>
+          <div>
+            You selcted: <div className="packName">{selectedProducts!==null && selectedProducts!=='null' && selectedProducts!=='undefined' && selectedProducts!==""? 
+            <div>
+            <OptionalProducts optionalproducts={selectedProducts}/>
+            </div>
+            : ""}</div>            
+          <OptionalProductsCards it={selectedProducts} optionalproducts={products} reload={setSelectedProducts}/>
+          </div>
           :
 
           "Checkout Place Holder"

@@ -9,6 +9,13 @@
     justify-content: space-around;
 }
 
+.pricatag{
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
 .list-row{
     margin-top: 1%;
     width: 75%;
