@@ -1,0 +1,32 @@
+.container{
+    justify-content: center;
+    align-items: center;
+    font-size: 200%;
+    color:rgb(0, 0, 0);
+}
+
+.title{
+    margin-top: 2%;
+    font-size: 50%;
+    color: rgb(40, 40, 41);
+    text-shadow: none;
+}
+
+input{
+    display: flex;
+    font-size: 100%;
+    box-shadow: none;
+    border: none;
+    width: min-content;
+}
+
+.putflex{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.total{
+    display: flex;
+    margin-left: 65%;
+}

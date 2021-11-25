@@ -27,7 +27,7 @@ console.log(localStorage.getItem("username"));
            {(localStorage.getItem("email")!== " " && localStorage.getItem("username")=== "undefined") ? <NavbarEmployee reload={setRole}/> : <NavbarHome reload={setRole}/>} 
             <Routes>
                 <Route path="/" index element={<Home/>}/>
-                <Route path="/employee" element={<HomeEmployee/>}/>
+                <Route path="/employee/home" element={<HomeEmployee/>}/>
                 <Route path="/buy" element={<Buy/>}/>
                 <Route path="/pay" element={<Pay/>}/>
                 <Route path="/logout" element={<Logout/>}/>

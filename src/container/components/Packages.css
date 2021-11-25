@@ -32,6 +32,7 @@
     margin-right: auto;
 }
 
+
 .innerlist{
     display: block;
 }
@@ -77,6 +78,8 @@
  }
  
 
+
+
 .OH {
 width: 100%;
 font-weight: bold;
@@ -92,6 +95,12 @@ font-weight: bold;
     font-size:  130%;
 }
 
+
 .price-tag{
     font-size: 200%;
+}
+
+td:hover::after {
+font-size: 120%;
+z-index: -1;
 }

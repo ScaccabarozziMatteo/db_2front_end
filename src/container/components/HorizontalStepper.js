@@ -13,6 +13,7 @@ import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 import "./HorizontalStepper.css";
 import OptionalProductsCards from './OptionalProductsCards';
+import Riepilogo from './Riepilogo';
 
 const steps = ['Select a package', 'Add optional products', 'Check your order'];
 
@@ -44,6 +45,11 @@ useEffect(() =>{
   })
 
 },[]
+)
+
+useEffect(() =>{
+localStorage.getItem("date")===null || localStorage.getItem("date")==="" || localStorage.getItem("date")===" " || localStorage.getItem("date")==="undefined" ? localStorage.setItem("date") : true;
+}
 )
 
   const isStepOptional = (step) => {
@@ -148,8 +154,7 @@ useEffect(() =>{
           </div>
           :
 
-          "Checkout Place Holder"
-        
+    <Riepilogo reload={setSelectedProducts}/>        
         }
 
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
