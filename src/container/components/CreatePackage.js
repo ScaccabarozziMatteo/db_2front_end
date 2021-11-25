@@ -146,8 +146,8 @@ export default function createPackage() {
     }
 
     function handleAddServices(e) {
-                setServices({
-            ...services,
+                setTypeServices({
+            ...typeServices,
             [e.target.name]: e.target.value
         })
     }
@@ -181,13 +181,14 @@ export default function createPackage() {
                                     id="outlined-select-currency"
                                     select
                                     required
-                                    name="type"
-                                    label="Mobile phone service"
+                                    name="fixed_phone"
+                                    label="Fixed phone service"
                                     sx={{m: 1, width: '25ch'}}
-                                    value={typeServices.mobile_phone}
+                                    value={typeServices.fixed_phone}
                                     onChange={handleAddServices}
-                                    helperText="Please select type of the service"
-                                >
+                                    helperText="You can choose one of it"
+
+                                ><MenuItem value=''><em>None</em></MenuItem>
                                     {services.map(service => {
                                             if (service.type === 'fixed phone') {
                                                 return (
