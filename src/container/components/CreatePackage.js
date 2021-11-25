@@ -146,7 +146,7 @@ export default function createPackage() {
     }
 
     function handleAddServices(e) {
-                setTypeServices({
+        setTypeServices({
             ...typeServices,
             [e.target.name]: e.target.value
 
@@ -171,7 +171,7 @@ export default function createPackage() {
                                     sx={{m: 1, width: '25ch'}}
                                     value={name}
                                     onChange={handleChangeName}
-                                    helperText={!_error.error0? "Please choose a name of the package" : "Insert a valid name"}
+                                    helperText={!_error.error0 ? "Please choose a name of the package" : "Insert a valid name"}
                                 >
                                 </TextField>
                             </Grid>
@@ -187,9 +187,9 @@ export default function createPackage() {
                                     name="mobile_phone"
                                     label="Mobile phone service"
                                     sx={{m: 1, width: '25ch'}}
-                                    value={typeServices.fixed_phone}
+                                    value={typeServices.mobile_phone}
                                     onChange={handleAddServices}
-                                    helperText={!_error.error0? "You can choose one of it" : "Choose at least one service"}
+                                    helperText={!_error.error0 ? "You can choose one of it" : "Choose at least one service"}
 
                                 ><MenuItem value=''><em>None</em></MenuItem>
                                     {services.map(service => {
@@ -198,7 +198,7 @@ export default function createPackage() {
                                                     <MenuItem key={service.id} value={service.id}>
                                                         {'ID: ' + service.id}
                                                         {service.minutes ? ' Minuti: ' + service.minutes + ' minuti, fee: ' + service.minutes_fee + '€ |' : ''}
-                                                        {service.internet ? ' Internet: ' + service.internet + 'MB, fee: ' + service.internet_fee + '€ |': ''}
+                                                        {service.internet ? ' Internet: ' + service.internet + 'MB, fee: ' + service.internet_fee + '€ |' : ''}
                                                         {service.sms ? ' SMS: ' + service.sms + ', fee: ' + service.sms_fee : ''}
                                                     </MenuItem>
                                                 )
@@ -209,8 +209,7 @@ export default function createPackage() {
                             </Grid>
 
 
-
-                                <Grid item xs>
+                            <Grid item xs>
                                 <TextField
                                     id="outlined-select-typeservice3"
                                     select
@@ -221,7 +220,7 @@ export default function createPackage() {
                                     sx={{m: 1, width: '25ch'}}
                                     value={typeServices.fixed_phone}
                                     onChange={handleAddServices}
-                                    helperText={!_error.error0? "You can choose one of it" : "Choose at least one service"}
+                                    helperText={!_error.error0 ? "You can choose one of it" : "Choose at least one service"}
 
                                 ><MenuItem value=''><em>None</em></MenuItem>
                                     {services.map(service => {
@@ -230,7 +229,7 @@ export default function createPackage() {
                                                     <MenuItem key={service.id} value={service.id}>
                                                         {'ID: ' + service.id}
                                                         {service.minutes ? ' Minuti: ' + service.minutes + ' minuti, fee: ' + service.minutes_fee + '€ |' : ''}
-                                                        {service.internet ? ' Internet: ' + service.internet + 'MB, fee: ' + service.internet_fee + '€ |': ''}
+                                                        {service.internet ? ' Internet: ' + service.internet + 'MB, fee: ' + service.internet_fee + '€ |' : ''}
                                                         {service.sms ? ' SMS: ' + service.sms + ', fee: ' + service.sms_fee : ''}
                                                     </MenuItem>
                                                 )
@@ -241,7 +240,7 @@ export default function createPackage() {
                             </Grid>
 
 
-                                <Grid item xs>
+                            <Grid item xs>
                                 <TextField
                                     id="outlined-select-typeservice3"
                                     select
@@ -250,9 +249,9 @@ export default function createPackage() {
                                     label="Fixed internet service"
                                     error={_error.error1}
                                     sx={{m: 1, width: '25ch'}}
-                                    value={typeServices.fixed_phone}
+                                    value={typeServices.fixed_internet}
                                     onChange={handleAddServices}
-                                    helperText={!_error.error0? "You can choose one of it" : "Choose at least one service"}
+                                    helperText={!_error.error0 ? "You can choose one of it" : "Choose at least one service"}
 
                                 ><MenuItem value=''><em>None</em></MenuItem>
                                     {services.map(service => {
@@ -261,7 +260,7 @@ export default function createPackage() {
                                                     <MenuItem key={service.id} value={service.id}>
                                                         {'ID: ' + service.id}
                                                         {service.minutes ? ' Minuti: ' + service.minutes + ' minuti, fee: ' + service.minutes_fee + '€ |' : ''}
-                                                        {service.internet ? ' Internet: ' + service.internet + 'MB, fee: ' + service.internet_fee + '€ |': ''}
+                                                        {service.internet ? ' Internet: ' + service.internet + 'MB, fee: ' + service.internet_fee + '€ |' : ''}
                                                         {service.sms ? ' SMS: ' + service.sms + ', fee: ' + service.sms_fee : ''}
                                                     </MenuItem>
                                                 )
@@ -271,7 +270,7 @@ export default function createPackage() {
                                 </TextField>
                             </Grid>
 
-                                                            <Grid item xs>
+                            <Grid item xs>
                                 <TextField
                                     id="outlined-select-typeservice4"
                                     select
@@ -280,9 +279,9 @@ export default function createPackage() {
                                     label="Mobile internet service"
                                     sx={{m: 1, width: '25ch'}}
                                     error={_error.error1}
-                                    value={typeServices.fixed_phone}
+                                    value={typeServices.mobile_internet}
                                     onChange={handleAddServices}
-                                    helperText={!_error.error0? "You can choose one of it" : "Choose at least one service"}
+                                    helperText={!_error.error0 ? "You can choose one of it" : "Choose at least one service"}
 
                                 ><MenuItem value=''><em>None</em></MenuItem>
                                     {services.map(service => {
@@ -291,7 +290,7 @@ export default function createPackage() {
                                                     <MenuItem key={service.id} value={service.id}>
                                                         {'ID: ' + service.id}
                                                         {service.minutes ? ' Minuti: ' + service.minutes + ' minuti, fee: ' + service.minutes_fee + '€ |' : ''}
-                                                        {service.internet ? ' Internet: ' + service.internet + 'MB, fee: ' + service.internet_fee + '€ |': ''}
+                                                        {service.internet ? ' Internet: ' + service.internet + 'MB, fee: ' + service.internet_fee + '€ |' : ''}
                                                         {service.sms ? ' SMS: ' + service.sms + ', fee: ' + service.sms_fee : ''}
                                                     </MenuItem>
                                                 )
@@ -301,7 +300,55 @@ export default function createPackage() {
                                 </TextField>
                             </Grid>
 
+                        </Grid>
+                        <Grid container item spacing={2} column direction={'row'}>
+                            <Grid item xs>
+                                <TextField
+                                    id="outlined-fee12"
+                                    error={_error.error2}
+                                    required
+                                    type='number'
+                                    name="fee12"
+                                    label="Fee for 12 months"
+                                    sx={{m: 1, width: '25ch'}}
+                                    value={fees.fee12}
+                                    onChange={handlerInputChangeFees}
+                                    helperText={!_error.error2 ? "Please define the fee" : "Insert a valid fee"}
+                                >
+                                </TextField>
+                            </Grid>
+                            <Grid item xs>
 
+                                <TextField
+                                    id="outlined-fee24"
+                                    error={_error.error3}
+                                    required
+                                    type='number'
+                                    name="fee24"
+                                    label="Fee for 24 months"
+                                    sx={{m: 1, width: '25ch'}}
+                                    value={fees.fee24}
+                                    onChange={handlerInputChangeFees}
+                                    helperText={!_error.error3 ? "Please define the fee" : "Insert a valid fee"}
+                                >
+                                </TextField>
+                            </Grid>
+                            <Grid item xs>
+
+                                <TextField
+                                    id="outlined-fee36"
+                                    error={_error.error4}
+                                    required
+                                    type='number'
+                                    name="fee36"
+                                    label="Fee for 36 months"
+                                    sx={{m: 1, width: '25ch'}}
+                                    value={fees.fee36}
+                                    onChange={handlerInputChangeFees}
+                                    helperText={!_error.error4 ? "Please define the fee" : "Insert a valid fee"}
+                                >
+                                </TextField>
+                            </Grid>
                         </Grid>
 
 
