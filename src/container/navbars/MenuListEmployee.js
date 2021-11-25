@@ -1,7 +1,7 @@
 export const MenuList =[
     {
         title: "Home",
-        url: "/employee",
+        url: "/employee/home",
     },
     {
         title: "Create",
