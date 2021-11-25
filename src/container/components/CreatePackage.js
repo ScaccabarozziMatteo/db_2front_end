@@ -319,7 +319,6 @@ export default function createPackage() {
                                         <MenuItem key={product.id} value={product.id}>
                                             {'ID: ' + product.id + ' ' + product.name + ', fee: ' + product.monthly_fee + '€'}
                                         <Checkbox checked={choosenProducts.indexOf(product.id) > -1} />
-                                        <ListItemText primary={product.id} />
                                         </MenuItem>
                                         )
                                     )}
