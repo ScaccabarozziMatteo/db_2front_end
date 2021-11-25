@@ -5,21 +5,21 @@ import Loading from "../../container/components/Loading";
 
 function Home() {
 
-        const [packages,setPackages] = useState([]);
+    const [packages, setPackages] = useState([]);
 
-useEffect(() =>{
-    axios.get("package/getall").then((result)=>{
-        setPackages(result.data);
-    })
+    useEffect(() => {
+        axios.get("package/getall").then((result) => {
+            setPackages(result.data);
+        })
 
-},[])
+    }, [])
 
     return (
-    <div>
-        {
-            packages? <Packages packages={packages} /> : <Loading/>
-        }
-    </div>
+        <div>
+            {
+                packages ? <Packages packages={packages}/> : <Loading/>
+            }
+        </div>
     );
 }
 

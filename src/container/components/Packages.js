@@ -32,7 +32,7 @@ function clickHandle(apackage){
         <div  className="name">
             {apackage.name.toUpperCase()}
         </div>
-        <div className="list-title" > Serivces:</div>
+        <div className="list-title" > Services:</div>
         <Services services={apackage.services}/>
         <div className="list-title" > Included-product:</div>
         <div className="list-group">
