@@ -127,7 +127,7 @@ useEffect(() =>{
           <div className="selected">
             <div className="packageDetails">
             <div className="packNamediv">
-            You selcted: <div className="packName">{selectedPackage!==null && selectedPackage!=='null' && selectedPackage!=="undefined" && selectedPackage!==""? selectedPackage.name.toUpperCase() + ". " : ""}</div>            
+            You selected: <div className="packName">{selectedPackage!==null && selectedPackage!=='null' && selectedPackage!=="undefined" && selectedPackage!==""? selectedPackage.name.toUpperCase() + ". " : ""}</div>            
            </div>
             <div className="dateSelector">
               Starting from: 
@@ -139,7 +139,7 @@ useEffect(() =>{
           : 
           activeStep===1 ?
           <div>
-            You selcted: <div className="packName">{selectedProducts!==null && selectedProducts!=='null' && selectedProducts!=='undefined' && selectedProducts!==""? 
+            You selected: <div className="packName">{selectedProducts!==null && selectedProducts!=='null' && selectedProducts!=='undefined' && selectedProducts!==""? 
             <div>
             <OptionalProducts optionalproducts={selectedProducts}/>
             </div>
