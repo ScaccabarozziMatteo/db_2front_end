@@ -9,7 +9,7 @@ function Buy() {
     print();
 
     function print() {
-        if (localStorage.getItem("username") !== null && localStorage.getItem("username") !== '')
+        if (localStorage.getItem("username") !== null && localStorage.getItem("username") !== '' && localStorage.getItem("username") !== 'undefined')
             return Logged()
         else
             return pleaseLog()
