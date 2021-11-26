@@ -56,6 +56,35 @@ localStorage.getItem("date")===null || localStorage.getItem("date")==="" || loca
 }
 )
 
+function formatDate(date) {
+  var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+  if (month.length < 2) 
+      month = '0' + month;
+  if (day.length < 2) 
+      day = '0' + day;
+
+  return [year, month, day].join('/');
+}
+
+function handleConfirm  (){
+  console.log(localStorage.getItem("optionalProducts"));
+axios.post("/order/create",
+{
+  user: localStorage.getItem("user"),
+  apackage: localStorage.getItem("selectedPackage"),
+  optionalProducts: localStorage.getItem("optionalProducts"),
+  validity: localStorage.getItem("validity"),
+  start_subs: formatDate(localStorage.getItem("date").toString().slice(0,15))
+}
+)
+
+};
+
+
   const isStepOptional = (step) => {
     return step === 1;
   };
@@ -181,7 +210,7 @@ localStorage.getItem("date")===null || localStorage.getItem("date")==="" || loca
               Next
             </Button>
             :
-<FinalStepButton role={props.role} reload={props.reload}/> 
+<FinalStepButton handleConfirm={handleConfirm} role={props.role} reload={props.reload}/> 
               }
           </Box>
         </React.Fragment>

@@ -11,7 +11,7 @@ const FinalStepButton =(props)=>{
     return(
         isLoggedIn?
         <Button onClick={props.handleConfirm}>
-            Confirm
+            BUY
         </Button>
         :
     <div className="flexdiv">
