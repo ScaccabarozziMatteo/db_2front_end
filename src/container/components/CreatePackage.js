@@ -71,7 +71,7 @@ export default function createPackage() {
                     fee_36: fees.fee36,
                     employee: localStorage.getItem('email'),
                     services: [typeServices.fixed_phone, typeServices.mobile_phone, typeServices.fixed_internet, typeServices.mobile_internet],
-                    optionalProducts: optionalProducts
+                    optionalProducts: choosenProducts
                 })
                 .then(result => {
                     if (result.status === 200) {
