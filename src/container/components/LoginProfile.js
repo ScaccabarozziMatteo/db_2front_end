@@ -23,7 +23,7 @@ const LoginProfile = (props) =>{
 
     const [isLoggedIn,setIsLoggedIn] = useState(localStorage.getItem("email")!=="" && localStorage.getItem("email")!==null);
     useEffect(()=>{
-        setIsLoggedIn(props.role);
+        setIsLoggedIn(localStorage.getItem("email")!=="" && localStorage.getItem("email")!==null && localStorage.getItem("email")!=="undefined" && localStorage.getItem("email")!=="null");
     })
 
 
