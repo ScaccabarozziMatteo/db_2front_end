@@ -34,8 +34,6 @@ export default function createPackage() {
         error2: false,
         error3: false,
         error4: false,
-        error5: false,
-        error6: false,
 
         errorAlert: false,
         errorZeroInput: false,
@@ -55,12 +53,9 @@ export default function createPackage() {
 
       function handleChangeProducts(event) {
 
-    const {
-      target: { value },
-    } = event;
     setChoosenProducts(
       // On autofill we get a the stringified value.
-      typeof value === 'string' ? value.split(',') : value,
+      typeof event.target.value === 'string' ? event.target.value.split(',') : event.target.value,
     );
   }
 
@@ -68,8 +63,20 @@ export default function createPackage() {
 
         if (checkValidity()) {
 
-            axios.post('/package/create',
-                {})
+            let data = {
+                    name: name,
+                    fee_12: fees.fee12,
+                    fee_24: fees.fee24,
+                    fee_36: fees.fee36,
+                    employee: localStorage.getItem('email'),
+                    services: [typeServices.fixed_phone, typeServices.mobile_phone, typeServices.fixed_internet, typeServices.mobile_internet],
+                    optionalProducts: optionalProducts
+
+                }
+                console.log(data)
+
+            axios.post('/package/create',data
+                )
                 .then(result => {
                     if (result.status === 200) {
                         setError({
@@ -80,8 +87,6 @@ export default function createPackage() {
                             error2: false,
                             error3: false,
                             error4: false,
-                            error5: false,
-                            error6: false,
                             errorZeroInput: false,
                             successAlert: true
                         });
@@ -97,24 +102,18 @@ export default function createPackage() {
                     error1: false,
                     error2: false,
                     error3: false,
-                    error4: false,
-                    error5: false,
-                    error6: false
+                    error4: false
                 });
             })
         }
     }
 
     function checkValidity() {
-        let _error0 = (name === '');
+        let _error0 = (name === '' || name.length > 30);
         let _error1 = (typeServices.fixed_phone === '' && typeServices.mobile_phone === '' && typeServices.mobile_internet === '' && typeServices.fixed_internet === '')
         let _error2 = Number(fees.fee12) <= 0
         let _error3 = Number(fees.fee24) <= 0
         let _error4 = Number(fees.fee36) <= 0
-        let _error5 = false
-        let _error6 = false
-        let _errorZeroInput = false;
-
 
         setError({
             ..._error,
@@ -123,12 +122,10 @@ export default function createPackage() {
             error2: _error2,
             error3: _error3,
             error4: _error4,
-            error5: _error5,
-            error6: _error6,
-            errorZeroInput: _errorZeroInput,
+            errorZeroInput: _error1,
         })
 
-        return (!(_error0 || _error1 || _error2 || _error3 || _error4 || _error5 || _error6))
+        return (!(_error0 || _error1 || _error2 || _error3 || _error4))
 
     }
 
@@ -140,7 +137,7 @@ export default function createPackage() {
     }
 
     function handleChangeName(e) {
-        setName(e);
+        setName(e.target.value);
     }
 
     function handleAddServices(e) {
@@ -154,7 +151,7 @@ export default function createPackage() {
     return (
         <div align={'center'}>
             <Box width='90%' alignContent={"center"} sx={{boxShadow: 3}}>
-                <Typography marginBottom={'15px'} align={"center"} variant="h4">Create service</Typography>
+                <Typography marginBottom={'15px'} align={"center"} variant="h4">Create package</Typography>
                 <Box sx={{flexGrow: 1}}>
                     <Grid container item spacing={1}>
 
@@ -165,9 +162,9 @@ export default function createPackage() {
                                     id="outlined-name-service"
                                     error={_error.error0}
                                     required
-                                    name="type"
+                                    name="name"
                                     label="Name of service"
-                                    sx={{m: 1, width: '25ch'}}
+                                    sx={{m: 1, width: '40ch'}}
                                     value={name}
                                     onChange={handleChangeName}
                                     helperText={!_error.error0 ? "Please choose a name of the package" : "Insert a valid name"}
@@ -178,44 +175,13 @@ export default function createPackage() {
                         <Grid container item spacing={1} column direction={'row'}>
                             <Grid item xs>
                                 <TextField
-                                    id="outlined-select-typeservice1"
-                                    select
-                                    required
-                                    error={_error.error1}
-                                    name="mobile_phone"
-                                    label="Mobile phone service"
-                                    sx={{m: 1, width: '25ch'}}
-                                    value={typeServices.mobile_phone}
-                                    onChange={handleAddServices}
-                                    helperText={!_error.error1 ? "You can choose one of it" : "Choose at least one service"}
-
-                                ><MenuItem value=''><em>None</em></MenuItem>
-                                    {services.map(service => {
-                                            if (service.type === 'mobile phone') {
-                                                return (
-                                                    <MenuItem key={service.id} value={service.id}>
-                                                        {'ID: ' + service.id}
-                                                        {service.minutes ? ' Minuti: ' + service.minutes + ' minuti, fee: ' + service.minutes_fee + '€ |' : ''}
-                                                        {service.internet ? ' Internet: ' + service.internet + 'MB, fee: ' + service.internet_fee + '€ |' : ''}
-                                                        {service.sms ? ' SMS: ' + service.sms + ', fee: ' + service.sms_fee : ''}
-                                                    </MenuItem>
-                                                )
-                                            }
-                                        }
-                                    )})
-                                </TextField>
-                            </Grid>
-
-
-                            <Grid item xs>
-                                <TextField
                                     id="outlined-select-typeservice2"
                                     select
                                     required
                                     name="fixed_phone"
                                     error={_error.error1}
                                     label="Fixed phone service"
-                                    sx={{m: 1, width: '25ch'}}
+                                    sx={{m: 1, minWidth: '100%'}}
                                     value={typeServices.fixed_phone}
                                     onChange={handleAddServices}
                                     helperText={!_error.error1 ? "You can choose one of it" : "Choose at least one service"}
@@ -237,7 +203,37 @@ export default function createPackage() {
                                 </TextField>
                             </Grid>
 
+                            <Grid item xs>
+                                <TextField
+                                    id="outlined-select-typeservice1"
+                                    select
+                                    required
+                                    error={_error.error1}
+                                    name="mobile_phone"
+                                    label="Mobile phone service"
+                                    sx={{m: 1, minWidth: '100%'}}
+                                    value={typeServices.mobile_phone}
+                                    onChange={handleAddServices}
+                                    helperText={!_error.error1 ? "You can choose one of it" : "Choose at least one service"}
 
+                                ><MenuItem value=''><em>None</em></MenuItem>
+                                    {services.map(service => {
+                                            if (service.type === 'mobile phone') {
+                                                return (
+                                                    <MenuItem key={service.id} value={service.id}>
+                                                        {'ID: ' + service.id}
+                                                        {service.minutes ? ' Minuti: ' + service.minutes + ' minuti, fee: ' + service.minutes_fee + '€ |' : ''}
+                                                        {service.internet ? ' Internet: ' + service.internet + 'MB, fee: ' + service.internet_fee + '€ |' : ''}
+                                                        {service.sms ? ' SMS: ' + service.sms + ', fee: ' + service.sms_fee : ''}
+                                                    </MenuItem>
+                                                )
+                                            }
+                                        }
+                                    )})
+                                </TextField>
+                            </Grid>
+                        </Grid>
+                        <Grid container item spacing={1} column direction={'row'}>
                             <Grid item xs>
                                 <TextField
                                     id="outlined-select-typeservice3"
@@ -246,7 +242,7 @@ export default function createPackage() {
                                     name="fixed_internet"
                                     label="Fixed internet service"
                                     error={_error.error1}
-                                    sx={{m: 1, width: '25ch'}}
+                                    sx={{m: 1, minWidth: '100%'}}
                                     value={typeServices.fixed_internet}
                                     onChange={handleAddServices}
                                     helperText={!_error.error1 ? "You can choose one of it" : "Choose at least one service"}
@@ -275,7 +271,7 @@ export default function createPackage() {
                                     required
                                     name="mobile_internet"
                                     label="Mobile internet service"
-                                    sx={{m: 1, width: '25ch'}}
+                                    sx={{m: 1, minWidth: '100%'}}
                                     error={_error.error1}
                                     value={typeServices.mobile_internet}
                                     onChange={handleAddServices}
@@ -297,28 +293,25 @@ export default function createPackage() {
                                     )})
                                 </TextField>
                             </Grid>
-
                         </Grid>
                         <Grid container item spacing={1} column direction={'row'}>
                             <Grid item xs>
 
                                 <Select
-                                    labelId="outlined-select-products-label"
-                                    id="outlined-select-products"
-                                    required
+                                    //labelId="outlined-select-products-label"
+                                    id="outlined-select-products2"
+                                    //required
                                     variant='outlined'
                                     style={{width: '100%'}}
                                     multiple
-                                    sx={{m: 1, width: '25ch'}}
+                                    //sx={{m: 1, width: '25ch'}}
                                     value={choosenProducts}
-                                    input={<OutlinedInput label="Optional products" />}
                                     onChange={handleChangeProducts}
-                                    helperText={"You can choose 0, 1 or many products"}
+                                    startAdornment={'Optional Products'}
                                 >
                                     {optionalProducts.map(product => (
                                         <MenuItem key={product.id} value={product.id}>
                                             {'ID: ' + product.id + ' ' + product.name + ', fee: ' + product.monthly_fee + '€'}
-                                        <Checkbox checked={choosenProducts.indexOf(product.id) > -1} />
                                         </MenuItem>
                                         )
                                     )}
@@ -382,13 +375,13 @@ export default function createPackage() {
 
                 </Box>
                 <Collapse in={_error.errorAlert}>
-                    <Alert style={{marginTop: '20px'}} severity="error">Invalid inputs!</Alert>
+                    <Alert style={{marginTop: '20px'}} variant='filled' severity="error">Invalid inputs!</Alert>
                 </Collapse>
                 <Collapse in={_error.errorZeroInput}>
                     <Alert style={{marginTop: '20px'}} severity="error">Choose at least one service!</Alert>
                 </Collapse>
                 <Collapse in={_error.successAlert}>
-                    <Alert style={{marginTop: '20px'}} severity="success">Service created!</Alert>
+                    <Alert style={{marginTop: '20px'}} severity="success">Package created!</Alert>
                 </Collapse>
             </Box>
         </div>

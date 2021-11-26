@@ -135,7 +135,7 @@ export default function createService() {
                             <Grid item xs>
 
                                 <TextField
-                                    id="outlined-select-currency"
+                                    id="outlined-select-type-service"
                                     select
                                     required
                                     name="type"
