@@ -34,8 +34,6 @@ export default function createPackage() {
         error2: false,
         error3: false,
         error4: false,
-        error5: false,
-        error6: false,
 
         errorAlert: false,
         errorZeroInput: false,
@@ -77,8 +75,6 @@ export default function createPackage() {
                             error2: false,
                             error3: false,
                             error4: false,
-                            error5: false,
-                            error6: false,
                             errorZeroInput: false,
                             successAlert: true
                         });
@@ -94,24 +90,18 @@ export default function createPackage() {
                     error1: false,
                     error2: false,
                     error3: false,
-                    error4: false,
-                    error5: false,
-                    error6: false
+                    error4: false
                 });
             })
         }
     }
 
     function checkValidity() {
-        let _error0 = (name === '');
+        let _error0 = (name === '' || name.length > 30);
         let _error1 = (typeServices.fixed_phone === '' && typeServices.mobile_phone === '' && typeServices.mobile_internet === '' && typeServices.fixed_internet === '')
         let _error2 = Number(fees.fee12) <= 0
         let _error3 = Number(fees.fee24) <= 0
         let _error4 = Number(fees.fee36) <= 0
-        let _error5 = false
-        let _error6 = false
-        let _errorZeroInput = false;
-
 
         setError({
             ..._error,
@@ -120,12 +110,10 @@ export default function createPackage() {
             error2: _error2,
             error3: _error3,
             error4: _error4,
-            error5: _error5,
-            error6: _error6,
-            errorZeroInput: _errorZeroInput,
+            errorZeroInput: _error1,
         })
 
-        return (!(_error0 || _error1 || _error2 || _error3 || _error4 || _error5 || _error6))
+        return (!(_error0 || _error1 || _error2 || _error3 || _error4))
 
     }
 
@@ -151,7 +139,7 @@ export default function createPackage() {
     return (
         <div align={'center'}>
             <Box width='90%' alignContent={"center"} sx={{boxShadow: 3}}>
-                <Typography marginBottom={'15px'} align={"center"} variant="h4">Create service</Typography>
+                <Typography marginBottom={'15px'} align={"center"} variant="h4">Create package</Typography>
                 <Box sx={{flexGrow: 1}}>
                     <Grid container item spacing={1}>
 
@@ -181,7 +169,7 @@ export default function createPackage() {
                                     name="fixed_phone"
                                     error={_error.error1}
                                     label="Fixed phone service"
-                                    sx={{m: 1, width: '40ch'}}
+                                    sx={{m: 1, minWidth: '100%'}}
                                     value={typeServices.fixed_phone}
                                     onChange={handleAddServices}
                                     helperText={!_error.error1 ? "You can choose one of it" : "Choose at least one service"}
@@ -211,7 +199,7 @@ export default function createPackage() {
                                     error={_error.error1}
                                     name="mobile_phone"
                                     label="Mobile phone service"
-                                    sx={{m: 1, width: '40ch'}}
+                                    sx={{m: 1, minWidth: '100%'}}
                                     value={typeServices.mobile_phone}
                                     onChange={handleAddServices}
                                     helperText={!_error.error1 ? "You can choose one of it" : "Choose at least one service"}
@@ -242,7 +230,7 @@ export default function createPackage() {
                                     name="fixed_internet"
                                     label="Fixed internet service"
                                     error={_error.error1}
-                                    sx={{m: 1, width: '40ch'}}
+                                    sx={{m: 1, minWidth: '100%'}}
                                     value={typeServices.fixed_internet}
                                     onChange={handleAddServices}
                                     helperText={!_error.error1 ? "You can choose one of it" : "Choose at least one service"}
@@ -271,7 +259,7 @@ export default function createPackage() {
                                     required
                                     name="mobile_internet"
                                     label="Mobile internet service"
-                                    sx={{m: 1, width: '40ch'}}
+                                    sx={{m: 1, minWidth: '100%'}}
                                     error={_error.error1}
                                     value={typeServices.mobile_internet}
                                     onChange={handleAddServices}
@@ -306,9 +294,8 @@ export default function createPackage() {
                                     multiple
                                     //sx={{m: 1, width: '25ch'}}
                                     value={choosenProducts}
-                                    //input={<OutlinedInput label="Optional products" />}
                                     onChange={handleChangeProducts}
-                                    //helperText={"You can choose 0, 1 or many products"}
+                                    startAdornment={'Optional Products'}
                                 >
                                     {optionalProducts.map(product => (
                                         <MenuItem key={product.id} value={product.id}>
@@ -382,7 +369,7 @@ export default function createPackage() {
                     <Alert style={{marginTop: '20px'}} severity="error">Choose at least one service!</Alert>
                 </Collapse>
                 <Collapse in={_error.successAlert}>
-                    <Alert style={{marginTop: '20px'}} severity="success">Service created!</Alert>
+                    <Alert style={{marginTop: '20px'}} severity="success">Package created!</Alert>
                 </Collapse>
             </Box>
         </div>
