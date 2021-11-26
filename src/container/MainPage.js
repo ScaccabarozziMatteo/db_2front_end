@@ -11,6 +11,7 @@ import Login from '../Pages/LoginPage';
 import NavbarEmployee from './navbars/NavbarEmployee';
 import HomeEmployee from "../Pages/Employee_Pages/HomeEmployee";
 import ReportPage from "../Pages/Employee_Pages/ReportPage";
+import Profile from "../Pages/User_Pages/Profile";
 
 function MainPage() {
 const [role,setRole]=useState();
@@ -29,6 +30,7 @@ console.log(localStorage.getItem("username"));
                 <Route path="/employee/home" element={<HomeEmployee/>}/>
                 <Route path="/buy" element={<Buy role ={role} reload={setRole}/>}/>
                 <Route path="/pay" element={<Pay/>}/>
+                <Route path="/profile" element={<Profile/>}/>
                 <Route path="/logout" element={<Logout/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/employee/report" element={<ReportPage/>}/>

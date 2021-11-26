@@ -26,6 +26,11 @@ export default function MenuAppBar(props) {
     setAnchorEl(null);
   };
 
+  function handleProfile() {
+    setAnchorEl(null);
+    navigate('/profile')
+  };
+
   const logOut=()=> {
     handleClose();
     props.onLogChange();
@@ -60,7 +65,7 @@ export default function MenuAppBar(props) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleProfile}>Profile</MenuItem>
                 <MenuItem onClick={logOut}>Logout</MenuItem>
               </Menu>
             </div>
