@@ -4,15 +4,15 @@ import Login from "../../container/Login";
 import {Alert} from "@mui/material";
 import React from "react";
 
-function Buy() {
+function Buy(props) {
 
     print();
 
     function print() {
-        if (localStorage.getItem("username") !== null && localStorage.getItem("username") !== '' && localStorage.getItem("username") !== 'undefined')
-            return Logged()
-        else
-            return pleaseLog()
+       // if (localStorage.getItem("username") !== null && localStorage.getItem("username") !== '' && localStorage.getItem("username") !== 'undefined')
+            return Logged();
+       // else
+         //   return pleaseLog()
 
     }
 
@@ -28,7 +28,7 @@ function Buy() {
     function Logged() {
         return (
             <div>
-                <HorizontalLinearStepper/>
+                <HorizontalLinearStepper role={props.role} reload={props.reload}/>
             </div>
         )
     }

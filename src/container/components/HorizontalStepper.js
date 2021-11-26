@@ -14,22 +14,26 @@ import 'react-day-picker/lib/style.css';
 import "./HorizontalStepper.css";
 import OptionalProductsCards from './OptionalProductsCards';
 import Riepilogo from './Riepilogo';
+import Login from '../Login';
+import FinalStepButton from './finalStepButton';
 
 const steps = ['Select a package', 'Add optional products', 'Check your order'];
 
 
 
-
-export default function HorizontalLinearStepper() {
+export default function HorizontalLinearStepper(props) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const [packages,setPackages] = useState([]);
   const [products,setProducts] = useState([]);
   const [selectedPackage,setSelectedPackage] = useState(JSON.parse(localStorage.getItem("selectedPackage")));
   const [selectedProducts,setSelectedProducts] =useState(JSON.parse(localStorage.getItem("optionalProducts")));
-
+  const [isLoggedIn,setIsLoggedIn] = useState(localStorage.getItem("email")!=="" && localStorage.getItem("email")!==null);
   const today= new Date();
   
+
+
+    
 
   useEffect(() =>{
     axios.get("package/getall").then((result)=>{
@@ -51,6 +55,35 @@ useEffect(() =>{
 localStorage.getItem("date")===null || localStorage.getItem("date")==="" || localStorage.getItem("date")===" " || localStorage.getItem("date")==="undefined" ? localStorage.setItem("date") : true;
 }
 )
+
+function formatDate(date) {
+  var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+  if (month.length < 2) 
+      month = '0' + month;
+  if (day.length < 2) 
+      day = '0' + day;
+
+  return [year, month, day].join('/');
+}
+
+function handleConfirm  (){
+  console.log(localStorage.getItem("optionalProducts"));
+axios.post("/order/create",
+{
+  user: localStorage.getItem("user"),
+  apackage: localStorage.getItem("selectedPackage"),
+  optionalProducts: localStorage.getItem("optionalProducts"),
+  validity: localStorage.getItem("validity"),
+  start_subs: formatDate(localStorage.getItem("date").toString().slice(0,15))
+}
+)
+
+};
+
 
   const isStepOptional = (step) => {
     return step === 1;
@@ -172,10 +205,13 @@ localStorage.getItem("date")===null || localStorage.getItem("date")==="" || loca
                 Skip
               </Button>
             )}
-
+            {activeStep !== steps.length - 1 ? 
             <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? 'Confirm order' : 'Next'}
+              Next
             </Button>
+            :
+<FinalStepButton handleConfirm={handleConfirm} role={props.role} reload={props.reload}/> 
+              }
           </Box>
         </React.Fragment>
       )}
