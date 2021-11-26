@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
+import SendIcon from '@mui/icons-material/Send';
 import Button from '@mui/material/Button';
 import { PinDropSharp } from "@mui/icons-material";
 import Login from "../Login";
@@ -10,12 +10,12 @@ const FinalStepButton =(props)=>{
 
     return(
         isLoggedIn?
-        <Button onClick={props.handleConfirm}>
+        <Button  variant="contained" endIcon={<SendIcon />} onClick={props.handleConfirm}>
             BUY
         </Button>
         :
     <div className="flexdiv">
-    <Login url="" role={props.role} reload = {props.reload} onLogChange={setIsLoggedIn}/>
+    <Login variant="contained" url="" role={props.role} reload = {props.reload} onLogChange={setIsLoggedIn}/>
     <SignUpUser/>
     </div>
 

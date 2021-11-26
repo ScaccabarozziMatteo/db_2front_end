@@ -27,7 +27,7 @@ function Buy(props) {
 
     function Logged() {
         return (
-            <div>
+            <div style={{alignItems:'center'}}>
                 <HorizontalLinearStepper role={props.role} reload={props.reload}/>
             </div>
         )

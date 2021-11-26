@@ -4,10 +4,6 @@ export const MenuList =[
         url: "/employee/home",
     },
     {
-        title: "Create",
-        url: "/employee/createPackages",
-    },
-        {
         title: "Report",
         url: "/employee/report",
     },

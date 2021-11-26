@@ -1,34 +1,27 @@
-import {NavLink} from "react-router-dom";
-import "./Packages.css";
 import Services from "./Services";
 import OptionalProducts from "./OptionalProducts";
-import {useNavigate} from "react-router";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
-function Packages(props) {
+export default function PackagesEmployee() {
 
-    const navigate = useNavigate();
+    const [packages, setPackages] = useState([]);
 
-    function clickHandle(apackage) {
+    useEffect(() => {
+            axios.get("../package/getall").then((result) => {
+                setPackages(result.data);
+            })
 
-        console.log(window.location.href);
-
-        localStorage.setItem("selectedPackage", JSON.stringify(apackage));
-        console.log(JSON.parse(localStorage.getItem("selectedPackage")));
-        if (window.location.href === "http://localhost:3000/")
-            navigate("/buy");
-        else {
-            props.reloadStepper(JSON.parse(localStorage.getItem("selectedPackage")));
-        }
-    }
-
+        }, []
+    )
     return (
         <ul className="list-group">
-            {props.packages.map((apackage) => (
+            {packages.map((apackage) => (
                 <div className="divq">
                     <li
                         key={apackage.id}
                         id={apackage.id}
-                        className="list-row" activeClassName="active" onClick={() => clickHandle(apackage)}
+                        className="list-row" activeClassName="active"
                     >
                         <div className="name">
                             {apackage.name.toUpperCase()}
@@ -79,7 +72,4 @@ function Packages(props) {
                 </div>
             ))}
         </ul>)
-        ;
-};
-
-export default Packages;
+}

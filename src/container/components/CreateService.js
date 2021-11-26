@@ -1,24 +1,20 @@
 import React, {useState} from "react";
 import axios from "axios";
-import {Box, Grid, InputAdornment} from "@material-ui/core";
-import {Alert, Button, Collapse, TextField, Typography} from "@mui/material";
+import {Box, Grid, InputAdornment, Snackbar} from "@material-ui/core";
+import {Alert, Button, TextField, Typography} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 
 const typeServices = [
     {
-        value: 'fixed_phone',
-        label: 'Fixed phone',
-    },
-    {
-        value: 'fixed_internet',
+        value: 'fixed internet',
         label: 'Fixed internet',
     },
     {
-        value: 'mobile_phone',
+        value: 'mobile phone',
         label: 'Mobile phone',
     },
     {
-        value: 'mobile_internet',
+        value: 'mobile internet',
         label: 'Mobile internet',
     },
 ];
@@ -47,6 +43,25 @@ export default function createService() {
         errorZeroInput: false,
         successAlert: false
     });
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickable') {
+            return;
+        }
+        setError({
+            ..._error,
+            errorZeroInput: false,
+            errorAlert: false,
+            successAlert: false,
+            error0: false,
+            error1: false,
+            error2: false,
+            error3: false,
+            error4: false,
+            error5: false,
+            error6: false
+        });
+    }
 
     function handleSubmit() {
 
@@ -81,13 +96,24 @@ export default function createService() {
                     } else if (result.status === 401)
                         setError({..._error, errorAlert: true, errorZeroInput: false})
                 }).catch(() => {
-                setError({..._error, errorZeroInput: false, errorAlert: true, error0: false, error1: false, error2: false, error3: false, error4: false, error5: false, error6: false});
+                setError({
+                    ..._error,
+                    errorZeroInput: false,
+                    errorAlert: true,
+                    error0: false,
+                    error1: false,
+                    error2: false,
+                    error3: false,
+                    error4: false,
+                    error5: false,
+                    error6: false
+                });
             })
         }
     }
 
     function checkValidity() {
-        let _error0 = (serviceAttr.type !== 'fixed_phone' && serviceAttr.type !== 'mobile_internet' && serviceAttr.type !== 'fixed_internet' && serviceAttr.type !== 'mobile_phone');
+        let _error0 = (serviceAttr.type !== 'mobile internet' && serviceAttr.type !== 'fixed internet' && serviceAttr.type !== 'mobile phone');
         let _error1 = Number(serviceAttr.sms) < -1
         let _error2 = Number(serviceAttr.sms_fee) < 0
         let _error3 = Number(serviceAttr.minutes) < -1
@@ -97,7 +123,7 @@ export default function createService() {
         let _errorZeroInput = false;
 
         if (Number(serviceAttr.sms) === 0 && Number(serviceAttr.minutes) === 0 && Number(serviceAttr.internet) === 0) {
-            _error0 = _error1 = _error2 =  _error3 =  _error4 =  _error5 = _error6 = true;
+            _error0 = _error1 = _error2 = _error3 = _error4 = _error5 = _error6 = true;
             _errorZeroInput = true;
         }
 
@@ -141,6 +167,7 @@ export default function createService() {
                                     name="type"
                                     label="Type of service"
                                     sx={{m: 1, width: '25ch'}}
+                                    error={_error.error0}
                                     value={serviceAttr.type}
                                     onChange={handlerInputChange}
                                     helperText="Please select type of the service"
@@ -159,7 +186,7 @@ export default function createService() {
                                 <TextField id="outlined-basic" label="SMS quantity" variant="outlined"
                                            name="sms" color="secondary"
                                            type="number"
-                                           disabled={(serviceAttr.type) === ('fixed_phone') || (serviceAttr.type) === ('')}
+                                           disabled={(serviceAttr.type) === ('fixed phone') || (serviceAttr.type) === ('')}
                                            sx={{m: 1, width: '25ch'}}
                                            error={_error.error1}
                                            helperText={_error.error1 ? 'SMS quantity not valid' : 'Please insert SMS quantity, -1 for infinity'}
@@ -211,7 +238,7 @@ export default function createService() {
                                 <TextField id="outlined-basic" label="Internet MB" variant="outlined"
                                            name="internet" color="secondary"
                                            type="number"
-                                           disabled={(serviceAttr.type) === 'fixed_phone' || (serviceAttr.type) === ('')}
+                                           disabled={(serviceAttr.type) === 'fixed phone' || (serviceAttr.type) === ('')}
                                            sx={{m: 1, width: '25ch'}}
                                            error={_error.error5}
                                            helperText={_error.error5 ? 'Internet MB not valid' : 'Please insert Internet MB, -1 for infinity'}
@@ -239,16 +266,21 @@ export default function createService() {
                             onClick={handleSubmit}>Create</Button>
 
                 </Box>
-                <Collapse in={_error.errorAlert}>
-                    <Alert style={{marginTop: '20px'}} severity="error">Invalid inputs!</Alert>
-                </Collapse>
-                <Collapse in={_error.errorZeroInput}>
-                    <Alert style={{marginTop: '20px'}} severity="error">Choose at least one service!</Alert>
-                </Collapse>
-                <Collapse in={_error.successAlert}>
-                    <Alert style={{marginTop: '20px'}} severity="success">Service created!</Alert>
-                </Collapse>
             </Box>
+            <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'left'}} open={_error.errorAlert}
+                      autoHideDuration={6000} onClose={handleClose}>
+                <Alert variant='filled' severity='error'>Invalid inputs!</Alert>
+            </Snackbar>
+
+            <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'left'}} open={_error.successAlert}
+                      autoHideDuration={6000} onClose={handleClose}>
+                <Alert variant='filled' severity='success'>Service created!</Alert>
+            </Snackbar>
+
+            <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'left'}} open={_error.errorZeroInput}
+                      autoHideDuration={6000} onClose={handleClose}>
+                <Alert variant='filled' severity='error'>Choose at least one service!</Alert>
+            </Snackbar>
         </div>
     )
 }

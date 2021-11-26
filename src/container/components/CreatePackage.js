@@ -63,20 +63,16 @@ export default function createPackage() {
 
         if (checkValidity()) {
 
-            let data = {
+            axios.post('/package/create',
+                {
                     name: name,
                     fee_12: fees.fee12,
                     fee_24: fees.fee24,
                     fee_36: fees.fee36,
                     employee: localStorage.getItem('email'),
                     services: [typeServices.fixed_phone, typeServices.mobile_phone, typeServices.fixed_internet, typeServices.mobile_internet],
-                    optionalProducts: optionalProducts
-
-                }
-                console.log(data)
-
-            axios.post('/package/create',data
-                )
+                    optionalProducts: choosenProducts
+                })
                 .then(result => {
                     if (result.status === 200) {
                         setError({
@@ -300,7 +296,6 @@ export default function createPackage() {
                                 <Select
                                     //labelId="outlined-select-products-label"
                                     id="outlined-select-products2"
-                                    //required
                                     variant='outlined'
                                     style={{width: '100%'}}
                                     multiple
@@ -330,7 +325,7 @@ export default function createPackage() {
                                     sx={{m: 1, width: '25ch'}}
                                     value={fees.fee12}
                                     onChange={handlerInputChangeFees}
-                                    helperText={!_error.error2 ? "Please define the fee" : "Insert a valid fee"}
+                                    helperText={!_error.error2 ? "Please define the fee for a month" : "Insert a valid fee"}
                                 >
                                 </TextField>
                             </Grid>
@@ -346,7 +341,7 @@ export default function createPackage() {
                                     sx={{m: 1, width: '25ch'}}
                                     value={fees.fee24}
                                     onChange={handlerInputChangeFees}
-                                    helperText={!_error.error3 ? "Please define the fee" : "Insert a valid fee"}
+                                    helperText={!_error.error3 ? "Please define the fee for a month" : "Insert a valid fee"}
                                 >
                                 </TextField>
                             </Grid>
@@ -362,7 +357,7 @@ export default function createPackage() {
                                     sx={{m: 1, width: '25ch'}}
                                     value={fees.fee36}
                                     onChange={handlerInputChangeFees}
-                                    helperText={!_error.error4 ? "Please define the fee" : "Insert a valid fee"}
+                                    helperText={!_error.error4 ? "Please define the fee for a month" : "Insert a valid fee"}
                                 >
                                 </TextField>
                             </Grid>
@@ -375,7 +370,7 @@ export default function createPackage() {
 
                 </Box>
                 <Collapse in={_error.errorAlert}>
-                    <Alert style={{marginTop: '20px'}} variant='filled' severity="error">Invalid inputs!</Alert>
+                    <Alert style={{marginTop: '20px'}} severity="error">Invalid inputs!</Alert>
                 </Collapse>
                 <Collapse in={_error.errorZeroInput}>
                     <Alert style={{marginTop: '20px'}} severity="error">Choose at least one service!</Alert>
