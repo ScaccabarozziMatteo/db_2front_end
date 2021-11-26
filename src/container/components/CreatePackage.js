@@ -63,8 +63,20 @@ export default function createPackage() {
 
         if (checkValidity()) {
 
-            axios.post('/package/create',
-                {})
+            let data = {
+                    name: name,
+                    fee_12: fees.fee12,
+                    fee_24: fees.fee24,
+                    fee_36: fees.fee36,
+                    employee: localStorage.getItem('email'),
+                    services: [typeServices.fixed_phone, typeServices.mobile_phone, typeServices.fixed_internet, typeServices.mobile_internet],
+                    optionalProducts: optionalProducts
+
+                }
+                console.log(data)
+
+            axios.post('/package/create',data
+                )
                 .then(result => {
                     if (result.status === 200) {
                         setError({
@@ -363,7 +375,7 @@ export default function createPackage() {
 
                 </Box>
                 <Collapse in={_error.errorAlert}>
-                    <Alert style={{marginTop: '20px'}} severity="error">Invalid inputs!</Alert>
+                    <Alert style={{marginTop: '20px'}} variant='filled' severity="error">Invalid inputs!</Alert>
                 </Collapse>
                 <Collapse in={_error.errorZeroInput}>
                     <Alert style={{marginTop: '20px'}} severity="error">Choose at least one service!</Alert>

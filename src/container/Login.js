@@ -115,7 +115,7 @@ function Login(props) {
                         if (_state.typeLogin === 'user')
                             navigate(props.url);
                         else
-                            navigate("/employee");
+                            navigate("/employee/home");
 
                     } else if (result.status === 401)
                         setError({..._error, errorAlert: true})
