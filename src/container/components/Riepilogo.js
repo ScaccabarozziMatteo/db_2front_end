@@ -7,20 +7,20 @@ import "./Riepilogo.css";
 
 const Riepilogo =(props)=>{
 
-    const [validity,setValidity] = useState(12);
+    const [validity,setValidity] = useState(props.validity);
     const[products,setProducts] = useState([]);
     const [tot,setTot]=useState();
     useEffect(()=>{
-        console.log(localStorage.getItem("date").toString().slice(0,15));
-        if(localStorage.getItem("optionalProducts")!==" " && localStorage.getItem("optionalProducts")!=="undefined" && localStorage.getItem("optionalProducts")!==null && localStorage.getItem("optionalProducts")!=='null'){
-            setProducts(JSON.parse(localStorage.getItem("optionalProducts")));        
+        //console.log(localStorage.getItem("date").toString().slice(0,15));
+        if(props.optionalProducts!==" " && props.optionalProducts!=="undefined" && props.optionalProducts!==null && props.optionalProducts!=='null'){
+            setProducts(props.optionalProducts);        
         }
     },[]
 )
 
 useEffect(()=>{
 
-    total();
+    total(localStorage.getItem("validity"));
 }
 
 )
@@ -30,37 +30,36 @@ function handleInputChange(event){
     {
         setValidity(0);
         localStorage.setItem("validity",0);
-        total();
-        //console.log(localStorage.getItem("validity"));
+        total(localStorage.getItem("validity"));
+        //console.log(props.validity);
     }
     else{
         setValidity(event.target.value);
         localStorage.setItem("validity",event.target.value);
-        total();
-       // console.log(localStorage.getItem("validity"));
+        total(localStorage.getItem("validity"));
+       // console.log(props.validity);
     }
     //console.log("tot");
 }
 
-function total(){
-   const x =localStorage.getItem("validity");
+function total(val){
+   const x =val;
+   console.log(x);
    var fee;
     switch(true){
-        default :
-            fee= JSON.parse(localStorage.getItem("selectedPackage")).fee12;
-            break;
         case x<24:
-            fee= JSON.parse(localStorage.getItem("selectedPackage")).fee12;
+            fee= props.selectedPackage.fee12;
             break;
         case x<36:
-            fee= JSON.parse(localStorage.getItem("selectedPackage")).fee24;
+            fee= props.selectedPackage.fee24;
             break;
         case x>35:
-            fee= JSON.parse(localStorage.getItem("selectedPackage")).fee36;
+            fee= props.selectedPackage.fee36;
             break;
     }
     
-    var sP = JSON.parse(localStorage.getItem("optionalProducts"));
+    console.log(fee);
+    var sP = (props.optionalProducts);
     var somma=0;
     for(var i=0; i<sP.length;i ++){
         somma += sP[i].monthly_fee;
@@ -79,7 +78,7 @@ return (
     <div className="title">
         SELECTED PACKAGE:
     </div>
-    {JSON.parse(localStorage.getItem("selectedPackage")).name.toUpperCase()}
+    {props.selectedPackage.name.toUpperCase()}
        <div>
    </div>
     <div className="title">
@@ -89,7 +88,7 @@ return (
     </div>
 
     <div className="title">
-        STARTING FROM: <div className="container">{localStorage.getItem("date").toString().slice(0,15)}</div>
+        STARTING FROM: <div className="container">{props.date}</div>
     </div>
     <div className="putflex">
     <div className="title">

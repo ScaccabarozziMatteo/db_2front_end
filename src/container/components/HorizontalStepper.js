@@ -16,6 +16,7 @@ import OptionalProductsCards from './OptionalProductsCards';
 import Riepilogo from './Riepilogo';
 import Login from '../Login';
 import FinalStepButton from './finalStepButton';
+import { useNavigate } from "react-router";
 
 const steps = ['Select a package', 'Add optional products', 'Check your order'];
 
@@ -30,7 +31,7 @@ export default function HorizontalLinearStepper(props) {
   const [selectedProducts,setSelectedProducts] =useState(JSON.parse(localStorage.getItem("optionalProducts")));
   const [isLoggedIn,setIsLoggedIn] = useState(localStorage.getItem("email")!=="" && localStorage.getItem("email")!==null);
   const today= new Date();
-  
+  const navigate =useNavigate();
 
 
     
@@ -52,8 +53,8 @@ useEffect(() =>{
 )
 
 useEffect(() =>{
-localStorage.getItem("date")===null || localStorage.getItem("date")==="" || localStorage.getItem("date")===" " || localStorage.getItem("date")==="undefined" ? localStorage.setItem("date") : true;
-}
+localStorage.getItem("date")===null || localStorage.getItem("date")==="" || localStorage.getItem("date")===" " || localStorage.getItem("date")==="undefined" ? localStorage.setItem("date",new Date().toString().slice(0,15)) : true;
+},[]
 )
 
 function formatDate(date) {
@@ -67,21 +68,38 @@ function formatDate(date) {
   if (day.length < 2) 
       day = '0' + day;
 
-  return [year, month, day].join('/');
+  return [year, month, day].join('-');
 }
 
 function handleConfirm  (){
-  console.log(localStorage.getItem("optionalProducts"));
+  const sp =   JSON.parse(localStorage.getItem("optionalProducts"));
+  var sP= [];
+  sp=== null ? 
+  sP=[] 
+  : 
+  
+  ()=>{
+    for(var i=0; i<sp.length;i++){
+    sP[i]=sp[i].id
+  }
+}
+
+  //console.log(localStorage.getItem("optionalProducts"));
+  //console.log(localStorage.getItem("validity"));
 axios.post("/order/create",
 {
-  user: localStorage.getItem("user"),
-  apackage: localStorage.getItem("selectedPackage"),
-  optionalProducts: localStorage.getItem("optionalProducts"),
+  user: localStorage.getItem("user_id"),
+  aPackage: JSON.parse(localStorage.getItem("selectedPackage")).id,
+  optionalProducts: sP,
   validity: localStorage.getItem("validity"),
   start_subs: formatDate(localStorage.getItem("date").toString().slice(0,15))
-}
-)
+}).then((result)=>{
+  localStorage.setItem("order_id",result.data);
+  //console.log(result.data);
+})
 
+console.log(localStorage.getItem("order_id"));
+navigate("/pay");
 };
 
 
@@ -187,7 +205,7 @@ axios.post("/order/create",
           </div>
           :
 
-    <Riepilogo reload={setSelectedProducts}/>        
+    <Riepilogo Riepilogo selectedPackage={JSON.parse(localStorage.getItem("selectedPackage"))}  validity={localStorage.getItem("validity")} optionalProducts = {localStorage.getItem("optionalProducts")!== null && localStorage.getItem("optionalProducts")!== "null" && localStorage.getItem("optionalProducts")!== "" && localStorage.getItem("optionalProducts")!== "undefined"  ? JSON.parse(localStorage.getItem("optionalProducts")): []} date={localStorage.getItem("date").toString().slice(0,15)} fix={false}/>        
         }
 
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
@@ -210,7 +228,7 @@ axios.post("/order/create",
               Next
             </Button>
             :
-<FinalStepButton handleConfirm={handleConfirm} role={props.role} reload={props.reload}/> 
+            <FinalStepButton handleConfirm={handleConfirm} role={props.role} reload={props.reload}/> 
               }
           </Box>
         </React.Fragment>
