@@ -9,7 +9,7 @@ const [role,setRole]=useState();
 
 useEffect(()=>{
     console.log(role);
-    setRole(props.role);
+    //setRole(props.role);
     console.log(role);
 })
 
