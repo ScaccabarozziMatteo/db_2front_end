@@ -26,6 +26,7 @@ export default function createOptProduct() {
                 {
                     name: optionalProd.name,
                     monthly_fee: optionalProd.monthly_fee,
+                    employee: localStorage.getItem('email')
                 })
                 .then(result => {
                     if (result.status === 200) {
@@ -113,6 +114,7 @@ export default function createOptProduct() {
                             onClick={handleSubmit}>Create</Button>
 
                 </Box>
+
                 <Collapse in={_error.errorAlert}>
                     <Alert style={{marginTop: '20px'}} severity="error">Invalid inputs!</Alert>
                 </Collapse>
