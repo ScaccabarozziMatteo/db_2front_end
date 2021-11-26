@@ -325,7 +325,7 @@ export default function createPackage() {
                                     sx={{m: 1, width: '25ch'}}
                                     value={fees.fee12}
                                     onChange={handlerInputChangeFees}
-                                    helperText={!_error.error2 ? "Please define the fee" : "Insert a valid fee"}
+                                    helperText={!_error.error2 ? "Please define the fee for a month" : "Insert a valid fee"}
                                 >
                                 </TextField>
                             </Grid>
@@ -341,7 +341,7 @@ export default function createPackage() {
                                     sx={{m: 1, width: '25ch'}}
                                     value={fees.fee24}
                                     onChange={handlerInputChangeFees}
-                                    helperText={!_error.error3 ? "Please define the fee" : "Insert a valid fee"}
+                                    helperText={!_error.error3 ? "Please define the fee for a month" : "Insert a valid fee"}
                                 >
                                 </TextField>
                             </Grid>
@@ -357,7 +357,7 @@ export default function createPackage() {
                                     sx={{m: 1, width: '25ch'}}
                                     value={fees.fee36}
                                     onChange={handlerInputChangeFees}
-                                    helperText={!_error.error4 ? "Please define the fee" : "Insert a valid fee"}
+                                    helperText={!_error.error4 ? "Please define the fee for a month" : "Insert a valid fee"}
                                 >
                                 </TextField>
                             </Grid>

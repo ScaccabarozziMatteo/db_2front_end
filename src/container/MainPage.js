@@ -8,7 +8,6 @@ import Error from "../Pages/Error";
 import Home from "../Pages/User_Pages/Home";
 import Logout from '../Pages/Logout';
 import Login from '../Pages/LoginPage';
-import CreatePage from '../Pages/Employee_Pages/CreatePage';
 import NavbarEmployee from './navbars/NavbarEmployee';
 import HomeEmployee from "../Pages/Employee_Pages/HomeEmployee";
 import ReportPage from "../Pages/Employee_Pages/ReportPage";
@@ -32,7 +31,6 @@ console.log(localStorage.getItem("username"));
                 <Route path="/pay" element={<Pay/>}/>
                 <Route path="/logout" element={<Logout/>}/>
                 <Route path="/login" element={<Login/>}/>
-                <Route path="/employee/createPackages" element={<CreatePage/>}/>
                 <Route path="/employee/report" element={<ReportPage/>}/>
                 <Route path="/*" element={<Error/>}/>
             </Routes>

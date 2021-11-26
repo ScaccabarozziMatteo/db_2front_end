@@ -6,10 +6,6 @@ import MenuItem from "@mui/material/MenuItem";
 
 const typeServices = [
     {
-        value: 'fixed phone',
-        label: 'Fixed phone',
-    },
-    {
         value: 'fixed internet',
         label: 'Fixed internet',
     },
@@ -79,8 +75,7 @@ export default function createService() {
                     internet: serviceAttr.internet,
                     minutes_fee: serviceAttr.minutes_fee,
                     sms_fee: serviceAttr.sms_fee,
-                    internet_fee: serviceAttr.internet_fee,
-                    employee: localStorage.getItem('email'),
+                    internet_fee: serviceAttr.internet_fee
                 })
                 .then(result => {
                     if (result.status === 200) {
@@ -118,7 +113,7 @@ export default function createService() {
     }
 
     function checkValidity() {
-        let _error0 = (serviceAttr.type !== 'fixed phone' && serviceAttr.type !== 'mobile internet' && serviceAttr.type !== 'fixed internet' && serviceAttr.type !== 'mobile phone');
+        let _error0 = (serviceAttr.type !== 'mobile internet' && serviceAttr.type !== 'fixed internet' && serviceAttr.type !== 'mobile phone');
         let _error1 = Number(serviceAttr.sms) < -1
         let _error2 = Number(serviceAttr.sms_fee) < 0
         let _error3 = Number(serviceAttr.minutes) < -1
