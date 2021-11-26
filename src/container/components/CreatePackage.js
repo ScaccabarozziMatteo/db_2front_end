@@ -55,12 +55,9 @@ export default function createPackage() {
 
       function handleChangeProducts(event) {
 
-    const {
-      target: { value },
-    } = event;
     setChoosenProducts(
       // On autofill we get a the stringified value.
-      typeof value === 'string' ? value.split(',') : value,
+      typeof event.target.value === 'string' ? event.target.value.split(',') : event.target.value,
     );
   }
 
@@ -140,7 +137,7 @@ export default function createPackage() {
     }
 
     function handleChangeName(e) {
-        setName(e);
+        setName(e.target.value);
     }
 
     function handleAddServices(e) {
@@ -165,7 +162,7 @@ export default function createPackage() {
                                     id="outlined-name-service"
                                     error={_error.error0}
                                     required
-                                    name="type"
+                                    name="name"
                                     label="Name of service"
                                     sx={{m: 1, width: '25ch'}}
                                     value={name}
@@ -303,22 +300,21 @@ export default function createPackage() {
                             <Grid item xs>
 
                                 <Select
-                                    labelId="outlined-select-products-label"
-                                    id="outlined-select-products"
-                                    required
+                                    //labelId="outlined-select-products-label"
+                                    id="outlined-select-products2"
+                                    //required
                                     variant='outlined'
                                     style={{width: '100%'}}
                                     multiple
-                                    sx={{m: 1, width: '25ch'}}
+                                    //sx={{m: 1, width: '25ch'}}
                                     value={choosenProducts}
-                                    input={<OutlinedInput label="Optional products" />}
+                                    //input={<OutlinedInput label="Optional products" />}
                                     onChange={handleChangeProducts}
-                                    helperText={"You can choose 0, 1 or many products"}
+                                    //helperText={"You can choose 0, 1 or many products"}
                                 >
                                     {optionalProducts.map(product => (
                                         <MenuItem key={product.id} value={product.id}>
                                             {'ID: ' + product.id + ' ' + product.name + ', fee: ' + product.monthly_fee + '€'}
-                                        <Checkbox checked={choosenProducts.indexOf(product.id) > -1} />
                                         </MenuItem>
                                         )
                                     )}
