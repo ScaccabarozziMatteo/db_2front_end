@@ -45,7 +45,7 @@ props.reload(JSON.parse(localStorage.getItem("optionalProducts")));
 
     {
     props.optionalproducts.map((product) => (
-     <div className="divq">
+     <div className="divq" key={product.id}>
      <li
         key={product.id}
         id={product.id}

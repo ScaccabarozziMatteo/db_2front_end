@@ -24,7 +24,7 @@ function Packages(props) {
     return (
         <ul className="list-group">
             {props.packages.map((apackage) => (
-                <div className="divq">
+                <div className="divq" key={apackage.id}>
                     <li
                         key={apackage.id}
                         id={apackage.id}

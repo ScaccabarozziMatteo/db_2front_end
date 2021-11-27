@@ -7,7 +7,7 @@ function OptionalProducts(props) {
     return (
     <ul className="list-group">
     {props.optionalproducts.map((products) => (
-     <div className="divs">
+     <div className="divs" key={products.id}>
      <li
         key={products.id} className="lis" >
         {products.name}

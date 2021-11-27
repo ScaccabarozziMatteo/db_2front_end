@@ -39,7 +39,7 @@ useEffect(()=>{
         <ul className="list-group">
         {
         orders.map((order) => (
-         <div className="divq">
+         <div className="divq" key={order.id}>
          <li
             key={order.id}
             id={order.id}

@@ -15,12 +15,15 @@ props.orders!==[] && props.orders!==null ?
 <ul className="list-group">
 {
 props.orders.map((order) => (
- <div className="divq">
+ <div className="divq" key={order.id}>
  <li
     key={order.id}
     id={order.id}
     className="list-row" activeClassName="active" 
   >
+     <div  className="name">
+         {order.id}
+    </div>
     <div  className="name">
         {order.aPackage.name.toUpperCase()}
     </div>
