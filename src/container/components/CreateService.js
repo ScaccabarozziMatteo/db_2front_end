@@ -91,11 +91,8 @@ export default function createService() {
                             error6: false,
                             errorZeroInput: false,
                             successAlert: true
-                        });
-
-                    } else if (result.status === 401)
-                        setError({..._error, errorAlert: true, errorZeroInput: false})
-                }).catch(() => {
+                })}})
+                .catch(() => {
                 setError({
                     ..._error,
                     errorZeroInput: false,
@@ -186,7 +183,7 @@ export default function createService() {
                                 <TextField id="outlined-basic" label="SMS quantity" variant="outlined"
                                            name="sms" color="secondary"
                                            type="number"
-                                           disabled={(serviceAttr.type) === ('fixed phone') || (serviceAttr.type) === ('')}
+                                           disabled={(serviceAttr.type) === ('fixed phone') || (serviceAttr.type) === ('fixed internet') || (serviceAttr.type) === ('mobile internet') || (serviceAttr.type) === ('')}
                                            sx={{m: 1, width: '25ch'}}
                                            error={_error.error1}
                                            helperText={_error.error1 ? 'SMS quantity not valid' : 'Please insert SMS quantity, -1 for infinity'}
@@ -212,7 +209,7 @@ export default function createService() {
                                            name="minutes" color="secondary"
                                            type="number"
                                            sx={{m: 1, width: '25ch'}}
-                                           disabled={(serviceAttr.type) === ('')}
+                                           disabled={(serviceAttr.type) === ('fixed phone') || (serviceAttr.type) === ('fixed internet') || (serviceAttr.type) === ('mobile internet') || (serviceAttr.type) === ('')}
                                            error={_error.error3}
                                            helperText={_error.error3 ? 'Minute quantity not valid' : 'Please insert minute quantity, -1 for infinity'}
                                            onChange={handlerInputChange}/>
@@ -238,7 +235,7 @@ export default function createService() {
                                 <TextField id="outlined-basic" label="Internet MB" variant="outlined"
                                            name="internet" color="secondary"
                                            type="number"
-                                           disabled={(serviceAttr.type) === 'fixed phone' || (serviceAttr.type) === ('')}
+                                           disabled={(serviceAttr.type) === 'fixed phone' || (serviceAttr.type) === 'mobile phone' || (serviceAttr.type) === ('')}
                                            sx={{m: 1, width: '25ch'}}
                                            error={_error.error5}
                                            helperText={_error.error5 ? 'Internet MB not valid' : 'Please insert Internet MB, -1 for infinity'}
