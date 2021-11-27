@@ -8,8 +8,8 @@ export const MenuList =[
         url: "/buy",
     },
         {
-        title: "Pay",
-        url: "/pay",
+        title: "Orders",
+        url: "/orders",
     },
 ];
 export default MenuList;

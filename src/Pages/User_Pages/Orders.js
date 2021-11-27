@@ -3,6 +3,7 @@ import react, { useEffect, useState } from "react";
 import OrdersRejected from "../../container/components/OrdersRejected";
 import OrdersCards from "../../container/components/Orders";
 import { useLocation } from "react-router";
+import {Alert} from "@mui/material";
 
 const Orders = (props) =>{
         const [orderId,setOrderId] = useState(props.orderId); 
@@ -25,45 +26,63 @@ const Orders = (props) =>{
                 user_id: localStorage.getItem("user_id")
             }}).then((result)=>{
                 setRejected(result.data);
-                //console.log(result)
+                console.log(result.data);
             })
         },[props.orderId])
 
+
+        function pleaseLog() {
+            return (
+                <div>
+                    <Alert severity='warning'>In order to see your submitted orders, please click on the LOGIN BUTTON in the top-right and enter you credentials.</Alert>
+                </div>
+            )
+        }
+  
     return (
         <div>
-            {
-            rejected!==[]
-            ?
-            <div>
-                <div>
-                TO BE PAYED:
-                </div>
-                <OrdersRejected sure={props.orderId} setOrderId={props.setOrderId} orders={rejected}/>
-            </div>
-            :
-            <div>
-                All bought orders have been payed!
-            </div>
-            }
-            <div>
-            {
-            payed!==[] ?
-            <div>
-            <div>
-            PROCESSED ORDERS:
-            </div>
-            <div>
-            <OrdersCards sure={props.orderId} setOrderId={props.setOrderId} orders={payed}/>               
-            </div>
-            </div>
-            :
-            <div>
-                No processed order found.
-                </div>
-            }
-            </div>
+       {
+       localStorage.getItem("username") !== null && localStorage.getItem("username") !== '' && localStorage.getItem("username") !== 'undefined'?
+       
+       <div>
+       {
+       rejected!==[]
+       ?
+       <div>
+           <div>
+           TO BE PAYED:
+           </div>
+           <OrdersRejected sure={props.orderId} setOrderId={props.setOrderId} orders={rejected}/>
+       </div>
+       :
+       <div>
+           All bought orders have been payed!
+       </div>
+       }
+       <div>
+       {
+       payed!==[] ?
+       <div>
+       <div>
+       PROCESSED ORDERS:
+       </div>
+       <div>
+       <OrdersCards sure={props.orderId} setOrderId={props.setOrderId} orders={payed}/>               
+       </div>
+       </div>
+       :
+       <div>
+           No processed order found.
+           </div>
+       }
+       </div>
+   </div>         
+   :
+     pleaseLog()
+        }
         </div>
-    )
+        
+     )
 }
 
 export default Orders;

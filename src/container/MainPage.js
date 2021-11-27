@@ -21,7 +21,7 @@ const [orderId,setOrderId]=useState(true);
 useEffect (()=>{
 //console.log(localStorage.getItem("email"));
 //console.log(localStorage.getItem("username"));
-}
+},[orderId]
 )
 
     return (

@@ -26,20 +26,28 @@ const Pay = (props) =>{
     },[props.orderId]
     )
     function reject(){
-        axios.put("/order/refuse/" + localStorage.getItem("order_id"));
-        props.setOrderId(!props.orderId);
-        navigate("/orders",{order_id: localStorage.getItem("order_id")});
+        axios.put("/order/refuse/" + localStorage.getItem("order_id")).then((response)=>
+        {
+            props.setOrderId(!props.orderId);
+            navigate("/orders",{order_id: localStorage.getItem("order_id")});
+        })
+
     }
     function pay(){
-        axios.put("/order/payed/" + localStorage.getItem("order_id"));
-        props.setOrderId(!props.orderId);
-        navigate("/orders",{order_id: localStorage.getItem("order_id")});
+        axios.put("/order/payed/" + localStorage.getItem("order_id")).then((response)=>
+        {
+            props.setOrderId(!props.orderId);
+            navigate("/orders",{order_id: localStorage.getItem("order_id")});
+        });
+       
     }  
     
     function simulate(){
-        axios.put("/order/simulatePayment/" + localStorage.getItem("order_id"));
-        props.setOrderId(!props.orderId);
-        navigate("/orders",{order_id: localStorage.getItem("order_id")});
+        axios.put("/order/simulatePayment/" + localStorage.getItem("order_id")).then((response)=>
+        {
+            props.setOrderId(!props.orderId);
+            navigate("/orders",{order_id: localStorage.getItem("order_id")});
+        })
     }
 
 
