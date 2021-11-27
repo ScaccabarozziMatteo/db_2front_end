@@ -21,7 +21,7 @@ const Pay = (props) =>{
             setOrder(result.data);
             //console.log(result);
         });
-       // console.log(order);
+       console.log(order);
 
     },[props.orderId]
     )

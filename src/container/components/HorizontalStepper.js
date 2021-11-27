@@ -71,19 +71,26 @@ function formatDate(date) {
   return [year, month, day].join('-');
 }
 
+function copyOP(sp){
+  var sP= [];
+  for(var i=0; i<sp.length;i++){
+    sP[i]=sp[i];
+    console.log(sp[i]);
+  }
+  return sP;
+
+}
+
 function handleConfirm  (){
   const sp =   JSON.parse(localStorage.getItem("optionalProducts"));
   var sP= [];
   sp=== null ? 
   sP=[] 
   : 
-  
-  ()=>{
-    for(var i=0; i<sp.length;i++){
-    sP[i]=sp[i].id
-  }
-}
+  sP=copyOP(sp);
 
+
+console.log(sP);
   //console.log(localStorage.getItem("optionalProducts"));
   //console.log(localStorage.getItem("validity"));
 axios.post("/order/create",
