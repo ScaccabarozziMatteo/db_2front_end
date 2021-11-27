@@ -3,43 +3,42 @@ import OptionalProductsCards from "./OptionalProductsCards";
 import "./Packages.css"
 import OptionalProducts from "./OptionalProducts";
 
-const OrdersCards =(props)=>{
-return(
+const OrdersCards = (props) => {
+    return (
 
 
+        props.orders !== [] && props.orders !== null ?
+            <div>
 
-props.orders!==[] && props.orders!==null ?
-<div>
 
+                <ul className="list-group">
+                    {
+                        props.orders.map((order) => (
+                            <div className="divq" key={order.id}>
+                                <li
+                                    key={order.id}
+                                    id={order.id}
+                                    className="list-row" activeClassName="active"
+                                >
+                                    <div className="name">
+                                        {order.id}
+                                    </div>
+                                    <div className="name">
+                                        {order.aPackage.name.toUpperCase()}
+                                    </div>
+                                    <div className="name">
+                                        <OptionalProducts optionalproducts={order.optionalProducts}/>
+                                    </div>
+                                </li>
+                            </div>)
+                        )}
 
-<ul className="list-group">
-{
-props.orders.map((order) => (
- <div className="divq" key={order.id}>
- <li
-    key={order.id}
-    id={order.id}
-    className="list-row" activeClassName="active" 
-  >
-     <div  className="name">
-         {order.id}
-    </div>
-    <div  className="name">
-        {order.aPackage.name.toUpperCase()}
-    </div>
-    <div className="name">
-        <OptionalProducts optionalproducts={order.optionalProducts}/>
-    </div>
-</li>
-</div>)
-)}
+                </ul>
+            </div>
 
-</ul>
-</div>
+            :
 
-:
-
-null
+            null
 
 
     )

@@ -178,9 +178,6 @@ axios.post("/order/create",
       </Stepper>
       {activeStep === steps.length ? (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Box sx={{ flex: '1 1 auto' }} />
             <Button onClick={handleReset}>Reset</Button>
@@ -218,7 +215,7 @@ axios.post("/order/create",
            </div>
             <div className="dateSelector">
               Starting from: 
-           <DayPickerInput dayPickerProps={{ disabledDays: {before: new Date()} }} onDayChange={day =>  localStorage.setItem("date",day)} />
+           <DayPickerInput placeholder={today.toLocaleDateString()} dayPickerProps={{ disabledDays: {before: new Date()} }} onDayChange={day =>  localStorage.setItem("date",day)} />
            </div>
           </div>
           <Packages packages={packages} reloadStepper={setSelectedPackage} />
@@ -235,7 +232,7 @@ axios.post("/order/create",
           </div>
           :
 
-    <Riepilogo Riepilogo selectedPackage={JSON.parse(localStorage.getItem("selectedPackage"))}  validity={localStorage.getItem("validity")} optionalProducts = {localStorage.getItem("optionalProducts")!== null && localStorage.getItem("optionalProducts")!== "null" && localStorage.getItem("optionalProducts")!== "" && localStorage.getItem("optionalProducts")!== "undefined"  ? JSON.parse(localStorage.getItem("optionalProducts")): []} date={localStorage.getItem("date").toString().slice(0,15)} fix={false}/>        
+    <Riepilogo selectedPackage={JSON.parse(localStorage.getItem("selectedPackage"))}  validity={localStorage.getItem("validity")} optionalProducts = {localStorage.getItem("optionalProducts")!== null && localStorage.getItem("optionalProducts")!== "null" && localStorage.getItem("optionalProducts")!== "" && localStorage.getItem("optionalProducts")!== "undefined"  ? JSON.parse(localStorage.getItem("optionalProducts")): []} date={localStorage.getItem("date").toString().slice(0,15)} fix={false}/>
         }
 
         </React.Fragment>
