@@ -11,5 +11,9 @@ export const MenuList =[
         title: "Orders",
         url: "/orders",
     },
+    {
+        title: "Cart",
+        url: "/cart",
+    },
 ];
 export default MenuList;

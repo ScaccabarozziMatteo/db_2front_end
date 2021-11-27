@@ -13,6 +13,7 @@ import HomeEmployee from "../Pages/Employee_Pages/HomeEmployee";
 import ReportPage from "../Pages/Employee_Pages/ReportPage";
 import Profile from "../Pages/User_Pages/Profile";
 import Orders from '../Pages/User_Pages/Orders';
+import Cart from '../Pages/User_Pages/Cart';
 
 function MainPage() {
 const [role,setRole]=useState();
@@ -37,6 +38,7 @@ useEffect (()=>{
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/employee/report" element={<ReportPage/>}/>
                 <Route path="/orders" element={<Orders orderId={orderId} setOrderId={setOrderId}/>}/>
+                <Route path="/cart" element={<Cart orderId={orderId} setOrderId={setOrderId}/>}/>
                 <Route path="/*" element={<Error/>}/>
             </Routes>
         </Router>

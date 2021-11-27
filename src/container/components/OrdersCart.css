@@ -9,14 +9,7 @@
     justify-content: space-around;
 }
 
-.pricatag{
-    width: 100%;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-}
-
-.list-row-o{
+.list-row-cart{
     margin-top: 1%;
     width: 75%;
     list-style: none;
@@ -26,7 +19,7 @@
     box-sizing: border-box;
 	border-style:hidden;
 	border-width: 1px;
-    background-color: #ff0000;
+    background-color: #a2e2fc;
     align-items: center;
     margin-left: auto;
     margin-right: auto;
@@ -38,10 +31,10 @@
 }
 
 
-.list-row-o:hover,
-.list-row-o:active{
+.list-row-cart:hover,
+.list-row-cart:active{
     box-shadow: 0 16px 32px 0 rgba(0,0,0,0.5);
-    cursor: copy;
+    cursor:progress;
 
 }
 
@@ -74,7 +67,7 @@
      font-weight: bold;
      margin-top: 2%;
      font-size: 120%;
-     color: rgb(216, 0, 0);
+     color: rgb(148, 216, 255);
  }
  
 
