@@ -63,14 +63,24 @@ export default function createPackage() {
 
         if (checkValidity()) {
 
+                const services=[];
+                if(typeServices.mobile_internet!=='')
+                services.push(typeServices.mobile_internet);
+                if(typeServices.mobile_phone!=='')
+                services.push(typeServices.mobile_phone);
+                if(typeServices.fixed_phone!=='')
+                services.push(typeServices.fixed_phone);
+                if(typeServices.fixed_internet!=='')
+                services.push(typeServices.fixed_internet);
+
             axios.post('/package/create',
                 {
                     name: name,
-                    fee_12: fees.fee12,
-                    fee_24: fees.fee24,
-                    fee_36: fees.fee36,
-                    employee: localStorage.getItem('email'),
-                    services: [typeServices.fixed_phone, typeServices.mobile_phone, typeServices.fixed_internet, typeServices.mobile_internet],
+                    fee12: fees.fee12,
+                    fee24: fees.fee24,
+                    fee36: fees.fee36,
+                    employee: localStorage.getItem('user_id'),
+                    services: services,
                     optionalProducts: choosenProducts
                 })
                 .then(result => {
