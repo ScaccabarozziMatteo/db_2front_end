@@ -39,6 +39,7 @@ export default function createService() {
         error5: false,
         error6: false,
 
+        errorMessage: '',
         errorAlert: false,
         errorZeroInput: false,
         successAlert: false
@@ -92,19 +93,23 @@ export default function createService() {
                             errorZeroInput: false,
                             successAlert: true
                 })}})
-                .catch(() => {
+                .catch((error) => {
                 setError({
                     ..._error,
                     errorZeroInput: false,
                     errorAlert: true,
+                    successAlert: false,
                     error0: false,
                     error1: false,
                     error2: false,
                     error3: false,
                     error4: false,
                     error5: false,
-                    error6: false
+                    error6: false,
+                    errorMessage: 'Invalid inputs!'
                 });
+                if (error.message.includes("409"))
+                    setError({..._error, successAlert: false, errorAlert: true, errorMessage: "Existing service!"})
             })
         }
     }
@@ -266,7 +271,7 @@ export default function createService() {
             </Box>
             <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'left'}} open={_error.errorAlert}
                       autoHideDuration={6000} onClose={handleClose}>
-                <Alert variant='filled' severity='error'>Invalid inputs!</Alert>
+                <Alert variant='filled' severity='error'>{_error.errorMessage}</Alert>
             </Snackbar>
 
             <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'left'}} open={_error.successAlert}
