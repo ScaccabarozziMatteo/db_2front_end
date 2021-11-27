@@ -25,7 +25,7 @@ useEffect(()=>{
  function  clickHandle(order_id){
      localStorage.setItem("order_id",order_id);
      props.setOrderId(!props.orderId);
-     navigate("/pay",{state:{order_id: localStorage.getItem("order_id")}});
+     navigate("/pay");
     }
     
     return(

@@ -29,7 +29,7 @@ const Pay = (props) =>{
         axios.put("/order/refuse/" + localStorage.getItem("order_id")).then((response)=>
         {
             props.setOrderId(!props.orderId);
-            navigate("/orders",{order_id: localStorage.getItem("order_id")});
+            navigate("/orders");
         })
 
     }
@@ -37,7 +37,7 @@ const Pay = (props) =>{
         axios.put("/order/payed/" + localStorage.getItem("order_id")).then((response)=>
         {
             props.setOrderId(!props.orderId);
-            navigate("/orders",{order_id: localStorage.getItem("order_id")});
+            navigate("/orders");
         });
        
     }  
@@ -46,7 +46,7 @@ const Pay = (props) =>{
         axios.put("/order/simulatePayment/" + localStorage.getItem("order_id")).then((response)=>
         {
             props.setOrderId(!props.orderId);
-            navigate("/orders",{order_id: localStorage.getItem("order_id")});
+            navigate("/orders");
         })
     }
 

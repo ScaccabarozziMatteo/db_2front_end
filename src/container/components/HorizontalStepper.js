@@ -96,12 +96,12 @@ axios.post("/order/create",
 }).then((result)=>{
   localStorage.setItem("order_id",result.data);
   props.setOrderId(!props.orderId);
+  navigate("/pay");
   //console.log("OOOOOOO");
 //console.log(localStorage.getItem("order_id"));
 
 })
 
-navigate("/pay",{order_id: localStorage.getItem("order_id")});
 };
 
 
