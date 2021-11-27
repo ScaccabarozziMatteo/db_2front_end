@@ -5,7 +5,10 @@ import Loading from "../container/components/Loading";
 import "./Pay.css";
 import Button from '@mui/material/Button';
 import { useLocation, useNavigate } from "react-router";
-
+import CreditScoreIcon from '@mui/icons-material/CreditScore';
+import CreditCardOffIcon from '@mui/icons-material/CreditCardOff';
+import { CreditCardOff } from "@mui/icons-material";
+import PaymentIcon from '@mui/icons-material/Payment';
 const Pay = (props) =>{
     const navigate =useNavigate();
     const [order,setOrder] = useState(0);
@@ -63,13 +66,13 @@ const Pay = (props) =>{
         }
 
         <div className="butt">
-        <Button className="is" variant="contained" onClick={reject}>
+        <Button className="is" variant="contained" endIcon={<CreditCardOff fontSize="large"/>} size="large" onClick={reject}>
         SIMULATE REJECTION
         </Button>
-        <Button className="is" variant="contained" onClick={pay}>
+        <Button className="is" variant="contained" endIcon={<CreditScoreIcon fontSize="large"/>} size="large" onClick={pay}>
         SIMULATE PAYMENT
         </Button>
-        <Button className="is" variant="contained" onClick={simulate}>
+        <Button className="is" variant="contained" endIcon={<PaymentIcon fontSize="large" />} size="large" onClick={simulate}>
         SIMULATE RANDOM
         </Button>
         </div>
