@@ -17,6 +17,7 @@ import Riepilogo from './Riepilogo';
 import Login from '../Login';
 import FinalStepButton from './finalStepButton';
 import { useNavigate } from "react-router";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const steps = ['Select a package', 'Add optional products', 'Check your order'];
 
@@ -189,6 +190,32 @@ axios.post("/order/create",
         <React.Fragment>
           <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
 
+          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+            <Button
+              color="inherit"
+              disabled={activeStep === 0}
+              onClick={handleBack}
+              sx={{ mr: 1 }}
+              variant="outlined"
+            >
+              Back
+            </Button>
+            <Box sx={{ flex: '1 1 auto' }} />
+            {isStepOptional(activeStep) && (
+              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
+                Skip
+              </Button>
+            )}
+            {activeStep !== steps.length - 1 ? 
+            <Button onClick={handleNext} variant="contained" endIcon={<ArrowForwardIosIcon />} >
+              Next
+            </Button>
+            :
+            <FinalStepButton handleConfirm={handleConfirm} role={props.role} reload={props.reload}/> 
+              }
+          </Box>
+
+
           {activeStep===0 ? 
           <div className="selected">
             <div className="packageDetails">
@@ -217,29 +244,6 @@ axios.post("/order/create",
     <Riepilogo Riepilogo selectedPackage={JSON.parse(localStorage.getItem("selectedPackage"))}  validity={localStorage.getItem("validity")} optionalProducts = {localStorage.getItem("optionalProducts")!== null && localStorage.getItem("optionalProducts")!== "null" && localStorage.getItem("optionalProducts")!== "" && localStorage.getItem("optionalProducts")!== "undefined"  ? JSON.parse(localStorage.getItem("optionalProducts")): []} date={localStorage.getItem("date").toString().slice(0,15)} fix={false}/>        
         }
 
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-            <Button
-              color="inherit"
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              sx={{ mr: 1 }}
-            >
-              Back
-            </Button>
-            <Box sx={{ flex: '1 1 auto' }} />
-            {isStepOptional(activeStep) && (
-              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                Skip
-              </Button>
-            )}
-            {activeStep !== steps.length - 1 ? 
-            <Button onClick={handleNext}>
-              Next
-            </Button>
-            :
-            <FinalStepButton handleConfirm={handleConfirm} role={props.role} reload={props.reload}/> 
-              }
-          </Box>
         </React.Fragment>
       )}
     </Box>

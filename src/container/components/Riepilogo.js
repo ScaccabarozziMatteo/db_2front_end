@@ -92,7 +92,16 @@ return (
     </div>
     <div className="putflex">
     <div className="title">
-        FOR     <input value={validity} type="number" onChange={handleInputChange} /> MONTHS
+    FOR {
+
+props.fix===true? 
+<div>
+{validity} 
+</div>
+:
+<input value={validity} type="number" onChange={handleInputChange} />
+
+     }     MONTHS
     </div>
     <div className="total">
         TOTAL: € {tot}
