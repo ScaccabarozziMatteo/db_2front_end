@@ -1,0 +1,106 @@
+.list-group{
+    align-items: center;
+    justify-content: space-around;
+    padding: 0;
+}
+
+.divq{
+    display: flex;
+    justify-content: space-around;
+}
+
+.pricatag{
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.list-row-o{
+    margin-top: 1%;
+    width: 75%;
+    list-style: none;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px; /* 5px rounded corners */
+    box-sizing: border-box;
+	border-style:hidden;
+	border-width: 1px;
+    background-color: #ff0000;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.innerlist{
+    display: block;
+}
+
+
+.list-row:hover,
+.list-row:active{
+    box-shadow: 0 16px 32px 0 rgba(0,0,0,0.5);
+    cursor: copy;
+
+}
+
+.name{
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    align-content: right;
+    text-decoration:none;
+    text-shadow: royalblue;
+    box-sizing: border-box;
+    border-width: 80%;
+    display: flex;
+    justify-content: center;
+    font-weight: bolder;
+    font-size: x-large;
+}
+
+.list-title{
+   font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin-top: 1%;
+}
+
+.price-row{
+    text-align: center;
+}
+
+.list-titlet{
+    font-family: Arial, Helvetica, sans-serif;
+     font-weight: bold;
+     margin-top: 2%;
+     font-size: 120%;
+     color: rgb(216, 0, 0);
+ }
+ 
+
+
+
+.OH {
+width: 100%;
+font-weight: bold;
+}
+
+.tablet{
+    border-radius: 5px; /* 5px rounded corners */
+    box-sizing: border-box;
+	border-style:hidden;
+	border-width: 0.1px;
+    justify-content: center;
+    font-weight: normal;
+    font-size:  130%;
+}
+
+
+.price-tag{
+    font-size: 200%;
+}
+
+td:hover::after {
+font-size: 120%;
+z-index: -1;
+}

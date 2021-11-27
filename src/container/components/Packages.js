@@ -10,10 +10,10 @@ function Packages(props) {
 
     function clickHandle(apackage) {
 
-        console.log(window.location.href);
+        //console.log(window.location.href);
 
         localStorage.setItem("selectedPackage", JSON.stringify(apackage));
-        console.log(JSON.parse(localStorage.getItem("selectedPackage")));
+       // console.log(JSON.parse(localStorage.getItem("selectedPackage")));
         if (window.location.href === "http://localhost:3000/")
             navigate("/buy");
         else {

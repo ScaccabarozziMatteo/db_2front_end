@@ -95,11 +95,13 @@ axios.post("/order/create",
   start_subs: formatDate(localStorage.getItem("date").toString().slice(0,15))
 }).then((result)=>{
   localStorage.setItem("order_id",result.data);
-  //console.log(result.data);
+  props.setOrderId(!props.orderId);
+  //console.log("OOOOOOO");
+//console.log(localStorage.getItem("order_id"));
+
 })
 
-console.log(localStorage.getItem("order_id"));
-navigate("/pay");
+navigate("/pay",{order_id: localStorage.getItem("order_id")});
 };
 
 

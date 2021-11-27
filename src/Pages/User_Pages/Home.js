@@ -17,7 +17,10 @@ function Home() {
     return (
         <div>
             {
-                packages ? <Packages packages={packages}/> : <Loading/>
+                packages ? 
+                <Packages packages={packages}/> 
+                : 
+                <Loading/>
             }
         </div>
     );
