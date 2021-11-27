@@ -22,7 +22,7 @@ useEffect(()=>{
 
     total(localStorage.getItem("validity"));
 }
-
+,[]
 )
 
 function handleInputChange(event){

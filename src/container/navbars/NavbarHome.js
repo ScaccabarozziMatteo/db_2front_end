@@ -31,7 +31,7 @@ useEffect(()=>{
                         TEL<font>CO</font>
                     </NavLink>
                     <ul className="menu-list">{menuList}</ul>
-                <Profile role={props.role} reload={props.reload}/>
+                <Profile checkInsolvent={props.checkInsolvent} setCheckInsolvent={props.setCheckInsolvent} role={props.role} reload={props.reload}/>
                 </nav>
         )
 }

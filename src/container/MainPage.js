@@ -14,25 +14,39 @@ import ReportPage from "../Pages/Employee_Pages/ReportPage";
 import Profile from "../Pages/User_Pages/Profile";
 import Orders from '../Pages/User_Pages/Orders';
 import Cart from '../Pages/User_Pages/Cart';
+import axios from 'axios';
 
 function MainPage() {
 const [role,setRole]=useState();
 const [orderId,setOrderId]=useState(true);
-
+const [insolvent,setInsolvent] = useState(localStorage.getItem("insolvent")>0? true:false);
+const [checkInsolvent,setCheckInsolvent] = useState(false);
 useEffect (()=>{
 //console.log(localStorage.getItem("email"));
 //console.log(localStorage.getItem("username"));
 },[orderId]
 )
 
+useEffect (()=>{
+    axios.get("/user/getinsolvent",{params:{
+        user_id: localStorage.getItem("user_id")
+    }}).then((result)=>{
+        localStorage.setItem("insolvent",result.data);
+    })
+ setInsolvent(localStorage.getItem("insolvent")>0? true:false)
+    },[checkInsolvent]
+    )
+
+
+
     return (
         <Router>
-           {(localStorage.getItem("email")!== " " && localStorage.getItem("username")=== "undefined") ? <NavbarEmployee reload={setRole}/> : <NavbarHome role={role} reload={setRole}/>} 
+           {(localStorage.getItem("email")!== " " && localStorage.getItem("username")=== "undefined") ? <NavbarEmployee reload={setRole}/> : <NavbarHome  checkInsolvent={checkInsolvent} setCheckInsolvent={setCheckInsolvent} role={role} reload={setRole}/>} 
             <Routes>
-                <Route path="/" index element={<Home/>}/>
+                <Route path="/" index element={<Home insolvent={insolvent} orderId={orderId} setOrderId={setOrderId}/>}/>
                 <Route path="/employee/home" element={<HomeEmployee/>}/>
                 <Route path="/buy" element={<Buy role ={role} setOrderId={setOrderId} reload={setRole}/>}/>
-                <Route path="/pay" element={<Pay orderId={orderId} setOrderId={setOrderId}/>}/>
+                <Route path="/pay" element={<Pay checkInsolvent={checkInsolvent} setCheckInsolvent={setCheckInsolvent} orderId={orderId} setOrderId={setOrderId}/>}/>
                 <Route path="/profile" element={<Profile/>}/>
                 <Route path="/logout" element={<Logout/>}/>
                 <Route path="/login" element={<Login/>}/>

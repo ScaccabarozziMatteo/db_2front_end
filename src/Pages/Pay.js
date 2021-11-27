@@ -32,6 +32,9 @@ const Pay = (props) =>{
         axios.put("/order/refuse/" + localStorage.getItem("order_id")).then((response)=>
         {
             props.setOrderId(!props.orderId);
+           // localStorage.setItem("insolvent",localStorage.getItem("insolvent")-1);
+           // props.setInsolvent(localStorage.getItem("insolvent")>0? true:false);
+           props.setCheckInsolvent(!props.checkInsolvent);
             navigate("/orders");
         })
 
@@ -40,6 +43,9 @@ const Pay = (props) =>{
         axios.put("/order/payed/" + localStorage.getItem("order_id")).then((response)=>
         {
             props.setOrderId(!props.orderId);
+          //  localStorage.setItem("insolvent",localStorage.getItem("insolvent")-1);
+           // props.setInsolvent(localStorage.getItem("insolvent")>0? true:false);
+           props.setCheckInsolvent(!props.checkInsolvent);
             navigate("/orders");
         });
        
@@ -49,6 +55,7 @@ const Pay = (props) =>{
         axios.put("/order/simulatePayment/" + localStorage.getItem("order_id")).then((response)=>
         {
             props.setOrderId(!props.orderId);
+            props.setCheckInsolvent(!props.checkInsolvent);
             navigate("/orders");
         })
     }

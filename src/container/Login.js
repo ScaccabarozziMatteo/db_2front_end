@@ -105,6 +105,7 @@ function Login(props) {
                         localStorage.setItem("email", _state.email); 
                         localStorage.setItem("username", result.data.username); 
                         localStorage.setItem("user_id", result.data.id);
+                        props.setCheckInsolvent(!props.checkInsolvent);
                              // Set email in session storage
                         setError({..._error, errorAlert: false});
                      //   console.log(props.role);
