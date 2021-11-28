@@ -4,6 +4,7 @@ import OrdersRejected from "../../container/components/OrdersRejected";
 import OrdersCards from "../../container/components/Orders";
 import { useLocation } from "react-router";
 import {Alert} from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 const Orders = (props) =>{
         const [orderId,setOrderId] = useState(props.orderId); 
@@ -46,26 +47,30 @@ const Orders = (props) =>{
        
        <div>
        {
-       rejected!==[]
+           (rejected.length > 0)
        ?
        <div>
-           <div>
-           TO BE PAYED:
-           </div>
+           <Typography align={'center'} variant={"h3"}>
+           TO BE PAYED
+               {console.log(rejected)}
+           </Typography>
            <OrdersRejected sure={props.orderId} setOrderId={props.setOrderId} orders={rejected}/>
        </div>
        :
        <div>
-           All bought orders have been payed!
+           <Typography align={'center'} variant={"h3"}>
+           TO BE PAYED
+           </Typography>
+           <Alert severity='success'>All bought orders have been payed!</Alert>
        </div>
        }
        <div>
        {
        payed!==[] ?
        <div>
-       <div>
-       PROCESSED ORDERS:
-       </div>
+           <Typography align={'center'} variant={"h3"}>
+           PROCESSED ORDERS
+           </Typography>
        <div>
        <OrdersCards sure={props.orderId} setOrderId={props.setOrderId} orders={payed}/>               
        </div>

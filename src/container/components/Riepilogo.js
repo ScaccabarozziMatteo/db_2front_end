@@ -4,11 +4,13 @@ import OptionalProductsCards from "./OptionalProductsCards";
 import OptionalProducts from "./OptionalProducts";
 import {useState} from "react";
 import "./Riepilogo.css";
+import {Input} from "@material-ui/core";
 
 const Riepilogo = (props) => {
 
     const [validity, setValidity] = useState(props.validity);
     const [products, setProducts] = useState([]);
+    let _validity = 0;
     const [tot, setTot] = useState();
     useEffect(() => {
             //console.log(localStorage.getItem("date").toString().slice(0,15));
@@ -27,6 +29,7 @@ const Riepilogo = (props) => {
 
     function handleInputChange(event) {
         if (event.target.value < 0) {
+            _validity = 0;
             setValidity(0);
             localStorage.setItem("validity", 0);
             total(localStorage.getItem("validity"));
@@ -34,6 +37,7 @@ const Riepilogo = (props) => {
             //console.log(props.validity);
         } else {
             setValidity(event.target.value);
+            _validity = event.target.value;
             localStorage.setItem("validity", event.target.value);
             props.setValidity!==null? props.setValidity(event.target.value): null;
             total(localStorage.getItem("validity"));
@@ -46,7 +50,7 @@ const Riepilogo = (props) => {
         if(props.selectedPackage!==null){
         const x = val;
         console.log(x);
-        var fee;
+        let fee;
         switch (true) {
             case x < 24:
                 fee = props.selectedPackage.fee12;
@@ -60,9 +64,9 @@ const Riepilogo = (props) => {
         }
 
         console.log(fee);
-        var sP = (props.optionalProducts);
-        var somma = 0;
-        for (var i = 0; i < sP.length; i++) {
+        let sP = (props.optionalProducts);
+        let somma = 0;
+        for (let i = 0; i < sP.length; i++) {
             somma += sP[i].monthly_fee;
         }
         //console.log(somma);
@@ -103,7 +107,7 @@ const Riepilogo = (props) => {
                             {validity}
                         </div>
                         :
-                        <input value={validity} type="number" onChange={handleInputChange}/>
+                        <Input value={validity} type="number" variant="outlined" onChange={handleInputChange}/>
 
                 } MONTHS
                 </div>
