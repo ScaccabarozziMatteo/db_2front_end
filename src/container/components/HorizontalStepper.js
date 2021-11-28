@@ -223,13 +223,15 @@ axios.post("/order/create",
           : 
           activeStep===1 ?
           <div>
+            <Typography>
             You selected: <div className="packName">{selectedProducts!==null && selectedProducts!=='null' && selectedProducts!=='undefined' && selectedProducts!==""? 
-            <div>
+                <div>
             <OptionalProducts optionalproducts={selectedProducts}/>
             </div>
-            : ""}</div>            
+            : ""}</div>
+            </Typography>
           <OptionalProductsCards it={selectedProducts} optionalproducts={products} reload={setSelectedProducts}/>
-          </div>
+            </div>
           :
 
     <Riepilogo selectedPackage={JSON.parse(localStorage.getItem("selectedPackage"))}  validity={localStorage.getItem("validity")} optionalProducts = {localStorage.getItem("optionalProducts")!== null && localStorage.getItem("optionalProducts")!== "null" && localStorage.getItem("optionalProducts")!== "" && localStorage.getItem("optionalProducts")!== "undefined"  ? JSON.parse(localStorage.getItem("optionalProducts")): []} date={localStorage.getItem("date").toString().slice(0,15)} fix={false}/>

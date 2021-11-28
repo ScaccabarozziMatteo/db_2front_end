@@ -200,7 +200,7 @@ export default function createPackage() {
                                                         {'ID: ' + service.id}
                                                         {service.minutes ? ' Minuti: ' + service.minutes + ' minuti, fee: ' + service.minutes_fee + '€ |' : ''}
                                                         {service.internet ? ' Internet: ' + service.internet + 'MB, fee: ' + service.internet_fee + '€ |' : ''}
-                                                        {service.sms ? ' SMS: ' + service.sms + ', fee: ' + service.sms_fee : ''}
+                                                        {service.sms ? ' SMS: ' + service.sms + ', fee: ' + service.sms_fee + '€' : ''}
                                                     </MenuItem>
                                                 )
                                             }
@@ -230,7 +230,7 @@ export default function createPackage() {
                                                         {'ID: ' + service.id}
                                                         {service.minutes ? ' Minuti: ' + service.minutes + ' minuti, fee: ' + service.minutes_fee + '€ |' : ''}
                                                         {service.internet ? ' Internet: ' + service.internet + 'MB, fee: ' + service.internet_fee + '€ |' : ''}
-                                                        {service.sms ? ' SMS: ' + service.sms + ', fee: ' + service.sms_fee : ''}
+                                                        {service.sms ? ' SMS: ' + service.sms + ', fee: ' + service.sms_fee + '€' : ''}
                                                     </MenuItem>
                                                 )
                                             }
@@ -261,7 +261,7 @@ export default function createPackage() {
                                                         {'ID: ' + service.id}
                                                         {service.minutes ? ' Minuti: ' + service.minutes + ' minuti, fee: ' + service.minutes_fee + '€ |' : ''}
                                                         {service.internet ? ' Internet: ' + service.internet + 'MB, fee: ' + service.internet_fee + '€ |' : ''}
-                                                        {service.sms ? ' SMS: ' + service.sms + ', fee: ' + service.sms_fee : ''}
+                                                        {service.sms ? ' SMS: ' + service.sms + ', fee: ' + service.sms_fee + '€' : ''}
                                                     </MenuItem>
                                                 )
                                             }
@@ -291,7 +291,7 @@ export default function createPackage() {
                                                         {'ID: ' + service.id}
                                                         {service.minutes ? ' Minuti: ' + service.minutes + ' minuti, fee: ' + service.minutes_fee + '€ |' : ''}
                                                         {service.internet ? ' Internet: ' + service.internet + 'MB, fee: ' + service.internet_fee + '€ |' : ''}
-                                                        {service.sms ? ' SMS: ' + service.sms + ', fee: ' + service.sms_fee : ''}
+                                                        {service.sms ? ' SMS: ' + service.sms + ', fee: ' + service.sms_fee + '€' : ''}
                                                     </MenuItem>
                                                 )
                                             }

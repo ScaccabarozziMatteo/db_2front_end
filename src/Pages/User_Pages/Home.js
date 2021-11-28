@@ -3,6 +3,7 @@ import axios from "axios";
 import Packages from "../../container/components/Packages";
 import Loading from "../../container/components/Loading";
 import OrdersRejected from '../../container/components/OrdersRejected';
+import Typography from "@mui/material/Typography";
 
 function Home(props) {
 
@@ -34,9 +35,9 @@ function Home(props) {
             {
             props.insolvent===true?
             <div>
-            <div>
-            TO BE PAYED:
-            </div>
+            <Typography align={"center"} variant={"h3"}>
+            TO BE PAYED
+            </Typography>
             <OrdersRejected sure={props.orderId} setOrderId={props.setOrderId} orders={rejected}/>
           </div>
           :

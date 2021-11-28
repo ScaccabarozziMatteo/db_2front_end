@@ -2,6 +2,7 @@ import React from "react";
 import OptionalProductsCards from "./OptionalProductsCards";
 import "./Packages.css"
 import OptionalProducts from "./OptionalProducts";
+import Typography from "@mui/material/Typography";
 
 const OrdersCards = (props) => {
     return (
@@ -20,9 +21,9 @@ const OrdersCards = (props) => {
                                     id={order.id}
                                     className="list-row" activeClassName="active"
                                 >
-                                    <div className="name">
-                                        {order.id}
-                                    </div>
+                                    <Typography className="name" align={"center"} variant={"h4"}>
+                                        Order #{order.id}
+                                    </Typography>
                                     <div className="name">
                                         {order.aPackage.name.toUpperCase()}
                                     </div>
