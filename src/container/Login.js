@@ -3,7 +3,7 @@ import {Alert, Box, Button, Collapse, Divider, IconButton, TextField, Typography
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 import CustomizedSwitches from "./navbars/switchEmployee";
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 
 const style = {
@@ -20,7 +20,7 @@ const style = {
 
 function Login(props) {
 
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
 
     const [_state, _setState] = useState({
@@ -36,7 +36,8 @@ function Login(props) {
     const [_error, setError] = useState({
         error1: false,
         error2: false,
-        errorAlert: false
+        errorAlert: false,
+        errorMessage: 'Error'
     });
 
 
@@ -101,27 +102,25 @@ function Login(props) {
                 {email: _state.email, password: _state.password})
                 .then(result => {
                     if (result.status === 200) {
-                        
-                        localStorage.setItem("email", _state.email); 
-                        localStorage.setItem("username", result.data.username); 
+
+                        localStorage.setItem("email", _state.email);
+                        localStorage.setItem("username", result.data.username);
                         localStorage.setItem("user_id", result.data.id);
                         props.setCheckInsolvent(!props.checkInsolvent);
-                             // Set email in session storage
+                        // Set email in session storage
                         setError({..._error, errorAlert: false});
-                     //   console.log(props.role);
                         props.onLogChange(true);
                         props.reload(true);
-                      //  props.reload(true);
-                      // console.log(props.role);
                         if (_state.typeLogin === 'user')
                             navigate(props.url);
                         else
                             navigate("/employee/home");
-
-                    } else if (result.status === 401)
-                        setError({..._error, errorAlert: true})
-                }).catch(() => {
-                setError({..._error, errorAlert: true})
+                    }
+                }).catch((error) => {
+                    if (error.response.status === 401)
+                        setError({..._error, errorAlert: true, errorMessage: 'User not found!'})
+                else
+                    setError({..._error, errorAlert: true, errorMessage: error.message})
             })
         }
     }
@@ -169,7 +168,7 @@ function Login(props) {
                         <CustomizedSwitches {..._state} handleCallback={(typeLogin) => handleCallback(typeLogin)}/>
                     </Box>
                     <Collapse in={_error.errorAlert}>
-                        <Alert severity="error">Invalid credentials!</Alert>
+                        <Alert severity="error">{_error.errorMessage}</Alert>
                     </Collapse>
                 </Box>
             </Modal>

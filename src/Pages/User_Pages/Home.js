@@ -3,7 +3,6 @@ import axios from "axios";
 import Packages from "../../container/components/Packages";
 import Loading from "../../container/components/Loading";
 import OrdersRejected from '../../container/components/OrdersRejected';
-import "./Home.css"
 import Typography from "@mui/material/Typography";
 
 function Home(props) {
@@ -21,7 +20,6 @@ function Home(props) {
 
 
    useEffect(()=>{
-      // console.log(props.OrderId);
       localStorage.getItem("user_id")!==""?
        axios.get("/order/getrejected",{
            params:
@@ -51,11 +49,17 @@ function Home(props) {
                 }
             </div>
             <div>
+                <Typography align={"center"} variant={"h3"}>
+                                WINTER PROMO SALES
+                </Typography>
+                <Typography align={"center"} variant={"h5"}>
+                                Click on a package to buy it!
+                </Typography>
                 {
-                    packages ?
+                    packages.length > 0 ?
                         <Packages packages={packages}/>
                         :
-                        <Loading/>
+                        <Loading />
                 }
             </div>
 
