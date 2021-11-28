@@ -4,6 +4,7 @@ import OrdersRejected from "../../container/components/OrdersRejected";
 import OrdersCart from "../../container/components/OrdersCart";
 import { useLocation } from "react-router";
 import {Alert} from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 const Cart = (props) =>{
         const [orderId,setOrderId] = useState(props.orderId); 
@@ -40,14 +41,14 @@ const Cart = (props) =>{
        orders!==[]
        ?
        <div>
-           <div>
-           TO BUY:
-           </div>
+           <Typography align={'center'} variant={"h3"}>
+           TO BUY
+           </Typography>
            <OrdersCart sure={props.orderId} setOrderId={props.setOrderId} orders={orders}/>
        </div>
        :
        <div>
-           No order in the cart!
+           <Alert severity='warning'>No order in the cart!</Alert>
        </div>
        }
        </div>

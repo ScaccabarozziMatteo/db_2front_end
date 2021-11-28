@@ -3,6 +3,7 @@ import OptionalProductsCards from "./OptionalProductsCards";
 import "./OrdersCart.css"
 import OptionalProducts from "./OptionalProducts";
 import {useNavigate} from "react-router";
+import Typography from "@mui/material/Typography";
 
 const OrdersCart = (props) => {
 
@@ -46,9 +47,9 @@ const OrdersCart = (props) => {
                                     className="list-row-cart" activeClassName="active"
                                     onClick={() => clickHandle(order.id)}
                                 >
-                                    <div className="name">
-                                        {order.id}
-                                    </div>
+                                    <Typography className="name" align={"center"} variant={"h4"}>
+                                        Order #{order.id}
+                                    </Typography>
                                     <div className="name">
                                         {order.aPackage.name.toUpperCase()}
                                     </div>
