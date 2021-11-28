@@ -150,7 +150,7 @@ function Login(props) {
                         noValidate
                         autoComplete="off"
                     >
-                        <TextField id="outlined-basic" label="E-mail" variant="outlined"
+                        <TextField size={"large"} id="outlined-basic" label="E-mail" variant="outlined"
                                    name="email" color="secondary"
                                    type="email"
                                    required

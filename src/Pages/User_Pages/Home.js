@@ -8,8 +8,8 @@ import Typography from "@mui/material/Typography";
 function Home(props) {
 
     const [packages, setPackages] = useState([]);
-    const [orderId,setOrderId] = useState(props.orderId); 
-    const [rejected,setRejected] = useState([]);
+    const [orderId, setOrderId] = useState(props.orderId);
+    const [rejected, setRejected] = useState([]);
     useEffect(() => {
         axios.get("package/getall").then((result) => {
             setPackages(result.data);
@@ -18,41 +18,44 @@ function Home(props) {
     }, [])
 
 
-
-   useEffect(()=>{
-      // console.log(props.OrderId);
-       axios.get("/order/getrejected",{params:{
-           user_id: localStorage.getItem("user_id")
-       }}).then((result)=>{
-           setRejected(result.data);
-       })
-   },[props.orderId])
+    useEffect(() => {
+        if (localStorage.getItem("user_id") !== '') {
+            // console.log(props.OrderId);
+            axios.get("/order/getrejected", {
+                params: {
+                    user_id: localStorage.getItem("user_id")
+                }
+            }).then((result) => {
+                setRejected(result.data);
+            })
+        }
+    }, [props.orderId])
 
 
     return (
         <div>
             <div>
-            {
-            props.insolvent===true?
-            <div>
-            <Typography align={"center"} variant={"h3"}>
-            TO BE PAYED
-            </Typography>
-            <OrdersRejected sure={props.orderId} setOrderId={props.setOrderId} orders={rejected}/>
-          </div>
-          :
-          null 
-            }
-            </div>
-            <div>
-            {
-                    packages ? 
-                    <Packages packages={packages}/> 
-                    : 
-                    <Loading/>
+                {
+                    props.insolvent === true ?
+                        <div>
+                            <Typography align={"center"} variant={"h3"}>
+                                TO BE PAYED
+                            </Typography>
+                            <OrdersRejected sure={props.orderId} setOrderId={props.setOrderId} orders={rejected}/>
+                        </div>
+                        :
+                        null
                 }
             </div>
-        
+            <div>
+                {
+                    packages ?
+                        <Packages packages={packages}/>
+                        :
+                        <Loading/>
+                }
+            </div>
+
         </div>
     );
 }

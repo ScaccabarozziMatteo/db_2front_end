@@ -47,16 +47,20 @@ const Orders = (props) =>{
        
        <div>
        {
-           (rejected!==[])      // NOT WORK
+           (rejected.length > 0)
        ?
        <div>
            <Typography align={'center'} variant={"h3"}>
            TO BE PAYED
+               {console.log(rejected)}
            </Typography>
            <OrdersRejected sure={props.orderId} setOrderId={props.setOrderId} orders={rejected}/>
        </div>
        :
        <div>
+           <Typography align={'center'} variant={"h3"}>
+           TO BE PAYED
+           </Typography>
            <Alert severity='success'>All bought orders have been payed!</Alert>
        </div>
        }

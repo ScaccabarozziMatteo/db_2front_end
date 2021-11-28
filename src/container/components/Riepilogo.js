@@ -101,7 +101,7 @@ const Riepilogo = (props) => {
                             {validity}
                         </div>
                         :
-                        <Input value={validity} type="number" onChange={handleInputChange}/>
+                        <Input value={validity} type="number" variant="outlined" onChange={handleInputChange}/>
 
                 } MONTHS
                 </div>
