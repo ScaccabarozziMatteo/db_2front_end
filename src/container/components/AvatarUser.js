@@ -33,6 +33,7 @@ export default function MenuAppBar(props) {
 
   const logOut=()=> {
     handleClose();
+    
     props.onLogChange();
     navigate("/");
   }

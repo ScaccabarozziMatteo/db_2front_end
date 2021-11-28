@@ -28,9 +28,10 @@ export default function HorizontalLinearStepper(props) {
   const [skipped, setSkipped] = React.useState(new Set());
   const [packages,setPackages] = useState([]);
   const [products,setProducts] = useState([]);
-  const [selectedPackage,setSelectedPackage] = useState(JSON.parse(localStorage.getItem("selectedPackage")));
-  const [selectedProducts,setSelectedProducts] =useState(JSON.parse(localStorage.getItem("optionalProducts")));
+  const [selectedPackage,setSelectedPackage] = useState(localStorage.getItem("selectedPackage")? JSON.parse(localStorage.getItem("selectedPackage")) : "");
+  const [selectedProducts,setSelectedProducts] =useState(localStorage.getItem("optionalProducts")? JSON.parse(localStorage.getItem("optionalProducts")):[]);
   const [isLoggedIn,setIsLoggedIn] = useState(localStorage.getItem("email")!=="" && localStorage.getItem("email")!==null);
+  const [validity,setValidity] = useState(localStorage.getItem("validity")!==null?localStorage.getItem("validity"):0);
   const today= new Date();
   const navigate =useNavigate();
 
@@ -105,6 +106,10 @@ axios.post("/order/create",
   localStorage.setItem("order_id",result.data);
   props.setOrderId(!props.orderId);
   navigate("/pay");
+  localStorage.removeItem("selectedPackage");
+  localStorage.removeItem("optionalProducts");
+setSelectedProducts([]);
+setSelectedPackage();
   //console.log("OOOOOOO");
 //console.log(localStorage.getItem("order_id"));
 
@@ -202,7 +207,7 @@ axios.post("/order/create",
               Next
             </Button>
             :
-            <FinalStepButton checkInsolvent={props.checkInsolvent} setCheckInsolvent={props.setCheckInsolvent}  handleConfirm={handleConfirm} role={props.role} reload={props.reload}/> 
+            <FinalStepButton package={selectedPackage} validity={validity} setValidity={setValidity} checkInsolvent={props.checkInsolvent} setCheckInsolvent={props.setCheckInsolvent}  handleConfirm={handleConfirm} role={props.role} reload={props.reload}/> 
               }
           </Box>
 
@@ -232,7 +237,7 @@ axios.post("/order/create",
           </div>
           :
 
-    <Riepilogo selectedPackage={JSON.parse(localStorage.getItem("selectedPackage"))}  validity={localStorage.getItem("validity")} optionalProducts = {localStorage.getItem("optionalProducts")!== null && localStorage.getItem("optionalProducts")!== "null" && localStorage.getItem("optionalProducts")!== "" && localStorage.getItem("optionalProducts")!== "undefined"  ? JSON.parse(localStorage.getItem("optionalProducts")): []} date={localStorage.getItem("date").toString().slice(0,15)} fix={false}/>
+    <Riepilogo selectedPackage={JSON.parse(localStorage.getItem("selectedPackage"))}  validity={validity} setValidity={setValidity} optionalProducts = {localStorage.getItem("optionalProducts")!== null && localStorage.getItem("optionalProducts")!== "null" && localStorage.getItem("optionalProducts")!== "" && localStorage.getItem("optionalProducts")!== "undefined"  ? JSON.parse(localStorage.getItem("optionalProducts")): []} date={localStorage.getItem("date").toString().slice(0,15)} fix={false}/>
         }
 
         </React.Fragment>

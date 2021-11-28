@@ -16,6 +16,9 @@ const LoginProfile = (props) =>{
         localStorage.setItem("user_id","");
         localStorage.setItem("email","");
         localStorage.setItem("username","");
+        localStorage.setItem("user_id","");
+        localStorage.setItem("insolvent",0);
+        props.setCheckInsolvent(!props.checkInsolvent);
         setIsLoggedIn(false);
         props.reload(false);
     }
