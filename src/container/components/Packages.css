@@ -45,6 +45,21 @@
 
 }
 
+.nameo{
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    align-content: left;
+    text-decoration:none;
+    text-shadow: royalblue;
+    box-sizing: border-box;
+    border-width: 80%;
+    display: flex;
+    justify-content: left;
+    font-weight: bolder;
+    font-size: x-large;
+    text-align: left;
+}
+
 .name{
     color: black;
     font-family: Arial, Helvetica, sans-serif;

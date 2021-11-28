@@ -47,8 +47,8 @@ const OrdersRejected = (props) => {
                                     className="list-row-o" activeClassName="active"
                                     onClick={() => clickHandle(order.id)}
                                 >
-                                    <Typography className="name" align={"center"} variant={"h4"}>
-                                        Order #{order.id}
+                                    <Typography className="nameo" align={"center"} variant={"h5"}>
+                                         Order ID:{order.id}
                                     </Typography>
                                     <div className="name">
                                         {order.aPackage.name.toUpperCase()}

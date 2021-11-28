@@ -21,8 +21,8 @@ const OrdersCards = (props) => {
                                     id={order.id}
                                     className="list-row" activeClassName="active"
                                 >
-                                    <Typography className="name" align={"center"} variant={"h4"}>
-                                        Order #{order.id}
+                                    <Typography className="nameo"  align={"center"} variant={"h5"}>
+                                        Order ID:{order.id}
                                     </Typography>
                                     <div className="name">
                                         {order.aPackage.name.toUpperCase()}
