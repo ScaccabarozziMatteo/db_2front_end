@@ -34,7 +34,8 @@ function SignUpUser() {
         error2: false,
         error3: false,
         errorAlert: false,
-        successAlert: false
+        successAlert: false,
+        errorMessage: 'Error'
     });
 
     const [open, setOpen] = useState(false);
@@ -59,10 +60,12 @@ function SignUpUser() {
                             navigate('/login');
 
 
-                    } else if (result.status === 401)
-                        setError({..._error, errorAlert: true})
-                }).catch(() => {
-                setError({..._error, errorAlert: true, error1: false, error2: false, error3: false});
+                    }
+                }).catch((error) => {
+                    if (error.response.status === 409)
+                        setError({..._error, errorAlert: true, error1: false, error2: false, error3: false, errorMessage: 'User already registered!'});
+                    else
+                        setError({..._error, errorAlert: true, error1: false, error2: false, error3: false, errorMessage: error.response.status});
             })
         }
     }
@@ -161,7 +164,7 @@ function SignUpUser() {
 
                     </Box>
                     <Collapse in={_error.errorAlert}>
-                        <Alert severity="error">Invalid credentials!</Alert>
+                        <Alert severity="error">{_error.errorMessage}</Alert>
                     </Collapse>
                 </Box>
             </Modal>

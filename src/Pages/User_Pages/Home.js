@@ -4,6 +4,7 @@ import Packages from "../../container/components/Packages";
 import Loading from "../../container/components/Loading";
 import OrdersRejected from '../../container/components/OrdersRejected';
 import Typography from "@mui/material/Typography";
+import {CircularProgress} from "@material-ui/core";
 
 function Home(props) {
 
@@ -20,7 +21,6 @@ function Home(props) {
 
     useEffect(() => {
         if (localStorage.getItem("user_id") !== '') {
-            // console.log(props.OrderId);
             axios.get("/order/getrejected", {
                 params: {
                     user_id: localStorage.getItem("user_id")
@@ -48,11 +48,17 @@ function Home(props) {
                 }
             </div>
             <div>
+                <Typography align={"center"} variant={"h3"}>
+                                WINTER PROMO SALES
+                </Typography>
+                <Typography align={"center"} variant={"h5"}>
+                                Click on a package to buy it!
+                </Typography>
                 {
-                    packages ?
+                    packages.length > 0 ?
                         <Packages packages={packages}/>
                         :
-                        <Loading/>
+                        <Loading />
                 }
             </div>
 

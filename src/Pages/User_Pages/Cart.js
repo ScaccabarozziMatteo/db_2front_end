@@ -13,12 +13,10 @@ const Cart = (props) =>{
 
 
         useEffect(()=>{
-           // console.log(props.OrderId);
             axios.get("/order/getcart",{params:{
                 user_id: localStorage.getItem("user_id")
             }}).then((result)=>{
                 setOrders(result.data);
-                console.log(result.data);
             })
         },[props.orderId])
 
@@ -38,7 +36,7 @@ const Cart = (props) =>{
        
        <div>
        {
-       orders!==[]
+       orders.length > 0
        ?
        <div>
            <Typography align={'center'} variant={"h3"}>
@@ -48,7 +46,10 @@ const Cart = (props) =>{
        </div>
        :
        <div>
-           <Alert severity='warning'>No order in the cart!</Alert>
+           <Typography align={'center'} variant={"h3"}>
+           TO BUY
+           </Typography>
+           <Alert severity='info'>No order in the cart!</Alert>
        </div>
        }
        </div>

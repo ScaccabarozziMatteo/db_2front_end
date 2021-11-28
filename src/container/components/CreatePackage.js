@@ -37,7 +37,8 @@ export default function createPackage() {
 
         errorAlert: false,
         errorZeroInput: false,
-        successAlert: false
+        successAlert: false,
+        errorMessage: 'Error'
     });
 
     React.useEffect(async () => {
@@ -51,26 +52,26 @@ export default function createPackage() {
         })
     }, [])
 
-      function handleChangeProducts(event) {
+    function handleChangeProducts(event) {
 
-    setChoosenProducts(
-      // On autofill we get a the stringified value.
-      typeof event.target.value === 'string' ? event.target.value.split(',') : event.target.value,
-    );
-  }
+        setChoosenProducts(
+            // On autofill we get a the stringified value.
+            typeof event.target.value === 'string' ? event.target.value.split(',') : event.target.value,
+        );
+    }
 
     function handleSubmit() {
 
         if (checkValidity()) {
 
-                const services=[];
-                if(typeServices.mobile_internet!=='')
+            const services = [];
+            if (typeServices.mobile_internet !== '')
                 services.push(typeServices.mobile_internet);
-                if(typeServices.mobile_phone!=='')
+            if (typeServices.mobile_phone !== '')
                 services.push(typeServices.mobile_phone);
-                if(typeServices.fixed_phone!=='')
+            if (typeServices.fixed_phone !== '')
                 services.push(typeServices.fixed_phone);
-                if(typeServices.fixed_internet!=='')
+            if (typeServices.fixed_internet !== '')
                 services.push(typeServices.fixed_internet);
 
             axios.post('/package/create',
@@ -99,17 +100,31 @@ export default function createPackage() {
 
                     } else if (result.status === 401)
                         setError({..._error, errorAlert: true, errorZeroInput: false})
-                }).catch(() => {
-                setError({
-                    ..._error,
-                    errorZeroInput: false,
-                    errorAlert: true,
-                    error0: false,
-                    error1: false,
-                    error2: false,
-                    error3: false,
-                    error4: false
-                });
+                }).catch((error) => {
+                if (error.response.status === 401)
+                    setError({
+                        ..._error,
+                        errorZeroInput: false,
+                        errorAlert: true,
+                        error0: false,
+                        error1: false,
+                        error2: false,
+                        error3: false,
+                        error4: false,
+                        errorMessage: 'Invalid inputs!'
+                    });
+                else
+                    setError({
+                        ..._error,
+                        errorZeroInput: false,
+                        errorAlert: true,
+                        error0: false,
+                        error1: false,
+                        error2: false,
+                        error3: false,
+                        error4: false,
+                        errorMessage: error.response.status
+                    });
             })
         }
     }
@@ -158,6 +173,15 @@ export default function createPackage() {
         <div align={'center'}>
             <Box width='90%' alignContent={"center"} sx={{boxShadow: 3}}>
                 <Typography marginBottom={'15px'} align={"center"} variant="h4">Create package</Typography>
+                <Collapse in={_error.errorAlert}>
+                    <Alert style={{marginTop: '20px'}} severity="error">{_error.errorMessage}</Alert>
+                </Collapse>
+                <Collapse in={_error.errorZeroInput}>
+                    <Alert style={{marginTop: '20px'}} severity="error">Choose at least one service!</Alert>
+                </Collapse>
+                <Collapse in={_error.successAlert}>
+                    <Alert style={{marginTop: '20px'}} severity="success">Package created!</Alert>
+                </Collapse>
                 <Box sx={{flexGrow: 1}}>
                     <Grid container item spacing={1}>
 
@@ -315,9 +339,9 @@ export default function createPackage() {
                                     startAdornment={'Optional Products'}
                                 >
                                     {optionalProducts.map(product => (
-                                        <MenuItem key={product.id} value={product.id}>
-                                            {'ID: ' + product.id + ' ' + product.name + ', fee: ' + product.monthly_fee + '€'}
-                                        </MenuItem>
+                                            <MenuItem key={product.id} value={product.id}>
+                                                {'ID: ' + product.id + ' ' + product.name + ', fee: ' + product.monthly_fee + '€'}
+                                            </MenuItem>
                                         )
                                     )}
                                 </Select>
@@ -379,15 +403,6 @@ export default function createPackage() {
                             onClick={handleSubmit}>Create</Button>
 
                 </Box>
-                <Collapse in={_error.errorAlert}>
-                    <Alert style={{marginTop: '20px'}} severity="error">Invalid inputs!</Alert>
-                </Collapse>
-                <Collapse in={_error.errorZeroInput}>
-                    <Alert style={{marginTop: '20px'}} severity="error">Choose at least one service!</Alert>
-                </Collapse>
-                <Collapse in={_error.successAlert}>
-                    <Alert style={{marginTop: '20px'}} severity="success">Package created!</Alert>
-                </Collapse>
             </Box>
         </div>
     )

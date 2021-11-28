@@ -2,7 +2,6 @@ import axios from "axios";
 import react, { useEffect, useState } from "react";
 import OrdersRejected from "../../container/components/OrdersRejected";
 import OrdersCards from "../../container/components/Orders";
-import { useLocation } from "react-router";
 import {Alert} from "@mui/material";
 import Typography from "@mui/material/Typography";
 
@@ -27,7 +26,6 @@ const Orders = (props) =>{
                 user_id: localStorage.getItem("user_id")
             }}).then((result)=>{
                 setRejected(result.data);
-                console.log(result.data);
             })
         },[props.orderId])
 
@@ -52,7 +50,6 @@ const Orders = (props) =>{
        <div>
            <Typography align={'center'} variant={"h3"}>
            TO BE PAYED
-               {console.log(rejected)}
            </Typography>
            <OrdersRejected sure={props.orderId} setOrderId={props.setOrderId} orders={rejected}/>
        </div>
@@ -66,7 +63,7 @@ const Orders = (props) =>{
        }
        <div>
        {
-       payed!==[] ?
+       payed.length > 0 ?
        <div>
            <Typography align={'center'} variant={"h3"}>
            PROCESSED ORDERS
@@ -77,7 +74,10 @@ const Orders = (props) =>{
        </div>
        :
        <div>
-           No processed order found.
+           <Typography align={'center'} variant={"h3"}>
+           PROCESSED ORDERS
+           </Typography>
+           <Alert severity='info'>No processed order found.</Alert>
            </div>
        }
        </div>
