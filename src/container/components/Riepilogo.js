@@ -37,7 +37,7 @@ const Riepilogo = (props) => {
             props.setValidity!==null? props.setValidity(0): null;
             //console.log(props.validity);
         } else {
-            setValidity(Math.round(event.target.value));
+            setValidity(event.target.value);
             _validity = Math.round(event.target.value);
             localStorage.setItem("validity", Math.round(event.target.value));
             props.setValidity!==null? props.setValidity(Math.round(event.target.value)): null;
@@ -50,7 +50,7 @@ const Riepilogo = (props) => {
     function total(val) {
         if(props.selectedPackage!==null){
         const x = val;
-        console.log(x);
+        //console.log(x);
         let fee;
         switch (true) {
             case x < 24:
@@ -73,7 +73,7 @@ const Riepilogo = (props) => {
         //console.log(somma);
         //console.log((somma + fee)*validity);
         //console.log((somma + fee)*x);
-        setTot(((somma + fee) * validity).toFixed(2));}
+        setTot(((somma + fee) * Math.round(validity)).toFixed(2));}
         else{
         setTot(0);
         }
