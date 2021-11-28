@@ -55,10 +55,7 @@ const Orders = (props) =>{
        </div>
        :
        <div>
-           <Typography align={'center'} variant={"h3"}>
-           TO BE PAYED
-           </Typography>
-           <Alert severity='success'>All bought orders have been payed!</Alert>
+           <Alert severity='success'>All your orders have been payed!</Alert>
        </div>
        }
        <div>
