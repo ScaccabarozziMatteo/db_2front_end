@@ -72,7 +72,7 @@ const Riepilogo = (props) => {
         //console.log(somma);
         //console.log((somma + fee)*validity);
         //console.log((somma + fee)*x);
-        setTot(((somma + fee) * validity).toFixed(2));}
+        setTot(((somma + fee) * _validity).toFixed(2));}
         else{
         setTot(0);
         }
