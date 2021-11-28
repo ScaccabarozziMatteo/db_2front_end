@@ -9,7 +9,6 @@ function Home(props) {
     const [packages, setPackages] = useState([]);
     const [orderId,setOrderId] = useState(props.orderId); 
     const [rejected,setRejected] = useState([]);
-
     useEffect(() => {
         axios.get("package/getall").then((result) => {
             setPackages(result.data);
@@ -25,7 +24,6 @@ function Home(props) {
            user_id: localStorage.getItem("user_id")
        }}).then((result)=>{
            setRejected(result.data);
-           console.log(result.data);
        })
    },[props.orderId])
 

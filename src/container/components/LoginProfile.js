@@ -40,7 +40,7 @@ Ciao
         </div>
  :
  <div className = "menuobj">
- <Login  checkInsolvent={props.checkInsolvent} setCheckInsolvent={props.setCheckInsolvent} url="/"className="menuobj" vat={isLoggedIn} reload = {props.reload} onLogChange={setIsLoggedIn}/>
+ <Login  checkInsolvent={props.checkInsolvent} setCheckInsolvent={props.setCheckInsolvent} url="/" className="menuobj" vat={isLoggedIn} reload = {props.reload} onLogChange={setIsLoggedIn}/>
  <SignUpUser className="menuobj" onLogChange={setIsLoggedIn}/>
  </div>
 )

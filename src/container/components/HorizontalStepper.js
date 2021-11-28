@@ -202,7 +202,7 @@ axios.post("/order/create",
               Next
             </Button>
             :
-            <FinalStepButton handleConfirm={handleConfirm} role={props.role} reload={props.reload}/> 
+            <FinalStepButton checkInsolvent={props.checkInsolvent} setCheckInsolvent={props.setCheckInsolvent}  handleConfirm={handleConfirm} role={props.role} reload={props.reload}/> 
               }
           </Box>
 

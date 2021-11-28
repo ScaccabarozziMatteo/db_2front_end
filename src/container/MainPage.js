@@ -31,9 +31,9 @@ useEffect (()=>{
     axios.get("/user/getinsolvent",{params:{
         user_id: localStorage.getItem("user_id")
     }}).then((result)=>{
-        localStorage.setItem("insolvent",result.data);
+        setInsolvent(result.data>0? true:false)
     })
- setInsolvent(localStorage.getItem("insolvent")>0? true:false)
+ console.log(insolvent);
     },[checkInsolvent]
     )
 
@@ -43,9 +43,9 @@ useEffect (()=>{
         <Router>
            {(localStorage.getItem("email")!== " " && localStorage.getItem("username")=== "undefined") ? <NavbarEmployee reload={setRole}/> : <NavbarHome  checkInsolvent={checkInsolvent} setCheckInsolvent={setCheckInsolvent} role={role} reload={setRole}/>} 
             <Routes>
-                <Route path="/" index element={<Home insolvent={insolvent} orderId={orderId} setOrderId={setOrderId}/>}/>
+                <Route path="/" index element={<Home insolvent={insolvent} heckInsolvent={checkInsolvent} orderId={orderId} setOrderId={setOrderId}/>}/>
                 <Route path="/employee/home" element={<HomeEmployee/>}/>
-                <Route path="/buy" element={<Buy role ={role} setOrderId={setOrderId} reload={setRole}/>}/>
+                <Route path="/buy" element={<Buy checkInsolvent={checkInsolvent} setCheckInsolvent={setCheckInsolvent} role ={role} setOrderId={setOrderId} reload={setRole}/>}/>
                 <Route path="/pay" element={<Pay checkInsolvent={checkInsolvent} setCheckInsolvent={setCheckInsolvent} orderId={orderId} setOrderId={setOrderId}/>}/>
                 <Route path="/profile" element={<Profile/>}/>
                 <Route path="/logout" element={<Logout/>}/>
