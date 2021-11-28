@@ -4,7 +4,6 @@ import Packages from "../../container/components/Packages";
 import Loading from "../../container/components/Loading";
 import OrdersRejected from '../../container/components/OrdersRejected';
 import Typography from "@mui/material/Typography";
-import {CircularProgress} from "@material-ui/core";
 
 function Home(props) {
 
@@ -19,17 +18,19 @@ function Home(props) {
     }, [])
 
 
-    useEffect(() => {
-        if (localStorage.getItem("user_id") !== '') {
-            axios.get("/order/getrejected", {
-                params: {
-                    user_id: localStorage.getItem("user_id")
-                }
-            }).then((result) => {
-                setRejected(result.data);
-            })
-        }
-    }, [props.orderId])
+
+   useEffect(()=>{
+      localStorage.getItem("user_id")!==""?
+       axios.get("/order/getrejected",{
+           params:
+           {
+               user_id: localStorage.getItem("user_id")
+       }}).then((result)=>{
+           setRejected(result.data);
+       })
+       :
+       setRejected([]);
+   },[props.orderId, props.checkInsolvent])
 
 
     return (
@@ -39,7 +40,7 @@ function Home(props) {
                     props.insolvent === true ?
                         <div>
                             <Typography align={"center"} variant={"h3"}>
-                                TO BE PAYED
+                            YOU HAVE SOME INSOLVENT ORDERS IN STANDBY!
                             </Typography>
                             <OrdersRejected sure={props.orderId} setOrderId={props.setOrderId} orders={rejected}/>
                         </div>

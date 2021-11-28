@@ -24,8 +24,9 @@ const Riepilogo = (props) => {
 
             total(localStorage.getItem("validity"));
         }
-        , []
+        , [validity]
     )
+
 
     function handleInputChange(event) {
         if (event.target.value < 0) {
@@ -33,11 +34,13 @@ const Riepilogo = (props) => {
             setValidity(0);
             localStorage.setItem("validity", 0);
             total(localStorage.getItem("validity"));
+            props.setValidity!==null? props.setValidity(0): null;
             //console.log(props.validity);
         } else {
-            setValidity(event.target.value);
-            _validity = event.target.value;
-            localStorage.setItem("validity", event.target.value);
+            setValidity(Math.round(event.target.value));
+            _validity = Math.round(event.target.value);
+            localStorage.setItem("validity", Math.round(event.target.value));
+            props.setValidity!==null? props.setValidity(Math.round(event.target.value)): null;
             total(localStorage.getItem("validity"));
             // console.log(props.validity);
         }
@@ -45,6 +48,7 @@ const Riepilogo = (props) => {
     }
 
     function total(val) {
+        if(props.selectedPackage!==null){
         const x = val;
         console.log(x);
         let fee;
@@ -69,7 +73,10 @@ const Riepilogo = (props) => {
         //console.log(somma);
         //console.log((somma + fee)*validity);
         //console.log((somma + fee)*x);
-        setTot(((somma + fee) * _validity).toFixed(2));
+        setTot(((somma + fee) * validity).toFixed(2));}
+        else{
+        setTot(0);
+        }
     }
 
 
@@ -80,7 +87,7 @@ const Riepilogo = (props) => {
                 <div className="title">
                     SELECTED PACKAGE:
                 </div>
-                {props.selectedPackage.name.toUpperCase()}
+                {props.selectedPackage!==null ? props.selectedPackage.name.toUpperCase() : "PURCHASE A PACKAGE TO CONFIRM YOUR ORDER!"}
                 <div>
                 </div>
                 <div className="title">

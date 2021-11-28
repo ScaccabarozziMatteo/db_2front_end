@@ -28,11 +28,14 @@ useEffect (()=>{
 )
 
 useEffect (()=>{
+    localStorage.getItem("user_id")!==""?
     axios.get("/user/getinsolvent",{params:{
         user_id: localStorage.getItem("user_id")
     }}).then((result)=>{
         setInsolvent(result.data>0? true:false)
     })
+    :
+    setInsolvent(false);
  console.log(insolvent);
     },[checkInsolvent]
     )
@@ -43,7 +46,7 @@ useEffect (()=>{
         <Router>
            {(localStorage.getItem("email")!== " " && localStorage.getItem("username")=== "undefined") ? <NavbarEmployee reload={setRole}/> : <NavbarHome  checkInsolvent={checkInsolvent} setCheckInsolvent={setCheckInsolvent} role={role} reload={setRole}/>} 
             <Routes>
-                <Route path="/" index element={<Home insolvent={insolvent} heckInsolvent={checkInsolvent} orderId={orderId} setOrderId={setOrderId}/>}/>
+                <Route path="/" index element={<Home insolvent={insolvent} checkInsolvent={checkInsolvent} orderId={orderId} setOrderId={setOrderId}/>}/>
                 <Route path="/employee/home" element={<HomeEmployee/>}/>
                 <Route path="/buy" element={<Buy checkInsolvent={checkInsolvent} setCheckInsolvent={setCheckInsolvent} role ={role} setOrderId={setOrderId} reload={setRole}/>}/>
                 <Route path="/pay" element={<Pay checkInsolvent={checkInsolvent} setCheckInsolvent={setCheckInsolvent} orderId={orderId} setOrderId={setOrderId}/>}/>
