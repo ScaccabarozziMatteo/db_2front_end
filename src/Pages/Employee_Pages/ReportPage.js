@@ -23,7 +23,6 @@ function ReportPage() {
 
         axios.get("../user/getAllUserInsolvents").then((result) => {
             setUsersInsolvents(result.data);
-            console.log(result.data)
         })
 
     }, [])
@@ -71,14 +70,14 @@ function ReportPage() {
                     </TableContainer>
                 </Box>
                 <Box>
-                    <h2>Report services</h2>
+                    <h2>Report optional products for every package</h2>
                     <Stack marginBottom={'50px'} direction={"row"}>
                         <Box width={'50%'}>
                             <TableContainer component={Paper}>
                                 <Table aria-label="simple table">
                                     <TableHead style={{background: "grey"}}>
                                         <TableRow>
-                                            <TableCell align="center">ID service</TableCell>
+                                            <TableCell align="center">ID package</TableCell>
                                             <TableCell align="center">Average number of optional products sold
                                                 together</TableCell>
                                         </TableRow>
@@ -89,8 +88,8 @@ function ReportPage() {
                                                 key={row.name}
                                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                             >
-                                                <TableCell align="center">{row.name}</TableCell>
-                                                <TableCell align="center">{row.calories}</TableCell>
+                                                <TableCell align="center">{row.aPackage}</TableCell>
+                                                <TableCell align="center">{row.avgProd}</TableCell>
                                             </TableRow>
                                         ))}
                                     </TableBody>
