@@ -19,6 +19,7 @@ function ReportPage() {
 
         axios.get("../packreport/getAll").then((result) => {
             setReportPackages(result.data);
+            console.log(result.data)
         })
 
         axios.get("../user/getAllUserInsolvents").then((result) => {
@@ -89,7 +90,7 @@ function ReportPage() {
                                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                             >
                                                 <TableCell align="center">{row.aPackage}</TableCell>
-                                                <TableCell align="center">{row.avgProd}</TableCell>
+                                                <TableCell align="center">{row.avg_prod}</TableCell>
                                             </TableRow>
                                         ))}
                                     </TableBody>
@@ -132,9 +133,8 @@ function ReportPage() {
                             <Table aria-label="simple table">
                             <TableHead style={{background: "grey"}}>
                                     <TableRow>
-                                        <TableCell align="center">ID service</TableCell>
-                                        <TableCell align="center">Average number of optional products sold
-                                            together</TableCell>
+                                        <TableCell align="center">ID order</TableCell>
+                                        <TableCell align="center">E-mail</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
