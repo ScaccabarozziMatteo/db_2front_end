@@ -12,11 +12,17 @@ import Typography from "@mui/material/Typography";
 function ReportPage() {
 
     const [reportPackages, setReportPackages] = React.useState([])
+    const [usersInsolvents, setUsersInsolvents] = React.useState([])
+
 
     React.useEffect(() => {
 
         axios.get("../packreport/getAll").then((result) => {
             setReportPackages(result.data);
+        })
+
+        axios.get("../user/getAllUserInsolvents").then((result) => {
+            setUsersInsolvents(result.data);
             console.log(result.data)
         })
 
@@ -103,19 +109,17 @@ function ReportPage() {
                             <TableHead style={{background: "grey"}}>
                                 <TableRow>
                                     <TableCell align="center">E-mail</TableCell>
-                                    <TableCell align="center">Name</TableCell>
-                                    <TableCell align="center">Surname</TableCell>
+                                    <TableCell align="center">Username</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {reportPackages.map((row) => (
+                                {usersInsolvents.map((row) => (
                                     <TableRow
                                         key={row.name}
                                         sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                     >
-                                        <TableCell align="center">{row.name}</TableCell>
-                                        <TableCell align="center">{row.calories}</TableCell>
-                                        <TableCell align="center">{row.fat}</TableCell>
+                                        <TableCell align="center">{row[0]}</TableCell>
+                                        <TableCell align="center">{row[1]}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
