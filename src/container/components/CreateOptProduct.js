@@ -40,9 +40,9 @@ export default function createOptProduct() {
                         });
 
                     } else if (result.status === 401)
-                        setError({..._error, errorAlert: true, errorZeroInput: false})
+                        setError({..._error, errorAlert: true, successAlert: false, errorZeroInput: false})
                 }).catch(() => {
-                setError({..._error, errorAlert: true, error0: false, error1: false});
+                setError({..._error, successAlert: false, errorAlert: true, error0: false, error1: false});
             })
         }
     }

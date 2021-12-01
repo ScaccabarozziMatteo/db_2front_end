@@ -112,6 +112,7 @@ export default function createPackage() {
                         error2: false,
                         error3: false,
                         error4: false,
+                        successAlert: false,
                         errorMessage: 'Invalid inputs!'
                     });
                 else
@@ -124,6 +125,7 @@ export default function createPackage() {
                         error2: false,
                         error3: false,
                         error4: false,
+                        successAlert: false,
                         errorMessage: error.response.data.message
                     });
             })
