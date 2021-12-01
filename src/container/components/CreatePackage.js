@@ -98,7 +98,8 @@ export default function createPackage() {
                             successAlert: true
                         });
 
-                    } else if (result.status === 401)
+                    } 
+                    else if (result.status === 401)
                         setError({..._error, errorAlert: true, errorZeroInput: false})
                 }).catch((error) => {
                 if (error.response.status === 401)
@@ -123,7 +124,7 @@ export default function createPackage() {
                         error2: false,
                         error3: false,
                         error4: false,
-                        errorMessage: error.response.status
+                        errorMessage: error.response.data.message
                     });
             })
         }
