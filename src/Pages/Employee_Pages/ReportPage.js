@@ -90,7 +90,7 @@ function ReportPage() {
                                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                             >
                                                 <TableCell align="center">{row.aPackage}</TableCell>
-                                                <TableCell align="center">{isNaN(row.avg_prod)? 0 : row.avg_prod}</TableCell>
+                                                <TableCell align="center">{isNaN(row.avgProd)? 0 : row.avgProd}</TableCell>
                                             </TableRow>
                                         ))}
                                     </TableBody>
