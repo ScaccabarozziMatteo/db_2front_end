@@ -80,7 +80,7 @@ export default function createPackage() {
                     fee12: fees.fee12,
                     fee24: fees.fee24,
                     fee36: fees.fee36,
-                    employee: localStorage.getItem('user_id'),
+                    employee: localStorage.getItem("user_id"),
                     services: services,
                     optionalProducts: choosenProducts
                 })
