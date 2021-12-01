@@ -109,7 +109,7 @@ export default function createService() {
                     errorMessage: 'Invalid inputs!'
                 });
                 if (error.message.includes("409"))
-                    setError({..._error, successAlert: false, errorAlert: true, errorMessage: "Existing service!"})
+                    setError({..._error, successAlert: false, errorAlert: true, errorMessage: "Existing service!" + error.response.data.message})
             })
         }
     }
