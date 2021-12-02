@@ -98,24 +98,8 @@ export default function createPackage() {
                             successAlert: true
                         });
 
-                    } 
-                    else if (result.status === 401)
-                        setError({..._error, errorAlert: true, errorZeroInput: false})
+                    }
                 }).catch((error) => {
-                if (error.response.status === 401)
-                    setError({
-                        ..._error,
-                        errorZeroInput: false,
-                        errorAlert: true,
-                        error0: false,
-                        error1: false,
-                        error2: false,
-                        error3: false,
-                        error4: false,
-                        successAlert: false,
-                        errorMessage: 'Invalid inputs!'
-                    });
-                else
                     setError({
                         ..._error,
                         errorZeroInput: false,
