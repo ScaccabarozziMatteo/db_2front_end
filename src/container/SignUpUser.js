@@ -63,9 +63,9 @@ function SignUpUser() {
                     }
                 }).catch((error) => {
                     if (error.response.status === 409)
-                        setError({..._error, errorAlert: true, error1: false, error2: false, error3: false, errorMessage: 'User already registered!'});
+                        setError({..._error, successAlert: false, errorAlert: true, error1: false, error2: false, error3: false, errorMessage: 'User already registered!'});
                     else
-                        setError({..._error, errorAlert: true, error1: false, error2: false, error3: false, errorMessage: error.response.status});
+                        setError({..._error, successAlert: false, errorAlert: true, error1: false, error2: false, error3: false, errorMessage: error.response.status});
             })
         }
     }

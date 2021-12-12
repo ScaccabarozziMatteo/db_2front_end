@@ -1,7 +1,12 @@
 import react from "react";
+import {Alert} from "@mui/lab";
 
 const Error = () =>{
-    return (<div>Error, the page you are trying to reach does not exists!!!</div>)
+    return (
+        <div>
+            <Alert severity='warning'>Error, the page you are trying to reach does not exists!</Alert>
+        </div>
+    )
 }
 
 export default Error;

@@ -15,6 +15,7 @@ export default function createOptProduct() {
         error1: false,
 
         errorAlert: false,
+        errorMessage: 'Invalid inputs!',
         successAlert: false
     });
 
@@ -38,11 +39,9 @@ export default function createOptProduct() {
 
                             successAlert: true
                         });
-
-                    } else if (result.status === 401)
-                        setError({..._error, errorAlert: true, errorZeroInput: false})
-                }).catch(() => {
-                setError({..._error, errorAlert: true, error0: false, error1: false});
+                    }
+                }).catch((error) => {
+                setError({..._error, successAlert: false, errorAlert: true, error0: false, error1: false, errorMessage: error.response.data.message});
             })
         }
     }
@@ -116,7 +115,7 @@ export default function createOptProduct() {
                 </Box>
 
                 <Collapse in={_error.errorAlert}>
-                    <Alert style={{marginTop: '20px'}} severity="error">Invalid inputs!</Alert>
+                    <Alert style={{marginTop: '20px'}} severity="error">{_error.errorMessage}</Alert>
                 </Collapse>
                 <Collapse in={_error.successAlert}>
                     <Alert style={{marginTop: '20px'}} severity="success">Optional product created!</Alert>

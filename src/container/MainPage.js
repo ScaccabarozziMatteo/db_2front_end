@@ -11,7 +11,6 @@ import Login from '../Pages/LoginPage';
 import NavbarEmployee from './navbars/NavbarEmployee';
 import HomeEmployee from "../Pages/Employee_Pages/HomeEmployee";
 import ReportPage from "../Pages/Employee_Pages/ReportPage";
-import Profile from "../Pages/User_Pages/Profile";
 import Orders from '../Pages/User_Pages/Orders';
 import Cart from '../Pages/User_Pages/Cart';
 import axios from 'axios';
@@ -50,7 +49,7 @@ useEffect (()=>{
                 <Route path="/employee/home" element={<HomeEmployee/>}/>
                 <Route path="/buy" element={<Buy checkInsolvent={checkInsolvent} setCheckInsolvent={setCheckInsolvent} role ={role} setOrderId={setOrderId} reload={setRole}/>}/>
                 <Route path="/pay" element={<Pay checkInsolvent={checkInsolvent} setCheckInsolvent={setCheckInsolvent} orderId={orderId} setOrderId={setOrderId}/>}/>
-                <Route path="/profile" element={<Profile/>}/>
+                <Route path="/profile" element={<Orders/>}/>
                 <Route path="/logout" element={<Logout/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/employee/report" element={<ReportPage/>}/>

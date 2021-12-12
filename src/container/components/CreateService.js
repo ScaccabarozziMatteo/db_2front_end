@@ -106,10 +106,10 @@ export default function createService() {
                     error4: false,
                     error5: false,
                     error6: false,
-                    errorMessage: 'Invalid inputs!'
+                    errorMessage: error.message
                 });
                 if (error.message.includes("409"))
-                    setError({..._error, successAlert: false, errorAlert: true, errorMessage: "Existing service!" + error.response.data.message})
+                    setError({..._error, successAlert: false, errorAlert: true, errorMessage: error.response.data.message})
             })
         }
     }
@@ -198,7 +198,7 @@ export default function createService() {
                                 <TextField id="outlined-basic" label="SMS fee" variant="outlined"
                                            name="sms_fee" color="secondary"
                                            type="number"
-                                           disabled={Number(serviceAttr.sms) === 0}
+                                           disabled={Number(serviceAttr.sms) === 0 || (serviceAttr.type) === ('fixed phone') || (serviceAttr.type) === ('fixed internet') || (serviceAttr.type) === ('mobile internet') || (serviceAttr.type) === ('')}
                                            sx={{m: 1, width: '25ch'}}
                                            error={_error.error2}
 
@@ -223,7 +223,7 @@ export default function createService() {
                                 <TextField id="outlined-basic" label="Minutes fee" variant="outlined"
                                            name="minutes_fee" color="secondary"
                                            type="number"
-                                           disabled={Number(serviceAttr.minutes) === 0}
+                                           disabled={Number(serviceAttr.minutes) === 0 || (serviceAttr.type) === ('fixed phone') || (serviceAttr.type) === ('fixed internet') || (serviceAttr.type) === ('mobile internet') || (serviceAttr.type) === ('')}
                                            sx={{m: 1, width: '25ch'}}
                                            error={_error.error4}
 
@@ -250,7 +250,7 @@ export default function createService() {
                                 <TextField id="outlined-basic" label="Internet fee" variant="outlined"
                                            name="internet_fee" color="secondary"
                                            type="number"
-                                           disabled={Number(serviceAttr.internet) === 0}
+                                           disabled={Number(serviceAttr.internet) === 0 || (serviceAttr.type) === 'fixed phone' || (serviceAttr.type) === 'mobile phone' || (serviceAttr.type) === ('')}
                                            sx={{m: 1, width: '25ch'}}
                                            error={_error.error6}
                                            helperText={_error.error6 ? 'Internet fee price not valid' : 'Please insert price of internet fee'}
