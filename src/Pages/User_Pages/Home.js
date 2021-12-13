@@ -39,9 +39,6 @@ function Home(props) {
                 {
                     props.insolvent === true ?
                         <div>
-                            <Typography align={"center"} variant={"h3"}>
-                            YOU HAVE SOME INSOLVENT ORDERS IN STANDBY!
-                            </Typography>
                             <OrdersRejected sure={props.orderId} setOrderId={props.setOrderId} orders={rejected}/>
                         </div>
                         :
