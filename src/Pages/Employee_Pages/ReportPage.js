@@ -13,17 +13,27 @@ function ReportPage() {
 
     const [reportPackages, setReportPackages] = React.useState([])
     const [usersInsolvents, setUsersInsolvents] = React.useState([])
+    const [suspendedOrders, setSuspendedOrders] = React.useState([])
+    const [alertsReport, setAlertsReport] = React.useState([])
+
 
 
     React.useEffect(() => {
 
         axios.get("../packreport/getAll").then((result) => {
             setReportPackages(result.data);
-            console.log(result.data)
         })
 
-        axios.get("../user/getAllUserInsolvents").then((result) => {
+        axios.get("../insolventreport/getAll").then((result) => {
             setUsersInsolvents(result.data);
+        })
+
+        axios.get("../suspendedorder/getAll").then((result) => {
+            setSuspendedOrders(result.data);
+        })
+
+        axios.get("../auditingTable/getAll").then((result) => {
+            setAlertsReport(result.data);
         })
 
     }, [])
@@ -79,10 +89,10 @@ function ReportPage() {
                                     <TableHead style={{background: "grey"}}>
                                         <TableRow>
                                             <TableCell align="center">ID package</TableCell>
-                                            <TableCell align="center">Average number of optional products sold
-                                                together</TableCell>
+                                            <TableCell align="center">Average number of optional products</TableCell>
+                                            <TableCell align="center">Total number of optional products</TableCell>
                                         </TableRow>
-                                    </TableHead>
+                                </TableHead>
                                     <TableBody>
                                         {reportPackages.map((row) => (
                                             <TableRow
@@ -90,15 +100,16 @@ function ReportPage() {
                                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                             >
                                                 <TableCell align="center">{row.aPackage}</TableCell>
-                                                <TableCell align="center">{isNaN(row.avgProd)? 0 : row.avgProd}</TableCell>
+                                                <TableCell align="center">{!isNaN(row.avg_prod)? row.avg_prod : 0}</TableCell>
+                                                <TableCell align="center">{row.total_prod}</TableCell>
                                             </TableRow>
                                         ))}
                                     </TableBody>
                                 </Table>
                             </TableContainer>
                         </Box>
-                        <Box>
-                            <Typography marginLeft={'30px'}>Best seller optional product:</Typography>
+                        <Box marginLeft={'30px'}>
+                            <Typography>Best seller optional product:</Typography>
                         </Box>
                     </Stack>
                 </Box>
@@ -108,6 +119,7 @@ function ReportPage() {
                         <Table aria-label="simple table">
                             <TableHead style={{background: "grey"}}>
                                 <TableRow>
+                                    <TableCell align="center">ID User</TableCell>
                                     <TableCell align="center">E-mail</TableCell>
                                     <TableCell align="center">Username</TableCell>
                                 </TableRow>
@@ -115,11 +127,12 @@ function ReportPage() {
                             <TableBody>
                                 {usersInsolvents.map((row) => (
                                     <TableRow
-                                        key={row.name}
+                                        key={row.insolvent_user}
                                         sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                     >
-                                        <TableCell align="center">{row[0]}</TableCell>
-                                        <TableCell align="center">{row[1]}</TableCell>
+                                        <TableCell align="center">{row.insolvent_user}</TableCell>
+                                        <TableCell align="center">{row.email}</TableCell>
+                                        <TableCell align="center">{row.username}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
@@ -127,24 +140,34 @@ function ReportPage() {
                     </TableContainer>
                 </Box>
                 <Box>
-                    <Box marginBottom={'50px'} width={'60%'}>
+                    <Box marginBottom={'50px'} width={'100%'}>
                         <h2>Report suspended orders</h2>
                         <TableContainer component={Paper}>
                             <Table aria-label="simple table">
                             <TableHead style={{background: "grey"}}>
                                     <TableRow>
                                         <TableCell align="center">ID order</TableCell>
-                                        <TableCell align="center">E-mail</TableCell>
+                                        <TableCell align="center">Package</TableCell>
+                                        <TableCell align="center">Start subscription</TableCell>
+                                        <TableCell width={'20%'} align="center">Purchase date</TableCell>
+                                        <TableCell align="center">Total cost</TableCell>
+                                        <TableCell align="center">User ID</TableCell>
+                                        <TableCell align="center">Duration subscription in months</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {reportPackages.map((row) => (
+                                    {suspendedOrders.map((row) => (
                                         <TableRow
-                                            key={row.name}
+                                            key={row.id}
                                             sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                         >
-                                            <TableCell align="center">{row.name}</TableCell>
-                                            <TableCell align="center">{row.calories}</TableCell>
+                                            <TableCell align="center">{row.id}</TableCell>
+                                            <TableCell align="center">{row.aPackage}</TableCell>
+                                            <TableCell align="center">{row.start_subs}</TableCell>
+                                            <TableCell align="center">{row.timestamp}</TableCell>
+                                            <TableCell align="center">{row.total_costs} €</TableCell>
+                                            <TableCell align="center">{row.user}</TableCell>
+                                            <TableCell align="center">{row.validity}</TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>
@@ -157,22 +180,22 @@ function ReportPage() {
                             <Table aria-label="simple table">
                             <TableHead style={{background: "grey"}}>
                                     <TableRow>
-                                        <TableCell align="center">ID alert</TableCell>
+                                        <TableCell align="center">User ID</TableCell>
                                         <TableCell align="center">Username</TableCell>
                                         <TableCell align="center">Amount</TableCell>
                                         <TableCell align="center">Date of last rejection</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {reportPackages.map((row) => (
+                                    {alertsReport.map((row, index) => (
                                         <TableRow
-                                            key={row.name}
+                                            key={index}
                                             sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                         >
-                                            <TableCell align="center">{row.name}</TableCell>
-                                            <TableCell align="center">{row.calories}</TableCell>
-                                            <TableCell align="center">{row.fat}</TableCell>
-                                            <TableCell align="center">{row.carbs}</TableCell>
+                                            <TableCell align="center">{row.user_id}</TableCell>
+                                            <TableCell align="center">{row.username}</TableCell>
+                                            <TableCell align="center">{row.amount} €</TableCell>
+                                            <TableCell align="center">{row.date_time}</TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>
