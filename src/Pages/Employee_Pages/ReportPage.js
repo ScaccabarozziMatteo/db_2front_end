@@ -15,7 +15,7 @@ function ReportPage() {
     const [usersInsolvents, setUsersInsolvents] = React.useState([])
     const [suspendedOrders, setSuspendedOrders] = React.useState([])
     const [alertsReport, setAlertsReport] = React.useState([])
-
+    const [bestProduct, setBestProduct] = React.useState([])
 
 
     React.useEffect(() => {
@@ -34,6 +34,11 @@ function ReportPage() {
 
         axios.get("../auditingTable/getAll").then((result) => {
             setAlertsReport(result.data);
+        })
+
+        axios.get("../productreport/getBest").then((result) => {
+            setBestProduct(result.data);
+            console.log(result.data)
         })
 
     }, [])
@@ -80,38 +85,57 @@ function ReportPage() {
                         </Table>
                     </TableContainer>
                 </Box>
-                <Box>
+                <Box marginBottom={'50px'}>
                     <h2>Report optional products for every package</h2>
-                    <Stack marginBottom={'50px'} direction={"row"}>
-                        <Box width={'50%'}>
-                            <TableContainer component={Paper}>
-                                <Table aria-label="simple table">
-                                    <TableHead style={{background: "grey"}}>
-                                        <TableRow>
-                                            <TableCell align="center">ID package</TableCell>
-                                            <TableCell align="center">Average number of optional products</TableCell>
-                                            <TableCell align="center">Total number of optional products</TableCell>
-                                        </TableRow>
-                                </TableHead>
-                                    <TableBody>
-                                        {reportPackages.map((row) => (
-                                            <TableRow
-                                                key={row.name}
-                                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                                            >
-                                                <TableCell align="center">{row.aPackage}</TableCell>
-                                                <TableCell align="center">{!isNaN(row.avg_prod)? row.avg_prod : 0}</TableCell>
-                                                <TableCell align="center">{row.total_prod}</TableCell>
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                        </Box>
-                        <Box marginLeft={'30px'}>
-                            <Typography>Best seller optional product:</Typography>
-                        </Box>
-                    </Stack>
+                    <TableContainer component={Paper}>
+                        <Table aria-label="simple table">
+                            <TableHead style={{background: "grey"}}>
+                                <TableRow>
+                                    <TableCell align="center">ID package</TableCell>
+                                    <TableCell align="center">Average number of optional products</TableCell>
+                                    <TableCell align="center">Total number of optional products</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {reportPackages.map((row) => (
+                                    <TableRow
+                                        key={row.name}
+                                        sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                                    >
+                                        <TableCell align="center">{row.aPackage}</TableCell>
+                                        <TableCell align="center">{!isNaN(row.avg_prod) ? row.avg_prod : 0}</TableCell>
+                                        <TableCell align="center">{row.total_prod}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Box>
+                <Box marginBottom={'50px'} maxWidth={'60%'}>
+                    <h2>Best seller(s) optional products</h2>
+                    <TableContainer component={Paper}>
+                        <Table aria-label="simple table">
+                            <TableHead style={{background: "grey"}}>
+                                <TableRow>
+                                    <TableCell align="center">ID Optional product</TableCell>
+                                    <TableCell align="center">Name</TableCell>
+                                    <TableCell align="center">Total sales</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {bestProduct.map((row) => (
+                                    <TableRow
+                                        key={row.optional_product}
+                                        sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                                    >
+                                        <TableCell align="center">{row.optional_product}</TableCell>
+                                        <TableCell align="center">{row.name}</TableCell>
+                                        <TableCell align="center">{row.total_sales}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
                 </Box>
                 <Box marginBottom={'50px'} width={'60%'}>
                     <h2>Report insolvent users</h2>
@@ -144,7 +168,7 @@ function ReportPage() {
                         <h2>Report suspended orders</h2>
                         <TableContainer component={Paper}>
                             <Table aria-label="simple table">
-                            <TableHead style={{background: "grey"}}>
+                                <TableHead style={{background: "grey"}}>
                                     <TableRow>
                                         <TableCell align="center">ID order</TableCell>
                                         <TableCell align="center">Package</TableCell>
@@ -178,7 +202,7 @@ function ReportPage() {
                         <h2>Report alerts</h2>
                         <TableContainer component={Paper}>
                             <Table aria-label="simple table">
-                            <TableHead style={{background: "grey"}}>
+                                <TableHead style={{background: "grey"}}>
                                     <TableRow>
                                         <TableCell align="center">User ID</TableCell>
                                         <TableCell align="center">Username</TableCell>

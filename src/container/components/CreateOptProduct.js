@@ -71,7 +71,7 @@ export default function createOptProduct() {
     return (
         <div align={'center'}>
             <Box width='90%' alignContent={"center"} sx={{boxShadow: 3}}>
-                <Typography marginBottom={'15px'} align={"center"} variant="h4">Create service</Typography>
+                <Typography marginBottom={'15px'} align={"center"} variant="h4">Create optional product</Typography>
                 <Box sx={{flexGrow: 1}}>
                     <Grid container item spacing={1}>
                         <Grid container item spacing={1} column direction={'row'}>
