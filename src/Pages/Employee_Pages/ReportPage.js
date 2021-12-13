@@ -85,7 +85,7 @@ function ReportPage() {
                         </Table>
                     </TableContainer>
                 </Box>
-                <Box marginBottom={'50px'}>
+                <Box marginBottom={'50px'} maxWidth={'60%'}>
                     <h2>Report optional products for every package</h2>
                     <TableContainer component={Paper}>
                         <Table aria-label="simple table">
