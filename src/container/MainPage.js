@@ -35,7 +35,6 @@ useEffect (()=>{
     })
     :
     setInsolvent(false);
- console.log(insolvent);
     },[checkInsolvent]
     )
 
